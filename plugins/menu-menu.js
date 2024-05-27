@@ -604,7 +604,7 @@ let menu = `⌜ *${wm}* ⌟
 
 ShizukaBot-MD|| Alba070503`.trim()
 //conn.sendFile(m.chat, pp, 'lp.jpg', menu, m, false, { contextInfo: { mentionedJid }})
-let img = await (await fetch('https://i.postimg.cc/Y0mKLkP0/Picsart-24-05-27-11-24-49-743.png')).buffer()  
+let img = await (await fetch('https://telegra.ph/file/b7edf2026656718c1f0f7.jpg')).buffer()  
 await conn.sendMessage(m.chat, {
 text: menu,
 contextInfo: { 
