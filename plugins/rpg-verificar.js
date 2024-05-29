@@ -34,10 +34,22 @@ global.db.data.users[m.sender].joincount += 20
 • 900 Coins 💰
 • 500 Experiencia 💸
 • 20 Tokens 🪙
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '> 乂  R E G I S T R O  乂',  body: 'Registro exitoso 📝: By ShizukaBot-MD', previewType: 0, thumbnail: gataImg, sourceUrl: [md, nn, nna, fb].getRandom()}}})
-await m.reply(`${sn}`)}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`.trim()
+let img = await (await fetch('https://telegra.ph/file/b7edf2026656718c1f0f7.jpg')).buffer()  
+await conn.sendMessage(m.chat, {
+text: menu,
+contextInfo: { 
+mentionedJid: [m.sender],
+forwardingScore: 9, 
+externalAdReply: {
+title: 'Registro Completo By ShizukaBot-MD',
+//body: 'Wʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
+thumbnail: img,
+sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
+mediaType: 1,
+renderLargerThumbnail: true
+}}}, { quoted: m})
+await m.react('🤖')	await m.reply(`${sn}`)}
 handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
 handler.tags = ['xp']
 handler.command = /^(verify|verificar|registrar|reg(ister)?)$/i
