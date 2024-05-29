@@ -1,40 +1,43 @@
 import { createHash } from 'crypto'
 let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
 let handler = async function (m, { conn, text, usedPrefix, command }) {
-  let user = global.db.data.users[m.sender]
+let user = db.data.users[m.sender]
+let totalreg = Object.keys(global.db.data.users).length
+let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
   let name2 = conn.getName(m.sender)
-  let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? this.user.jid : m.sender
-  let pp = await this.profilePictureUrl(who, 'image').catch(_ => 'https://telegra.ph/file/1861aab98389b13db8588.jpg')
-  if (user.registered === true) throw `*⚠️ Ya estás registrado*\n\n¿Quiere volver a registrarse?\n\n💬 Use este comando para *eliminar su registro*\n*${usedPrefix}unreg* <Número de serie>`
-  if (!Reg.test(text)) throw `*⚠️ Formato incorrecto*\n\n📝 Uso del comamdo: *${usedPrefix + command} nombre.edad*\n💡 Ejemplo : *${usedPrefix + command}* ${name2}.18`
+  if (user.registered === true) throw `Ya eatas registrado pdj 😎`
+  if (!Reg.test(text)) throw `𝐔𝐬𝐨 𝐃𝐞𝐥 𝐂𝐨𝐦𝐚𝐧𝐝𝐨: ${usedPrefix + command} nombre.edad\n💻 Nota: ${usedPrefix + command} ${name2}.16`
   let [_, name, splitter, age] = text.match(Reg)
-  if (!name) throw '*📝 El nombre no puede estar vacío*'
-  if (!age) throw '*📝 La edad no puede estar vacía*'
-  if (name.length >= 30) throw '*⚠️ El nombre es demasiado largo*' 
+  if (!name) throw '🚩 El nombre no puede estar vacio'
+  if (!age) throw '🚩 La edad en necesaria'
+  if (name.length >= 30) throw '💫 El nombre es muy largo' 
   age = parseInt(age)
-  if (age > 100) throw '*👴🏻 Wow el abuelo quiere jugar al bot*'
-  if (age < 5) throw '*👀 hay un bebé jsjsj*'
+  if (age > 100) throw '😊 Un abuelo quiere ser la bot'
+  if (age < 5) throw '✏️ la bebé juega con WhatsApp'
   user.name = name.trim()
   user.age = age
   user.regTime = + new Date
   user.registered = true
-let sn = createHash('md5').update(m.sender).digest('hex').slice(0, 6)	
-m.react('📩') 
-let regbot = `
-🗃️ *R E G I S T R A D O* 🗃️
-🪁 *Nombre:* ${name}
-🎨 *Edad* : ${age} años
-🥏 *Numero de serie*:
-${sn}`
-await m.reply(regbot)
-await conn.sendUrl(m.chat, regbot, m, { externalAdReply: { mediaType: 1, renderLargerThumbnail: true, thumbnail: global.imagen6, thumbnailUrl: global.canal1, title: 'Registrado 📩', }})
+global.db.data.users[m.sender].money += 900
+global.db.data.users[m.sender].limit += 50
+global.db.data.users[m.sender].exp += 500
+global.db.data.users[m.sender].joincount += 20
+  let sn = createHash('md5').update(m.sender).digest('hex')
+  await conn.reply(m.chat,  ` 乂  R E G I S T R O  乂
 
-}
-handler.help = ['reg'].map(v => v + ' <nombre.edad>')
-handler.tags = ['rg']
-
-handler.command = ['verify', 'verificar', 'reg', 'register', 'registrar'] 
-
+• Usuario: ${name}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+• Edas: ${age} 𝖠𝗇̃𝗈𝗌
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+🚩 *Recompensas Por El Registro:*
+• 50 Diamantes 💎
+• 900 IgnaCoins 💰
+• 500 Experiencia 💸
+• 20 Tokens 🪙
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '> 乂  R E G I S T R O  乂',  body: 'Registro exitoso 📝: By Igna • Bot', previewType: 0, thumbnail: gataImg.getRandom(), sourceUrl: [canal1, canal2, canal3].getRandom()}}})
+await m.reply(`${sn}`)}
+handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
+handler.tags = ['xp']
+handler.command = /^(verify|verificar|registrar|reg(ister)?)$/i
 export default handler
-
-
