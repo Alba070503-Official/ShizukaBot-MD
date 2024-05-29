@@ -9,7 +9,7 @@ handler.all = async function (m) {
 global.key = ''
 
 // Cuentas
-const response = await fetch('https://raw.githubusercontent.com/GataNina-Li/GataBot-MD/master/official_accounts.json')  
+const response = await fetch('https://raw.githubusercontent.com/Alba070503-Official/ShizukaBot-MD/main/official_accounts.json')  
 const data = await response.json()
 let { accounts, channels, groups, collaboration, sponsors, others } = data.info
 
@@ -54,9 +54,9 @@ global.redesMenu = [canal1, canal2, canal3, canal4, soporteGB, grupo1, grupo2, g
 global.accountsgb = [canal1, canal2, canal3, canal4, tk, ig, yt, paypal, fb, ths, md, asistencia].getRandom()
 
 var canalesInfo = [
-{ link: canal1, id: "120363160031023229@newsletter", name: "INFINITY-WA 💫" },
-{ link: canal2, id: "120363169294281316@newsletter", name: "GB - UPDATE ✨" },
-{ link: canal3, id: "120363203805910750@newsletter", name: "Tips sobre GataBot 🤩" } 
+{ link: canal1, id: "120363198641161536@newsletter", name: "Canal sobre la información" },
+{ link: canal2, id: "120363198641161536@newsletter", name: "Canal Oficial del bot" },
+{ link: canal3, id: "120363198641161536@newsletter", name: "Develop Alba070503" } 
 ]
 var indiceAleatorio = Math.floor(Math.random() * canalesInfo.length)
 var channelRD = canalesInfo[indiceAleatorio]
@@ -76,31 +76,30 @@ global.imagen11 = fs.readFileSync("./media/menus/img10.jpg")
 global.imagen12 = fs.readFileSync("./media/menus/img11.jpg")
 global.imagen13 = fs.readFileSync("./media/menus/img12.jpg")
 
-global.img = 'https://qu.ax/vZii.jpg'
-global.img2 = 'https://qu.ax/hjcB.jpg'
+global.img = 'https://qu.ax/SjlN.png'
+global.img2 = 'https://qu.ax/ZMEP.png'
 
-global.img3 = 'https://qu.ax/zELg.jpg' //prem
-global.img4 = 'https://qu.ax/YueS.jpg' //prem
+global.img3 = 'https://qu.ax/KcGf.jpg' //prem
+global.img4 = 'https://qu.ax/SjlN.png' //prem
 
-global.img5 = 'https://qu.ax/xLcn.jpg'
-global.img6 = 'https://qu.ax/EGOe.jpg'
-global.img7 = 'https://qu.ax/wly.jpg'
-global.img8 = 'https://qu.ax/TPVV.jpg'
+global.img5 = 'https://qu.ax/ZMEP.png'
+global.img6 = 'https://qu.ax/KcGf.jpg'
+global.img7 = 'https://qu.ax/ZMEP.png'
+global.img8 = 'https://qu.ax/SjlN.png'
 global.img9 = 'https://qu.ax/qKlN.jpg'
 
-global.img10 = 'https://qu.ax/SYFo.jpg'
-global.img11 = 'https://qu.ax/efhn.jpg'
-global.img12 = 'https://qu.ax/Vmpl.jpg'
-global.img13 = 'https://qu.ax/ElSy.jpg'
-global.img14 = 'https://qu.ax/Tgbe.jpg'
-global.img15 = 'https://qu.ax/Puwj.jpg' 
+global.img10 = 'https://qu.ax/KcGf.jpg'
+global.img11 = 'https://qu.ax/KcGf.jpg'
+global.img12 = 'https://qu.ax/SjlN.png'
+global.img13 = 'https://qu.ax/SjlN.png'
+global.img14 = 'https://qu.ax/ZMEP.png'
+global.img15 = 'https://qu.ax/KcGf.jpg' 
 
-global.img16 = 'https://qu.ax/ovkN.jpg' //+18
+global.img16 = 'https://qu.ax/SjlN.png' //+18
 
-global.img17 = 'https://qu.ax/HJdr.jpg'
-global.img18 = 'https://qu.ax/HCt.jpg'
-
-global.logogit = 'https://qu.ax/RzKF.jpg'
+global.img17 = 'https://qu.ax/SjlN.png'
+global.img18 = 'https://qu.ax/SjlN.png'
+global.logogit = 'https://qu.ax/KcGf.jpg'
 
 global.gataVidMenu = ['https://qu.ax/AAvg.mp4', 'https://qu.ax/SeFS.mp4', 'https://qu.ax/NqZN.mp4'].getRandom()
 global.gataMenu = [img, img2, img6, img7, img8, img9, img13, img14, img15, img17, img18].getRandom()
@@ -121,7 +120,7 @@ let ftroli = { key: { remoteJid: 'status@broadcast', participant: '0@s.whatsapp.
 let fgif = {key: {participant : '0@s.whatsapp.net'}, message: {"videoMessage": { "title": wm, "h": `Hmm`, 'seconds': '999999999', 'gifPlayback': 'true', 'caption': bottime, 'jpegThumbnail': fs.readFileSync('./media/menus/Menu3.jpg')}}}
                              
 let enlace = { contextInfo: { externalAdReply: {title: wm + ' 🐈', body: 'support group' , sourceUrl: redesMenu, thumbnail: await(await fetch(gataMenu)).buffer() }}}
-let enlace2 = { contextInfo: { externalAdReply: { showAdAttribution: true, mediaUrl: yt, mediaType: 'VIDEO', description: '', title: wm, body: '😻 𝗦𝘂𝗽𝗲𝗿 𝗚𝗮𝘁𝗮𝗕𝗼𝘁-𝗠𝗗 - 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽 ', thumbnailUrl: gataMenu, sourceUrl: accountsgb }}}
+let enlace2 = { contextInfo: { externalAdReply: { showAdAttribution: true, mediaUrl: yt, mediaType: 'VIDEO', description: '', title: wm, body: 'ShizukaBot-MD By @Alba070503', thumbnailUrl: gataMenu, sourceUrl: accountsgb }}}
 let dos = [enlace, enlace2]  
 
 global.wait = "⌛ *`Cargando...`*\n*✪✦✦⊹⊹⊹⊹⊹⊹⊹⊹✪* `20%`"
