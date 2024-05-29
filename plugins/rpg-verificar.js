@@ -27,7 +27,7 @@ let regbot = `
 🥏 *Numero de serie*:
 ${sn}`
 await m.reply(regbot)
-// await conn.sendUrl(m.chat, regbot, m, { externalAdReply: { mediaType: 1, renderLargerThumbnail: true, thumbnail: pp, thumbnailUrl: pp, title: 'Registrado 📩', }})
+await conn.sendUrl(m.chat, regbot, m, { externalAdReply: { mediaType: 1, renderLargerThumbnail: true, thumbnail: global.imagen6, thumbnailUrl: global.canal1, title: 'Registrado 📩', }})
 
 }
 handler.help = ['reg'].map(v => v + ' <nombre.edad>')
