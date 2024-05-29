@@ -34,9 +34,10 @@ global.db.data.users[m.sender].joincount += 20
 • 900 IgnaCoins 💰
 • 500 Experiencia 💸
 • 20 Tokens 🪙
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '> 乂  R E G I S T R O  乂',  body: 'Registro exitoso 📝: By Igna • Bot', previewType: 0, thumbnail: gataImg.getRandom(), sourceUrl: [canal1, canal2, canal3].getRandom()}}})
-await m.reply(`${sn}`)}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈*:
+${sn}`
+await m.reply(regbot)
+await conn.sendUrl(m.chat, regbot, m, { externalAdReply: {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '> 乂  R E G I S T R O  乂',  body: 'Registro exitoso 📝: By Igna • Bot', previewType: 0, thumbnail: gataImg.getRandom(), sourceUrl: [canal1, canal2, canal3].getRandom()}}})
 handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
 handler.tags = ['xp']
 handler.command = /^(verify|verificar|registrar|reg(ister)?)$/i
