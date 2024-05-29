@@ -35,7 +35,8 @@ global.db.data.users[m.sender].joincount += 20
 • 500 Experiencia 💸
 • 20 Tokens 🪙
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '> 乂  R E G I S T R O  乂',  body: 'Registro exitoso 📝: By ShizukaBot-MD', previewType: 0, thumbnail: gataImg.getRandom(), sourceUrl: [md, nn, nna, fb].getRandom()}}})
+
+Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '> 乂  R E G I S T R O  乂',  body: 'Registro exitoso 📝: By ShizukaBot-MD', previewType: 0, thumbnail: gataImg, sourceUrl: [md, nn, nna, fb].getRandom()}}})
 await m.reply(`${sn}`)}
 handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
 handler.tags = ['xp']
