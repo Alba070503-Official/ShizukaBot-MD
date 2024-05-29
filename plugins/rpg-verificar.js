@@ -31,7 +31,7 @@ global.db.data.users[m.sender].joincount += 20
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 🚩 *Recompensas Por El Registro:*
 • 50 Diamantes 💎
-• 900 IgnaCoins 💰
+• 900 Coins 💰
 • 500 Experiencia 💸
 • 20 Tokens 🪙
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
