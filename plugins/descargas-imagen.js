@@ -18,4 +18,5 @@ handler.help = ['gimage <query>', 'imagen <query>']
 handler.tags = ['internet', 'tools']
 handler.command = /^(gimage|image|imagen|jpg)$/i
 handler.money = 50
+handler.rowner = true;
 export default handler
