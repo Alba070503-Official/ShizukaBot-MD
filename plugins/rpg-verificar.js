@@ -530,7 +530,7 @@ user.premium = true
 fecha = `${week}, ${date} *||* `
 hora = `${time}`
 user.tiempo = fecha + hora
-user.name = user.name === 0 ? sinDefinir : user.name + 'ͧͧͧͦꙶͣͤ✓ᚲᴳᴮ'
+user.name = user.name === 0 ? sinDefinir : user.name + ' '
 user.descripcion = bio
 user.age = user.age === 0 ? sinDefinir : user.age >= 18 ? user.age += ' Años *||* ' + '(Persona Adulta)' : user.age += ' Años *||* ' + '(Persona Joven)'
 user.genero = user.genero === 0 ? sinDefinir : user.genero == 'Ocultado' ? `${user.genero} 🕶️` : user.genero == 'Mujer' ? `${user.genero} 🚺` : user.genero == 'Hombre' ? `${user.genero} 🚹` : sinDefinir
@@ -540,7 +540,7 @@ user.pasatiempo = user.pasatiempo === 0 ? sinDefinir : user.pasatiempo
 fecha = `${week}, ${date} || `
 hora = `${time}`
 user.tiempo = fecha + hora
-user.name = user.name === 0 ? sinDefinir : user.name + 'ͧͧͧͦꙶͣͤ✓ᚲᴳᴮ'
+user.name = user.name === 0 ? sinDefinir : user.name + ' '
 user.age = user.age === 0 ? sinDefinir : user.age >= 18 ? user.age += ' Años *||* ' + '(Persona Adulta)' : user.age += ' Años *||* ' + '(Persona Joven)'
 user.descripcion = bio	
 }
