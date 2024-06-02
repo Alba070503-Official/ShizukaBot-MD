@@ -100,8 +100,19 @@ const img = await levelup(teks, user.level)
 conn.sendMessage(m.chat, {image: {url: img}, caption: str, mentions: conn.parseMention(str)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 //conn.sendFile(m.chat, img, 'levelup.jpg', str, m)
 } catch (e) {
-conn.sendMessage(m.chat, {text: str, contextInfo: {forwardingScore: 9999999, isForwarded: true, mentionedJid:[who], image: {url: img}, "externalAdReply":  {"showAdAttribution": true, "renderLargerThumbnail": true, "thumbnail": gataImg.getRandom(), "title": wm, "containsAutoReply": true, "mediaType": 1, "mediaUrl": 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04', "sourceUrl": 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04', }}}, { quoted: m })
-//m.reply(str)
+conn.sendMessage(m.chat, {
+text: menu,
+contextInfo: { 
+mentionedJid: [m.sender],
+forwardingScore: 9, 
+externalAdReply: {
+title: '❑— ShizukaBot-MD —❑\nWʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
+//body: 'Wʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
+thumbnail: img,
+sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
+mediaType: 1,
+renderLargerThumbnail: true
+}}}, { quoted: m})//m.reply(str)
 }}}
 handler.help = ['levelup']
 handler.tags = ['xp']
