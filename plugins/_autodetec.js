@@ -36,9 +36,9 @@ await this.sendMessage(m.chat, { text: lenguajeGB['smsAvisoIIG']() + mid.smsAuto
 } else if (chat.detect && m.messageStubType == 26) {
 await this.sendMessage(m.chat, { text: lenguajeGB['smsAvisoIIG']() + mid.smsAutodetec6(m), mentions: [m.sender] }, { quoted: fkontak })
 } else if (m.messageStubType == 29) {
-await this.sendMessage(m.chat, { text: `*@user* ¡Se suma al grupo de admins¡`, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]/*, mentions: (await conn.groupMetadata(m.chat)).participants.map(v => v.id)*/ }, { quoted: fkontak })
+await this.sendMessage(m.chat, { text: ` @user  ¡Se suma al grupo de admins¡`, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]/*, mentions: (await conn.groupMetadata(m.chat)).participants.map(v => v.id)*/ }, { quoted: fkontak })
 } else if (m.messageStubType == 30) {
-await this.sendMessage(m.chat, { text: `*@user* ¡Abandona el grupo!`, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]/*, mentions: (await conn.groupMetadata(m.chat)).participants.map(v => v.id)*/ }, { quoted: fkontak })
+await this.sendMessage(m.chat, { text: ` @user ¡Abandona el grupo!`, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]/*, mentions: (await conn.groupMetadata(m.chat)).participants.map(v => v.id)*/ }, { quoted: fkontak })
 } else if (chat.detect && m.messageStubType == 72) {
 await this.sendMessage(m.chat, { text: lenguajeGB['smsAvisoIIG']() + mid.smsAutodetec9(usuario, m), mentions: [m.sender] }, { quoted: fkontak })
 } else if (chat.detect && m.messageStubType == 123) {
