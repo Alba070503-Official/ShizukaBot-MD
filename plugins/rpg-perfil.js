@@ -1,41 +1,25 @@
-import { createHash } from 'crypto' 
-import PhoneNumber from 'awesome-phonenumber'
-import fetch from 'node-fetch'
-let handler = async (m, { conn, usedPrefix }) => {
-let pp = 'https://telegra.ph/file/d8ef67ebf82d35afc66c3.jpg'
-//const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => './src/avatar_contact.png')
-let user = global.db.data.users[m.sender]
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-try {
-pp = await conn.getProfilePicture(who)         //pp = await conn.getProfilePicture(who)
-} catch (e) {
+import moment from 'moment-timezone'
+import PhoneNum from 'awesome-phonenumber'
 
-} finally {
-let { name, limit, lastclaim, registered, regTime, age } = global.db.data.users[who]
-//let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let mentionedJid = [who]
-let username = conn.getName(who)
-let prem = global.prems.includes(who.split`@`[0])
-let sn = createHash('md5').update(who).digest('hex')
-let str =
-`┃ 𝙉𝙊𝙈𝘽𝙍𝙀 ${conn.getName(m.sender)} ${user.registered === true ? 'ͧͧͧͦꙶͣͤ✓ᚲᴳᴮ' : ''}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ 𝙉𝙐𝙈𝙀𝙍𝙊 ${PhoneNumber('+' + who.replace('@s.whatsapp.net', '')).getNumber('international')}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ 𝙀𝙉𝙇𝘼𝘾𝙀 wa.me/${who.split`@`[0]}${registered ?'\n┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n┃ 𝙀𝘿𝘼𝘿 ' + age + ' *años*' : ''}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ 𝙇𝙄𝙈𝙄𝙏𝙀𝙎 *${limit}* 𝙙𝙚 𝙐𝙨𝙤𝙨
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ 𝙍𝙀𝙂𝙄𝙎𝙏𝙍𝘼𝘿𝙊(𝘼) ${registered ? '✅': '❎'}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ 𝙋𝙍𝙀𝙈𝙄𝙐𝙈 ${prem ? '✅' : '❎'}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ 𝙉𝙐𝙈𝙀𝙍𝙊 𝘿𝙀 𝙎𝙀𝙍𝙄𝙀
-┃ *${sn}*`.trim()
-    conn.sendFile(m.chat, pp, 'pp.jpg', str, fkontak, false, { contextInfo: { mentionedJid }}) 
-  }
+let regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
+
+let handler = async (m, { conn, text, usedPrefix, command: cmd }) => {
+	let num = m.quoted?.sender || m.mentionedJid?.[0] || text
+	if (!num) throw `*Ejemplo*: ${usedPrefix + cmd} @tag 50492280729`
+	num = num.replace(/\D/g, '') + '@s.whatsapp.net'
+	if (!(await conn.onWhatsApp(num))[0]?.exists) throw 'Este usuario no existe, asegurese de escribir bien el numero.'
+	let img = await conn.profilePictureUrl(num, 'image').catch(_ => './src/avatar_contact.png')
+	let bio = await conn.fetchStatus(num).catch(_ => { })
+	let name = await conn.getName(num)
+	let business = await conn.getBusinessProfile(num)
+	let format = PhoneNum(`+${num.split('@')[0]}`)
+	let country = regionNames.of(format.getRegionCode('international'))
+	let wea = `> •*WhatsApp Stalking🍁*\n\n*Pais :* ${country.toUpperCase()}\n*Nombre :* ${name ? name : '-'}\n*Formato:* ${format.getNumber('international')}\n*Url:* wa.me/${num.split('@')[0]}\n*Tag :* @${num.split('@')[0]}\n*Bio :* ${bio?.status || '-'}\n*Bio Uptade:* ${bio?.setAt ? moment(bio.setAt.toDateString()).locale('id').format('LL') : '-'}\n\n${business ? `*Business Info 🫐*\n*BusinessId:* ${business.wid}\n*Website:* ${business.website ? business.website : '-'}\n*Email:* ${business.email ? business.email : '-'}\n*Categoria:* ${business.category}\n*Direccion:* ${business.address ? business.address : '-'}\n\*Zona Horaria:* ${business.business_hours.timezone ? business.business_hours.timezone : '-'}\n*Descripcion*: ${business.description ? business.description : '-'}` : '> •*Cuenta De WhatsApp*'}`
+	img ? await conn.sendMessage(m.chat, { image: { url: img }, caption: wea, mentions: [num] }, { quoted: m }) : m.reply(wea)
 }
-handler.help = ['profile [@user]']
-handler.tags = ['xp']
-handler.command = /^perfil|profile?$/i
+
+handler.help = ['wastalk *<numero>*']
+handler.tags = ['tools']
+handler.command = /^(wa|whatsapp)stalk|perfil$/i
+
 export default handler
