@@ -27,7 +27,7 @@ return resultado;
 const message = users.map((v, index) => `(${index + 1})\n║◉—⛩️ wa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${usedPrefix}estado\n*║◉—⛩️ Usuario  :* *${v.user.name || '-'}*\n*║◉—⛩️ Tiempo Conectado:* ${ v.uptime ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) : "Desconocido"}`).join('\n\n••••••••••••••••••••••••••••••••••••\n\n');
   const replyMessage = message.length === 0 ? '*NO HAY SUB BOTS DISPONIBLE. VERIFIQUE MÁS TARDE.*' : message;
 const totalUsers = users.length;
-const responseMessage = `╭═══〘 Bienvenido A la Lista de Sub Bots〙══╮\n\n║◉—⛩️ Puedes comunicarse con los Sub-Bots para que se unan a sus grupos\n\n ║◉—⛩️ Si el texto aparece blanco significa que no hay Sub-Bots conectado\n\n║◉—⛩️ Cada Sub-Bots puede hacer lo que quiera, ShizukaBot-MD no se hace responsable\n\n║◉—⛩️ Sub-Bots Conectado : ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
+const responseMessage = `╭═══〘 Lista Oficial Sub-Bots〙══╮\n\n║◉—⛩️ Puedes comunicarse con los Sub-Bots para que se unan a sus grupos\n\n║◉—⛩️ Si el texto aparece blanco significa que no hay Sub-Bots conectado\n\n║◉—⛩️ Cada Sub-Bots puede hacer lo que quiera, ShizukaBot-MD no se hace responsable\n\n║◉—⛩️ Sub-Bots Conectado : ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
 await _envio.sendMessage(m.chat, {text: responseMessage, mentions: _envio.parseMention(responseMessage)}, {quoted: m})}
 handler.command = handler.help = ['listjadibots', 'bots', 'subsbots'];
 handler.tags = ['jadibot'];
