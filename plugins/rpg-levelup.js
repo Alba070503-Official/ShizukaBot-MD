@@ -1,18 +1,15 @@
 import { canLevelUp, xpRange } from '../lib/levelling.js'
-import { levelup } from '../lib/canvas.js' 
+import { levelup } from '../lib/canvas.js'
 
 //import { xpRange } from '../lib/levelling.js'
 import PhoneNumber from 'awesome-phonenumber'
 import { promises } from 'fs'
 import { join } from 'path'
 let handler = async (m, { conn, usedPrefix, command, args, usedPrefix: _p, __dirname, isOwner, text, isAdmin, isROwner }) => {
-  
 const { levelling } = '../lib/levelling.js'
 //let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text }) => {
-
 let { exp, limit, level, role } = global.db.data.users[m.sender]
 let { min, xp, max } = xpRange(level, global.multiplier)
-
 let d = new Date(new Date + 3600000)
 let locale = 'es'
 let weton = ['Pahing', 'Pon', 'Wage', 'Kliwon', 'Legi'][Math.floor(d / 84600000) % 5]
@@ -50,12 +47,10 @@ let replace = {
 '%': '%',
 p: _p, uptime, muptime,
 me: conn.getName(conn.user.jid),
-
 exp: exp - min,
 maxexp: xp,
 totalexp: exp,
 xp4levelup: max - exp,
-
 level, limit, weton, week, date, dateIslamic, time, totalreg, rtotalreg, role,
 readmore: readMore
 }
@@ -72,48 +67,48 @@ let name = conn.getName(m.sender)
 let user = global.db.data.users[m.sender]
 if (!canLevelUp(user.level, user.exp, global.multiplier)) {
 let { min, xp, max } = xpRange(user.level, global.multiplier)
-throw `╭━━━[ *𝙉𝙄𝙑𝙀𝙇 | 𝙇𝙀𝙑𝙀𝙇* ]━━━━⬣
-┃ *NOMBRE | NAME*
-┃ ${name}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ *NIVEL:* *${user.level}*
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ *RANGO:* ${user.role}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ *XP:* *${user.exp - min}/${xp}*
-╰━━━〔 *𓃠 ${vs}* 〕━━━━━⬣
+throw `╭━〔  𝐍𝐈𝐕𝐄𝐋 ⛅  〕⬣
+🍄 *NOMBRE*: ${name}
 
-*Te falta ${max - user.exp} de XP para subir de nivel*
+🍀 𝗡𝗜𝗩𝗘𝗟 𝗔𝗖𝗧𝗨𝗔𝗟: ${user.level}
+
+⚔ 𝗥𝗔𝗡𝗚𝗢: ${role}
+
+🗓 𝗙𝗘𝗖𝗛𝗔: ${new Date().toLocaleString('id-ID')}
+╰━━━━━━━━━━━━⬣
+
+_*te falta ${max - user.exp} de XP para subir de nivel*_
 `.trim()}
-        
 let before = user.level * 1
 while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++
 if (before !== user.level) {
 let teks = `Bien hecho! ${conn.getName(m.sender)} Nivel: ${user.level}`
-let str = `╭━━━[ *𝙉𝙄𝙑𝙀𝙇 | 𝙇𝙀𝙑𝙀𝙇* ]━━━━⬣
-┃ *NIVEL ANTERIOR:* *${before}*
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ *NIVEL ACTUAL:* *${user.level}*
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ *RANGO* ${user.role}
-┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┃ *FECHA:* *${new Date().toLocaleString('id-ID')}*
-╰━━━〔 *𓃠 ${vs}* 〕━━━━━⬣
+let str = `╭━〔  𝐍𝐈𝐕𝐄𝐋 ⛅  〕⬣
+🍄 𝗡𝗜𝗩𝗘𝗟 𝗔𝗡𝗧𝗘𝗥𝗜𝗢𝗥: ${before}
 
-*_Cuanto más interactúes con GataBot-MD, mayor será tu nivel!!_*
-*_Actualiza tú rango con el comando ${usedPrefix}rol!!_*`.trim()
+🍀 𝗡𝗜𝗩𝗘𝗟 𝗔𝗖𝗧𝗨𝗔𝗟: ${user.level}
+
+⚔ 𝗥𝗔𝗡𝗚𝗢: ${role}
+
+🗓 𝗙𝗘𝗖𝗛𝗔: ${new Date().toLocaleString('id-ID')}
+╰━━━━━━━━━━━━⬣
+
+» 𝐒𝐮𝐛𝐞𝐬 𝐝𝐞 𝐧𝐢𝐯𝐞𝐥 𝐜𝐮𝐚𝐧𝐝𝐨 𝐢𝐧𝐭𝐞𝐫𝐚𝐜𝐭𝐮𝐚𝐬 𝐦𝐚𝐬 𝐜𝐨𝐧 𝐞𝐥 𝐛𝐨𝐭 ✨
+`.trim()
 try {
 const img = await levelup(teks, user.level)
-conn.sendMessage(m.chat, {image: {url: gataImg}, caption: str, mentions: conn.parseMention(str)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+conn.sendMessage(m.chat, {image: {url: img}, caption: str, mentions: conn.parseMention(str)}, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 //conn.sendFile(m.chat, img, 'levelup.jpg', str, m)
 } catch (e) {
-m.reply(str)
+conn.sendMessage(m.chat, {text: str, contextInfo: {forwardingScore: 9999999, isForwarded: true, mentionedJid:[who], image: {url: img}, "externalAdReply":  {"showAdAttribution": true, "renderLargerThumbnail": true, "thumbnail": gataImg.getRandom(), "title": wm, "containsAutoReply": true, "mediaType": 1, "mediaUrl": 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04', "sourceUrl": 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04', }}}, { quoted: m })
+//m.reply(str)
 }}}
 handler.help = ['levelup']
 handler.tags = ['xp']
 handler.command = ['nivel', 'lvl', 'levelup', 'level'] 
+handler.exp = 0
+handler.register = true
 export default handler
-    
 const more = String.fromCharCode(8206)
 const readMore = more.repeat(4001)
 function clockString(ms) {
