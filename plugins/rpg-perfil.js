@@ -8,7 +8,7 @@ let handler = async (m, { conn, text, usedPrefix, command: cmd }) => {
 	if (!num) throw `*Ejemplo*: ${usedPrefix + cmd} @tag 50492280729`
 	num = num.replace(/\D/g, '') + '@s.whatsapp.net'
 	if (!(await conn.onWhatsApp(num))[0]?.exists) throw 'Este usuario no existe, asegurese de escribir bien el numero.'
-	let img = await conn.profilePictureUrl(num, 'image').catch(_ => './src/avatar_contact.png')
+	let img = await conn.profilePictureUrl(num, 'image').catch(_ => './media/menus/img6.jpg')
 	let bio = await conn.fetchStatus(num).catch(_ => { })
 	let name = await conn.getName(num)
 	let business = await conn.getBusinessProfile(num)
