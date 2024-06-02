@@ -74,7 +74,7 @@ let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 await conn.sendMessage(m.chat, {
         text: `*Hey @${m.sender.split`@`[0]} estamos enviando el menu*
 
-NamiBot-MD.`,
+*ShizukaBot-MD*.`,
         contextInfo: { 
           mentionedJid: [m.sender],
         }
