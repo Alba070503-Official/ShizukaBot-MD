@@ -162,10 +162,10 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 let listSections = []    
 listSections.push({
 title: '',
-rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.code`, description: `Para volverte sudbot 🤖\n` },
+rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
 { header: "Velocidad", title: "", id: `.ping`, description: `Ver velocidad del bot\n` },
 { header: "Play", title: "", id: `.play`, description: `Para descargar musica 🎧\n` },
-{ header: "creador", title: "", id: `.creador`, description: `comunicate con mi creador ⚙️` }
+{ header: "creador", title: "", id: `.owner`, description: `comunicate con mi creador ⚙️` }
 ]})
 await conn.sendList(m.chat, '👋🏻 Hola¡! Bienvenido A Mi Sub Menú\n\n*Creador:* Alba070503\n*Versión:* 1.0.0\n\n💮 si hay algún error puedes contactarme, usa el comando: #owner\n\nGracias¡! 🔴', null, `Clik`, listSections, { mentions: [m.sender]}, {quoted: m})
   } catch (e) {
