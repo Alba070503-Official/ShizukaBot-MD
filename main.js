@@ -1,6 +1,6 @@
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1'
 import './config.js' 
-import './store.js'
+import './plugins/_content.js'
 import { createRequire } from 'module'
 import path, { join } from 'path'
 import {fileURLToPath, pathToFileURL} from 'url'
@@ -294,15 +294,14 @@ conn.ev.off('connection.update', conn.connectionUpdate)
 conn.ev.off('creds.update', conn.credsUpdate)
 }
 
-//Información para Grupos
-conn.welcome = '*╭┈⊰* @subject *⊰┈ ✦*\n*┊✨ BIENVENIDO(A)!!*\n┊💖 @user\n┊📄 *LEA LA DESCRIPCIÓN DEL GRUPO*\n*╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ ✦*\n@readMore\n@desc'
-conn.bye = '╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⊰*\n┊ *@user*\n┊ *NO FUE DIGNO(A) DE ESTAR AQUÍ!!* 🌟\n*╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈⊰*'
-conn.spromote = '*@user* ¡Se suma al grupo de admins¡'
-conn.sdemote = '*@user* ¡Abandona el grupo!'
-conn.sDesc = '¡Se ha modificado la descripción!\n\n*Nueva descripción:* @desc'
-conn.sSubject = '¡Se ha modificado el título del grupo!'
-conn.sIcon = '¡Se ha cambiado la foto del grupo!'
-conn.sRevoke = '¡Se ha actualizado el enlace del grupo!*\n*Nuevo enlace:* @revoke' 
+conn.welcome = '*┌─★ShizukaBot-MD*\n*│「 Bienvenido a @subject *\n*└┬★「 @user 」*\n│✑ Lee las reglas\n*│✑ By @Alba07503*\n*└───────────────┈ ⳹*';
+conn.bye = '*┌─★ShizukaBot-MD*\n*│「 ADIOS 👋 」*\n*└┬★「 @user 」*\n*│✑ Se fue*\n *│✑ Hasta Luego*\n*└───────────────┈ ⳹*'; 
+conn.spromote = '*@user* ¡Se suma al grupo de admins¡'; 
+conn.sdemote = '*@user* ¡Abandona el grupo!'; 
+conn.sDesc = lenguajeGB['smsSdesc']() 
+conn.sSubject = lenguajeGB['smsSsubject']() 
+conn.sIcon = lenguajeGB['smsSicon']() 
+conn.sRevoke = lenguajeGB['smsSrevoke']() 
 
 conn.handler = handler.handler.bind(global.conn)
 conn.participantsUpdate = handler.participantsUpdate.bind(global.conn)
