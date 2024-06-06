@@ -116,7 +116,7 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 > npm start
 ```
 ## `AGRADECIMIENTOS & CREDITOS` 
-<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="250" height="250" alt="Azamk"/></a>
+<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="90" height="250" alt="Azamk"/></a>
 
 <a href="https://www.youtube.com/@gatadios">
 <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
@@ -126,7 +126,7 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 </a>
 
   ## `EDITOR & PROPIETARIO DEL BOT` 
-<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="300" height="300" alt="Alba070503"/></a>
+<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="300" height="120" alt="Alba070503"/></a>
 
 `NamiBot-MD - By @Alba070503 `
 #### COLABORADORES 
