@@ -28,7 +28,6 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
     },
     message: {
       contactMessage: {
-        displayName: `\n|━━━〔 ShizukaBot-MD 〕━━━| \nAqui tienes el menu : ${username}`,
         vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${username}\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
       },
     },
@@ -80,7 +79,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
   let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
 
   
-  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo, );
+  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections,);
 };
 
 handler.command = ["menu3"];
