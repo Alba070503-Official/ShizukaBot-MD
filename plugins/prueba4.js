@@ -46,25 +46,14 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
 ┆Este menu esta en fase prueba 
 ╰ׄ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ─ׂׅ┄ׅׄ─ׂ╯`;
 
-  let listSections = [];
-
-  listSections.push({
-    title: `AVISO: LA BOT TODAVIA ESTA EN BETA`,
-    rows: [
-      {
-        header: "allmenu",
-        title: "Menu Completo",
-        description: `para ver todos los comandos`,
-        id: `${usedPrefix}allmenu`,
-      },
-      {
-        header: "owner",
-        title: "Información del creado",
-        description: `verifica si quieres hablar con mi creador`,
-        id: `${usedPrefix}owner`,
-      },
-    ],
-  });
+  let listSections = []    
+listSections.push({
+title: '',
+rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
+{ header: "Velocidad", title: "", id: `.ping`, description: `Ver velocidad del bot\n` },
+{ header: "Play", title: "", id: `.play`, description: `Para descargar musica 🎧\n` },
+{ header: "creador", title: "", id: `.owner`, description: `comunicate con mi creador ⚙️` }
+]});
 
   let img = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
