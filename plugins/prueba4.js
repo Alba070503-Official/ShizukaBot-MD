@@ -12,7 +12,7 @@ let time = d.toLocaleTimeString(locale, {
     }) 
 
   
-await conn.reply(m.chat, '⏱ _Cargando Menu_', m, fake, )
+await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
   m.react("✨");
 
   let sbot =
