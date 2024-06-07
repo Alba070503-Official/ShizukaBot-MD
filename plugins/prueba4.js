@@ -167,7 +167,7 @@ rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver
 { header: "Play", title: "", id: `.play`, description: `Para descargar musica 🎧\n` },
 { header: "creador", title: "", id: `.owner`, description: `comunicate con mi creador ⚙️` }
 ]})
-await conn.sendList(m.chat, '╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙══╮/n/ ║🥀 *𝗛ola, %taguser Bienvenido al menu* /n║≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡║║🥀 *Owner:* *Alba070503*/n║🥀 *Fecha:* %date /n║🥀 *Tiempo activo:* %uptime /n ║🥀 *Versión Actual:* *1.4* /n╰═══╡✯✯✯✯✯✯✯✯✯╞═══╯', null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections, { mentions: [m.sender]}, {quoted: m})
+await conn.sendList(m.chat, '╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙══╮/n/ ║🥀 *𝗛ola, %name Bienvenido al menu* /n║≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡║║🥀 *Owner:* *Alba070503*/n║🥀 *Fecha:* %date /n║🥀 *Tiempo activo:* %uptime /n ║🥀 *Versión Actual:* *1.4* /n╰═══╡✯✯✯✯✯✯✯✯✯╞═══╯', null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections, { mentions: [m.sender]}, {quoted: m})
   } catch (e) {
     conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
     throw e
