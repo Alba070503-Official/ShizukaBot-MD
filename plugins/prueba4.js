@@ -176,7 +176,7 @@ await conn.sendList(m.chat, '╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙═�
 
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = ['menu2', 'help', 'menú'] 
+handler.command = ['menu', 'help', 'menú'] 
 handler.register = true 
 export default handler
 
