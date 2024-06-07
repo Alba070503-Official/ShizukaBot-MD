@@ -28,7 +28,7 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
       },
     },
   };
-
+let menu = '.'
   let menu2 = `
 *╭─╮︹︹︹⊹︹︹︹⊹︹︹︹⊹*
 *┆  ${username}*
