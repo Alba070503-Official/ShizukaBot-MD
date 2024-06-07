@@ -5,24 +5,7 @@ import { xpRange } from '../lib/levelling.js'
 
 
 let tags = {
-  'main': 'INFO',
-  'game': 'JUEGOS',
-  'serbot': 'SUB BOTS',
-  'rpg': 'ECONOMÍA',
-  'rg': 'REGISTRO',
-  'downloader': 'DESCARGAS',
-  'marker': 'LOGO - MAKER',
-  'nable': 'ACTIVADORES',
-  'group': 'GRUPOS',
-  'search': 'BUSCADOR',
-  'img': 'IMÁGENES',
-  'tools': 'HERRAMIENTAS',
-  'fun': 'DIVERCIÓN',
-  'audio': 'EFECTO DE AUDIOS', 
-  'sticker': 'STICKERS',
-  'nsfw': 'NSFW',
   'owner': 'CREADOR',
-  'advanced': 'AVANZADO',
 }
 
 const defaultMenu = {
