@@ -161,7 +161,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let pp4 = 'https://telegra.ph/file/09b920486c3c291f5a9e6.mp4'
     m.react('💻')
    
-   conn.sendMessage(m.chat, { img: { url: [img, img2, img3, img4].getRandom() }, gifPlayback: true, caption: text.trim(), mentions: [m.sender] }, { quoted: m })
+    conn.sendMessage(m.chat, { video: { url: [pp, pp2, pp3, pp4].getRandom() }, gifPlayback: true, caption: text.trim(), mentions: [m.sender] }, { quoted: m })
 let listSections = []    
 listSections.push({
 title: '',
@@ -186,8 +186,7 @@ rows: [{ header: "Menu Completo", title: "", id: `.allmenu`, description: `Para 
 await conn.sendList(m.chat, '👋🏻 Hola¡! Bienvenido A Mi Sub Menú\n\n*Creador:* Alba070503\n*Versión:* 1.0.0\n\n💮 si hay algún error puedes contactarme, usa el comando: #owner\n\nGracias¡! 🔴', null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections,
  { mentions: [m.sender]}, {quoted: m})
    } catch (e) {
-   conn.sendList(m.chat, {image: img, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: m});
-     conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
+        conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
     throw e
   }
 }
