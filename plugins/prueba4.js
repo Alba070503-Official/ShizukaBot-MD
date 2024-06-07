@@ -28,7 +28,7 @@ await conn.sendMessage(m.chat, {text: `Bienvenido al menu esperame un rato que c
 await conn.sendMessage(m.chat, {text: ` Sigueme en Github : https://github.com/Alba070503
      `, edit: key})                                               
     const str = `╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙══╮
-║    ◉— *⛩️ NamiBot-MD ⛩️* —◉
+║    ◉— *⛩️ NaiBot-MD ⛩️* —◉
 ║≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡║
 ║🥀 *𝗛ola, ${taguser} Bienvenido al menu*
 ║≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡║
