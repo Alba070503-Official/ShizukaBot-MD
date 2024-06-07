@@ -45,6 +45,10 @@ const defaultMenu = {
 
 %readmore
 `.trimStart(),
+  header: '`MENU X %category`\n\n╭━━━━━━━∙⋆⋅⋆∙━━━━━━━━╮',
+  body: '➤ *%cmd*\n',
+  footer: '╰━━━━━━━∙⋆⋅⋆∙━━━━━━━━╯\n',
+  after: '',
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
