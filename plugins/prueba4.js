@@ -181,7 +181,7 @@ rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver
   let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
 
 await conn.sendList(m.chat, '👋🏻 Hola¡! Bienvenido A Mi Sub Menú\n\n*Creador:* Alba070503\n*Versión:* 1.0.0\n\n💮 si hay algún error puedes contactarme, usa el comando: #owner\n\nGracias¡! 🔴', null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections,
-, { mentions: [m.sender]}, {quoted: m})
+ { mentions: [m.sender]}, {quoted: m})
   } catch (e) {
     conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
     throw e
