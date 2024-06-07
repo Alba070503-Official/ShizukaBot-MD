@@ -162,12 +162,12 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 let listSections = []    
 listSections.push({
 title: '',
-rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
+rows: [{ header: "Menu Completo", title: "", id: `.allmenu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
 { header: "Velocidad", title: "", id: `.ping`, description: `Ver velocidad del bot\n` },
 { header: "Play", title: "", id: `.play`, description: `Para descargar musica 🎧\n` },
 { header: "creador", title: "", id: `.owner`, description: `comunicate con mi creador ⚙️` }
 ]})
-await conn.sendList(m.chat, '╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙══╮\n\n ║🥀 *𝗛ola, ${taguser}  Bienvenido al menu* \n\n ║≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡║║🥀 *Owner:* *Alba070503* \n\n ║🥀 *Fecha:* %date \n\n ║🥀 *Tiempo activo:* ${uptime} \n\n ║🥀 *Versión Actual:* *1.4* \n\n ╰═══╡✯✯✯✯✯✯✯✯✯╞═══╯', null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections, { mentions: [m.sender]}, {quoted: m})
+await conn.sendList(m.chat, '> 👋🏻 Hola¡! Bienvenido A Mi Sub Menú\n\n> *Creador:* Alba070503\n> *Versión:* 2.0\n\n> 💮 si hay algún error puedes contactarme, usa el comando: #owner\n\n> Si el menu no te funciana prueba con #allmenu\n\n> Gracias¡! 🔴', null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections, { mentions: [m.sender]}, {quoted: m})
   } catch (e) {
     conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
     throw e
@@ -176,7 +176,7 @@ await conn.sendList(m.chat, '╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙═�
 
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = ['menu', 'help', 'menú'] 
+handler.command = ['menu2', 'help', 'menú'] 
 handler.register = true 
 export default handler
 
