@@ -55,7 +55,18 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
   let img = "https://i.ibb.co/wstbFdW/file.jpg"; // Ejemplo de una de las imágenes
   let greeting = getGreeting();
 
-  await conn.sendList(m.chat, greeting, menu2, `Click Aquí`, [img], listSections);
+  await conn.sendMessage(m.chat, {
+    image: { url: img },
+    caption: greeting + menu2,
+    footer: 'Click Aquí',
+    templateButtons: [
+      { index: 1, quickReplyButton: { displayText: 'Menu Completo', id: `${usedPrefix}menu` } },
+      { index: 2, quickReplyButton: { displayText: 'SerBot', id: `${usedPrefix}serbot --code` } },
+      { index: 3, quickReplyButton: { displayText: 'Velocidad', id: `${usedPrefix}ping` } },
+      { index: 4, quickReplyButton: { displayText: 'Play', id: `${usedPrefix}play` } },
+      { index: 5, quickReplyButton: { displayText: 'Creador', id: `${usedPrefix}owner` } }
+    ]
+  });
 };
 
 handler.command = ["menu"];
