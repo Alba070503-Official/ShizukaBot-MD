@@ -150,8 +150,6 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
       level, star, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg,
       readmore: readMore
     }
-    // let vn = './media/menu.mp3'
-    const img = './Menu2.jpg'
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     
     let pp = 'https://telegra.ph/file/4c3e4b782c82511b3874d.mp4'
