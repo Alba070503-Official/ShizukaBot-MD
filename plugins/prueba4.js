@@ -58,10 +58,10 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
         id: `${usedPrefix}allmenu`,
       },
       {
-        header: ".",
-        title: ".",
-        description: `.`,
-        id: `${usedPrefix}test`,
+        header: "owner",
+        title: "Información del creado",
+        description: `verifica si quieres hablar con mi creador`,
+        id: `${usedPrefix}owner`,
       },
     ],
   });
