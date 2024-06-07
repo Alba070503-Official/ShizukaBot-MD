@@ -77,9 +77,7 @@ await conn.sendList(m.chat, '👋🏻 Hola¡! Bienvenido A Mi Sub Menú\n\n*Crea
   }
 }
 
-handler.help = ['menu']
-handler.tags = ['main']
-handler.command = ['menu', 'ayuda', 'comandos'] 
+handler.command = /^(menu|menú|memu|memú|help|info|comandos|allmenu|2help|menu1.2|ayuda|commands|commandos|cmd)$/i;
 handler.register = true 
 export default handler
 
