@@ -19,35 +19,15 @@ let tags = {
   'fun': 'DIVERCIÓN',
   'audio': 'EFECTO DE AUDIOS', 
   'sticker': 'STICKERS',
-  'nsfw': 'NSFW',
+  'nsfw': 'NSFW:',
   'owner': 'CREADOR',
   'advanced': 'AVANZADO',
 }
 
 const defaultMenu = {
   before: `
- > IGNA BOT FUTURE
-
-╭━━━━━━━∙⋆⋅⋆∙━━━━━━━━╮
-➤📝 *Nombre* : %name
-➤🪙 *Euros* : %limit
-➤🤖 *User* : %taguser
-➤📈 *Nivel* : %level
-➤⭐ *XP* : %totalexp
-╰━━━━━━━∙⋆⋅⋆∙━━━━━━━━╯
-
-╭━━━━━━━∙⋆⋅⋆∙━━━━━━━━╮
-➤🗣️ *Creador* : Daniel 🇦🇱
-➤📲 *Número* : Wa.me/51955918117
-➤⌛ *Tiempo* : %uptime
-╰━━━━━━━∙⋆⋅⋆∙━━━━━━━━╯
-
-%readmore
-`.trimStart(),
-  header: '`MENU X %category`\n\n╭━━━━━━━∙⋆⋅⋆∙━━━━━━━━╮',
-  body: '➤ *%cmd*\n',
-  footer: '╰━━━━━━━∙⋆⋅⋆∙━━━━━━━━╯\n',
-  after: '',
+ > Hola Bienvenido al menu especial `.trimStart(),
+  
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
