@@ -28,7 +28,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, fake, )
     },
     message: {
       contactMessage: {
-        displayName: `\n|━━━〔 ${wm} 〕━━━| \nAqui tienes el menu : ${username}`,
+        displayName: `\n|━━━〔 ShizukaBot-MD 〕━━━| \nAqui tienes el menu : ${username}`,
         vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${username}\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
       },
     },
@@ -43,9 +43,8 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, fake, )
 ╭─╮︹︹︹⊹︹︹︹⊹︹︹︹⊹─╮
 ┆   *🌹 ɪɴғᴏ  ᴅᴇ ʟᴀ ʙᴏᴛ 🍒*
 ┝╾─────────────────╯
-┆👥*𝘜𝘴𝘶𝘢𝘳𝘪𝘰𝘴: ${totalusr}* 
-┆⏱ *𝘓𝘭𝘦𝘷𝘰 𝘈𝘤𝘵𝘪𝘷𝘢: ${uptime}*
-┆${sbot}
+┆⏱ *𝘓𝘭𝘦𝘷𝘰 𝘈𝘤𝘵𝘪𝘷o: ${uptime}*
+┆Este menu esta en fase prueba 
 ╰ׄ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ─ׂׅ┄ׅׄ─ׂ╯`;
 
   let listSections = [];
