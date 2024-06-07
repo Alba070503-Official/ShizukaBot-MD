@@ -150,25 +150,28 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
       level, star, name, weton, week, date, dateIslamic, time, totalreg, rtotalreg,
       readmore: readMore
     }
+    // let vn = './media/menu.mp3'
+    const img = './Menu2.jpg'
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     
     let pp = 'https://telegra.ph/file/4c3e4b782c82511b3874d.mp4'
     let pp2 = 'https://telegra.ph/file/d8c5e18ab0cfc10511f63.mp4'
     let pp3 = 'https://telegra.ph/file/96e471a87971e2fb4955f.mp4'
+   const img = './Menu2.jpg'
     let pp4 = 'https://telegra.ph/file/09b920486c3c291f5a9e6.mp4'
     m.react('💻')
    
-  //  conn.sendMessage(m.chat, { video: { url: [pp, pp2, pp3, pp4].getRandom() }, gifPlayback: true, caption: text.trim(), mentions: [m.sender] }, { quoted: m })
+   conn.sendMessage(m.chat, { img: { url: [img, img2, img3, img4].getRandom() }, gifPlayback: true, caption: text.trim(), mentions: [m.sender] }, { quoted: m })
 let listSections = []    
 listSections.push({
 title: '',
-rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
+rows: [{ header: "Menu Completo", title: "", id: `.allmenu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
 { header: "Velocidad", title: "", id: `.ping`, description: `Ver velocidad del bot\n` },
 { header: "Play", title: "", id: `.play`, description: `Para descargar musica 🎧\n` },
 { header: "creador", title: "", id: `.owner`, description: `comunicate con mi creador ⚙️` }
 ]})
 
-  let img = "https://i.ibb.co/wstbFdW/file.jpg";
+  let img12 = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
   let img3 = "https://i.ibb.co/0s8V5FM/file.png";
   let img4 = "https://i.ibb.co/d6svLy0/file.jpg";
