@@ -79,7 +79,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
   let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
 
   
-  await conn.sendList(m.chat, allmenu, owner, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections,);
+  await conn.sendList(m.chat, menu, owner, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections,);
 };
 
 handler.command = ["menu"];
