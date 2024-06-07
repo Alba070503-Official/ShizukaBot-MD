@@ -58,7 +58,7 @@ await conn.sendMessage(m.chat, {text: ` Sigueme en Github : https://github.com/A
 
     m.react('💻')
    
-    conn.sendMessage(m.chat, { video: { url: [pp, pp2, pp3, pp4].getRandom() }, gifPlayback: true, caption: text.trim(), mentions: [m.sender] }, { quoted: m })
+   // conn.sendMessage(m.chat, { video: { url: [pp, pp2, pp3, pp4].getRandom() }, gifPlayback: true, caption: text.trim(), mentions: [m.sender] }, { quoted: m })
 let listSections = []    
 listSections.push({
 title: '',
