@@ -37,14 +37,25 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
 ┆Este menu esta en fase prueba 
 ╰ׄ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ─ׂׅ┄ׅׄ─ׂ╯`;
 
-  let listSections = []    
-listSections.push({
-title: '',
-rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
-{ header: "Velocidad", title: "", id: `.ping`, description: `Ver velocidad del bot\n` },
-{ header: "Play", title: "", id: `.play`, description: `Para descargar musica 🎧\n` },
-{ header: "creador", title: "", id: `.owner`, description: `comunicate con mi creador ⚙️` }
-]});
+  let listSections = [];
+
+  listSections.push({
+    title: `AVISO: LA BOT TODAVIA ESTA EN BETA`,
+    rows: [
+      {
+        header: "allmenu",
+        title: "Menu Completo",
+        description: `para ver todos los comandos`,
+        id: `${usedPrefix}allmenu`,
+      },
+      {
+        header: ".",
+        title: ".",
+        description: `.`,
+        id: `${usedPrefix}test`,
+      },
+    ],
+  });
 
   let img = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
@@ -58,15 +69,11 @@ rows: [{ header: "Menu Completo", title: "", id: `.menu`, description: `Para ver
   let img10 = "https://i.ibb.co/SKm0T9S/file.jpg";
   let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
 
-  
-  await conn.sendList(m.chat, '👋🏻 Hola¡! Bienvenido A Mi Sub Menú\n\n*Creador:* Alba070503\n*Versión:* 1.0.0\n\n💮 si hay algún error puedes contactarme, usa el comando: #owner\n\nGracias¡! 🔴', null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections, { mentions: [m.sender]}, {quoted: m})
-  } catch (e) {
-    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m)
-    throw e
-  }
-}
 
-handler.command = ["menu4"];
+  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo, );
+};
+
+handler.command = ["menu3"];
 
 export default handler;
 
