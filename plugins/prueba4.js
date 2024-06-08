@@ -28,7 +28,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, )
     },
     message: {
       contactMessage: {
-        displayName: `\n|━━━〔 ${botName} 〕━━━| \nAqui tienes el menu : ${username}`,
+        displayName: `\n|━━━〔 ${wm} 〕━━━| \nAqui tienes el menu : ${username}`,
         vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${username}\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
       },
     },
