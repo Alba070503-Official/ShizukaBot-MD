@@ -27,7 +27,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
 
   let menu2 = `
 *╭─╮︹︹︹⊹︹︹︹⊹︹︹︹⊹*
-*┆  ${username}*
+*┆  Bienvenido al Sud menu xd*
 *╰─ ⊹꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦⊹*
 
 ╭─╮︹︹︹⊹︹︹︹⊹︹︹︹⊹─╮
