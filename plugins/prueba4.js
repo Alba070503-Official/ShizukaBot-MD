@@ -71,17 +71,8 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, )
   let img = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
   let img3 = "https://i.ibb.co/0s8V5FM/file.png";
-  let img4 = "https://i.ibb.co/d6svLy0/file.jpg";
-  let img5 = "https://telegra.ph/file/2885253414cbf7b0878f3.jpg";
-  let img6 = "https://telegra.ph/file/ce57807eed899516484c7.jpg";
-  let img7 = "https://telegra.ph/file/63fd2e414b81fb8161d3a.jpg";
-  let img8 = "https://telegra.ph/file/3594f35921ce75d5c5e16.jpg";
-  let img9 = "https://telegra.ph/file/4f89789a5b1f874622ffd.jpg";
-  let img10 = "https://i.ibb.co/SKm0T9S/file.jpg";
-  let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
-
-  
-  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, m, );
+ 
+  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3].getRandom(), listSections, estilo, );
 };
 
 handler.command = ["menu3"];
