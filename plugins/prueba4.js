@@ -58,7 +58,10 @@ rows: [{ header: "Menu Completo", title: "Para ver el menu", id: `.allmenu`, des
 { header: "creador", title: "Si quieres comunícarte con mi dueño", id: `.owner`, description: `comunicate con mi creador ⚙️` }
 ]})
 
-await conn.sendList(m.chat, menu2, null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections, { mentions: [m.sender]}, {quoted: m})
+await conn.sendList(m.chat, menu2, null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, [img, img2].getRandom(), listSections, { mentions: [m.sender]}, {quoted: m})
+
+//await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo, );
+};
 
   let img = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
