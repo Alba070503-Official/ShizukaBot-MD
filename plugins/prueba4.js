@@ -49,24 +49,16 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, )
 ╰ׄ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ─ׂׅ┄ׅׄ─ׂ╯`;
 
   let listSections = [];
+let listSections = []    
+listSections.push({
+title: '',
+rows: [{ header: "Menu Completo", title: "Para ver el menu", id: `.allmenu`, description: `Para ver todos los comandos\n` }, { header: "Sub-Bot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
+{ header: "Velocidad", title: "Aqui veras la velocidad del bot", id: `.ping`, description: `Ver velocidad del bot\n` },
+{ header: "Play", title: "Aqui podras ver funcione de descargas", id: `.play`, description: `Para descargar musica 🎧\n` },
+{ header: "creador", title: "Si quieres comunícarte con mi dueño", id: `.owner`, description: `comunicate con mi creador ⚙️` }
+]})
 
-  listSections.push({
-    title: `AVISO: LA BOT TODAVIA ESTA EN BETA`,
-    rows: [
-      {
-        header: "allmenu",
-        title: "Menu Completo",
-        description: `para ver todos los comandos`,
-        id: `${usedPrefix}allmenu`,
-      },
-      {
-        header: ".",
-        title: ".",
-        description: `.`,
-        id: `${usedPrefix}test`,
-      },
-    ],
-  });
+await conn.sendList(m.chat, menu2, null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, listSections, { mentions: [m.sender]}, {quoted: m})
 
   let img = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
