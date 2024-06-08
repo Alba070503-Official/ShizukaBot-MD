@@ -87,7 +87,7 @@ function clockString(ms) {
   return [h, m, s].map((v) => v.toString().padStart(2, 0)).join(":");
 }
 
-var estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: packname, orderTitle: 'Bang', thumbnail: yoshiImg, sellerJid: '0@s.whatsapp.net' }}}
+var estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: packname, orderTitle: 'Bang', thumbnail: imagen2, sellerJid: '0@s.whatsapp.net' }}}
 
   var ase = new Date();
   var hour = ase.getHours();
