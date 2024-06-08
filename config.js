@@ -15,6 +15,7 @@ import { en, es, id, ar, pt } from "./lib/idiomas/total-idiomas.js"
 global.owner = [
 ["59175655964", 'Onwer Alba070503', true], //ShizukaBot-MD 💙
 ["59169082575"], 
+["573012482597"],
 ["5492266613038"], 
 ["593968263524"],
 ["33760536110"],
