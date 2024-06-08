@@ -72,8 +72,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, )
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
   let img3 = "https://i.ibb.co/0s8V5FM/file.png";
  
-  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3].getRandom(), listSections, estilo, );
-};
+        conn.sendMessage(m.chat, {image: img, caption: listSections.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: false});
 
 handler.command = ["menu3"];
 
