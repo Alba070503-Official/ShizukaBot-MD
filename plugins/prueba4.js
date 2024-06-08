@@ -28,7 +28,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, )
     },
     message: {
       contactMessage: {
-        displayName: `\n|━━━〔 ${wm} 〕━━━| \nAqui tienes el menu : ${username}`,
+        displayName: `\n|━━━〔 ${botName} 〕━━━| \nAqui tienes el menu : ${username}`,
         vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${username}\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
       },
     },
@@ -43,31 +43,46 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m, )
 ╭─╮︹︹︹⊹︹︹︹⊹︹︹︹⊹─╮
 ┆   *🌹 ɪɴғᴏ  ᴅᴇ ʟᴀ ʙᴏᴛ 🍒*
 ┝╾─────────────────╯
-┆👥*𝘜𝘴𝘶𝘢𝘳𝘪𝘰𝘴: ${totalusr}* 
-┆⏱ *𝘓𝘭𝘦𝘷𝘰 𝘈𝘤𝘵𝘪𝘷𝘢: ${uptime}*
+┆👥*User: ${totalusr}* 
+┆⏱ *Actividas: ${uptime}*
 ┆${sbot}
 ╰ׄ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ─ׂׅ┄ׅׄ─ׂ╯`;
 
   let listSections = [];
-let listSections = []    
-listSections.push({
-title: '',
-rows: [{ header: "Menu Completo", title: "Para ver el menu", id: `.allmenu`, description: `Para ver todos los comandos\n` }, { header: "Sub-Bot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
-{ header: "Velocidad", title: "Aqui veras la velocidad del bot", id: `.ping`, description: `Ver velocidad del bot\n` },
-{ header: "Play", title: "Aqui podras ver funcione de descargas", id: `.play`, description: `Para descargar musica 🎧\n` },
-{ header: "creador", title: "Si quieres comunícarte con mi dueño", id: `.owner`, description: `comunicate con mi creador ⚙️` }
-]})
 
-await conn.sendList(m.chat, menu2, null, `Selecione la opción correcta (⁠・⁠∀⁠・⁠)`, [img, img2].getRandom(), listSections, { mentions: [m.sender]}, {quoted: m})
-
-//await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo, );
-};
+  listSections.push({
+    title: `AVISO: LA BOT TODAVIA ESTA EN BETA`,
+    rows: [
+      {
+        header: "allmenu",
+        title: "Menu Completo",
+        description: `para ver todos los comandos`,
+        id: `${usedPrefix}allmenu`,
+      },
+      {
+        header: ".",
+        title: ".",
+        description: `.`,
+        id: `${usedPrefix}test`,
+      },
+    ],
+  });
 
   let img = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
   let img3 = "https://i.ibb.co/0s8V5FM/file.png";
- 
-        conn.sendMessage(m.chat, {image: img, caption: listSections.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: false});
+  let img4 = "https://i.ibb.co/d6svLy0/file.jpg";
+  let img5 = "https://telegra.ph/file/2885253414cbf7b0878f3.jpg";
+  let img6 = "https://telegra.ph/file/ce57807eed899516484c7.jpg";
+  let img7 = "https://telegra.ph/file/63fd2e414b81fb8161d3a.jpg";
+  let img8 = "https://telegra.ph/file/3594f35921ce75d5c5e16.jpg";
+  let img9 = "https://telegra.ph/file/4f89789a5b1f874622ffd.jpg";
+  let img10 = "https://i.ibb.co/SKm0T9S/file.jpg";
+  let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
+
+  
+  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, );
+};
 
 handler.command = ["menu3"];
 
@@ -81,7 +96,6 @@ function clockString(ms) {
   return [h, m, s].map((v) => v.toString().padStart(2, 0)).join(":");
 }
 
-var estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: packname, orderTitle: 'Bang', thumbnail: imagen2, sellerJid: '0@s.whatsapp.net' }}}
 
   var ase = new Date();
   var hour = ase.getHours();
