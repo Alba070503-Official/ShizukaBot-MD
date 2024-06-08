@@ -21,17 +21,8 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
       : `Sᴏʏ Sᴜʙʙᴏᴛ Dᴇ:  Wa.me/${global.conn.user.jid.split`@`[0]}`;
 
   global.fcontact = {
-    key: {
-      fromMe: false,
-      participant: `0@s.whatsapp.net`,
-      remoteJid: "status@broadcast",
-    },
-    message: {
-      contactMessage: {
-        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${username}\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
-      },
-    },
-  };
+    key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};      },
+                            }
   let menu = ``;
 
   let menu2 = `
