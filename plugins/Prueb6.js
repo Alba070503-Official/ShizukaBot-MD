@@ -46,7 +46,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
         header: "allmenu",
         title: "Menu Completo",
         description: `para ver todos los comandos`,
-        id: `${usedPrefix}allmenu`,
+        id: `${usedPrefix}play`,
       },
       {
         header: ".",
