@@ -116,7 +116,7 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 > npm start
 ```
 ## `AGRADECIMIENTOS & CREDITOS` 
-<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="90" height="90" alt="Azamk"/></a>
+<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="200" height="200" alt="Azamk"/></a>
 
 <a href="https://www.youtube.com/@gatadios">
 <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
@@ -125,10 +125,10 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white">
 </a>
 
-  ## `EDITOR & PROPIETARIO DEL BOT` 
-<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="120" height="120" alt="Alba070503"/></a>
+  ## `CREADOR  & PROPIETARIO DEL BOT` 
+<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="300" height="300" alt="Alba070503"/></a>
 
-`NamiBot-MD - By @Alba070503 `
+`ShizukaBot-MD - By @Alba070503 `
 #### COLABORADORES 
 
 <a href="https://github.com/Alba070503-Official/ShizukaBot-MD/graphs/contributors">
