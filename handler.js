@@ -1456,7 +1456,7 @@ mentionedJid:[user],
 "title": [wm, 'Hola mi nombre es: ' + gt + ' un gusto de conocerte:D ', 'By @Alba070503'].getRandom(),
 "containsAutoReply": true,
 "mediaType": 1, 
-sourceUrl: accountsgb }}}, { quoted: fkontak2 })
+sourceUrl: `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04` }}}, { quoted: fkontak2 })
 apii.data = ''
 //this.sendFile(id, apii.data, 'pp.jpg', text, null, false, { mentions: [user] }, { quoted: fkontak2 })
 }}}
