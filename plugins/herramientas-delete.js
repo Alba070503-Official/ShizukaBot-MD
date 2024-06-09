@@ -17,8 +17,8 @@ handler.help = ['delete']
 handler.tags = ['group']
 handler.command = /^(eliminar|del(ete)?)$/i
 
-handler.group = false
+/*handler.group = false
 handler.admin = true
-handler.botAdmin = true
+handler.botAdmin = true*/
 
 export default handler
