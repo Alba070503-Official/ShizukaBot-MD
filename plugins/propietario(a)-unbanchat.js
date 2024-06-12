@@ -7,7 +7,7 @@ await conn.reply(m.chat, ' *¡EL BOT YA FUÉ DESBANEADO EN ESTE CHAT!*', m)
 }
 handler.command = /^unbanchat|desbanearchat|desbanchat$/i
 handler.admin = true
-handler.owner = true 
+handler.rowner = true 
 //handler.group = true
 
 export default handler
