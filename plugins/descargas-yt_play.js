@@ -24,6 +24,7 @@ externalAdReply: {
 title: yt_play[0].title,
 body: wm,
 thumbnailUrl: yt_play[0].thumbnail, 
+sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
 mediaType: 1,
 showAdAttribution: true,
 renderLargerThumbnail: true
