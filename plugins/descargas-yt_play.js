@@ -15,6 +15,7 @@ additionalText = 'audio 🔊'
 additionalText = 'video 🎥'}
 await conn.sendMessage(m.chat, {
 text: `*🍁Titulo:* ${yt_play[0].title}
+
 *⇄ㅤ     ◁   ㅤ  ❚❚ㅤ     ▷ㅤ     ↻*
 
 *🍁Visualizaciones:* ${MilesNumber(yt_play[0].views)}
