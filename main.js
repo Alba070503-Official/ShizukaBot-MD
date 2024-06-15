@@ -294,9 +294,8 @@ conn.ev.off('connection.update', conn.connectionUpdate)
 conn.ev.off('creds.update', conn.credsUpdate)
 }
 
-conn.welcome = '┌─★ *ShizukaBot-MD* \n│「 Bienvenido 」\n└┬★ 「 @${m.messageStubParameters[0].split`@`[0]} 」\n   │✑  Bienvenido a\n   │✑  ${groupMetadata.subject}\n  │✑ Creado Por @Alba070503\n   └───────────────┈ ⳹`;
-conn.bye = `┌─★ *ShizukaBot-MD* \n│「 ADIOS 👋🏻 」\n└┬★ 「 @${m.messageStubParameters[0].split`@`[0]} 」\n   │✑  Se fue\n   │✑ Jamás te quisimos aquí\n   └───────────────┈ ⳹`;
- ; 
+conn.welcome = '*┌─★ShizukaBot-MD*\n*│「 Bienvenido a @subject *\n*└┬★「 @user 」*\n│✑ Lee las reglas\n*│✑ Creador @Alba07503*\n*└───────────────┈ ⳹*';
+conn.bye = '*┌─★ShizukaBot-MD*\n*│「 ADIOS 👋 」*\n*└┬★「 @user 」*\n*│✑ Se fue*\n *│✑ Hasta Luego*\n*└───────────────┈ ⳹*';
 conn.spromote = '*@user* ¡Se suma al grupo de admins¡'; 
 conn.sdemote = '*@user* ¡Abandona el grupo!'; 
 conn.sDesc = lenguajeGB['smsSdesc']() 
