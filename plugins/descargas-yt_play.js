@@ -14,11 +14,14 @@ additionalText = 'audio 🔊'
 } else if (command === 'play2') {
 additionalText = 'video 🎥'}
 await conn.sendMessage(m.chat, {
-text: `${yt_play[0].title}
+text: `*🍁Titulo:* ${yt_play[0].title}
 *⇄ㅤ     ◁   ㅤ  ❚❚ㅤ     ▷ㅤ     ↻*
 
-*⏰ Duración:* ${secondString(yt_play[0].duration.seconds)}
-*👉🏻Aguarde un momento en lo que envío su ${additionalText}*`, 
+*🍁Visualizaciones:* ${MilesNumber(yt_play[0].views)}
+*🍁Publicado:* ${yt_play[0].ago}
+*🍁Duración:* ${secondString(yt_play[0].duration.seconds)}
+*🍁Link:* ${yt_play[0].url}
+*🍁Aguarde un momento soy un poco lenta en lo que envio su  ${additionalText}*`, 
 contextInfo: {
 externalAdReply: {
 title: yt_play[0].title,
