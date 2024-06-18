@@ -15,7 +15,7 @@ await m.reply("Buscando...")
         throw new Error(data.message || "Falló")
       }
     let ipsearch = `
-*IP INFO*
+𝐈𝐏 𝐈𝐍𝐅𝐎
 
 IP : ${data.query}
 País : ${data.country}
