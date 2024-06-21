@@ -87,6 +87,18 @@ para usuarios del heroku
 
 ***
 -----
+### 💙 FlarexCloud
+> Empiece a usar FlarexCloud para activar **ShizukaBot-MD**
+
+<a href="https://www.flarex.cloud"><img src="https://cdn.flarex.cloud/deploy.png" height="60px"></a>
+### Información sobre FlarexCloud
+
+- **Página:** [`Aquí`](https://www.flarex.cloud)
+- **Dashboard / Área de Pagos:** [`Aquí`](https://billing.flarex.cloud)
+- **Game Panel:** [`Aquí`](https://gamepanel.flarex.cloud)
+- **Discord:** [`Aquí`](https://discord.flarex.cloud)
+- **Contacto:** [`hi@flarex.cloud`](mailto:hi@flarex.cloud) / [`support@flarex.cloud`](mailto:support@flarex.cloud) / [`partnerships@flarex.cloud`](mailto:partnerships@flarex.cloud)
+----
 ### 🟢 INFINITY-HOST
 > Activar **ShizukaBot-MD** 24/7 activo en Infinity-Host
 
@@ -102,6 +114,7 @@ para usuarios del heroku
 
 - [x] **Configuración** <details><summary>**Ajustes del Servidor - ShizukaBot-MD**</summary><img src="https://qu.ax/cpgf.jpg"></details>
 ------------------------
+
 🟢 ACTIVAR EN CODES SPACES 
 
 [`CREAR SERVIDOR`](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=GataNina-Li/GataBot-MD&ref=main&geo=UsEast)
