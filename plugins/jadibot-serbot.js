@@ -119,7 +119,7 @@ let handler = async (
       setTimeout(async () => {
         let codeBot = await conn.requestPairingCode(cleanedNumber);
         codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
-        parent.sendButton2(
+        parent.sendButton(
           m.chat,
           `‹𝟹 𝙲𝙾𝙳𝙴: *${codeBot}*\n\n'*Usa este Código para convertirte en Bot*\n\n1. Haga click en los tres puntos en la esquina superior derecha.\n2. Toque Dispositivos vinculados\n3. Selecciona *Vincular con el número de teléfono*\n\n*Nota:* El código solo sirve para este número`,
           mssg.ig,
