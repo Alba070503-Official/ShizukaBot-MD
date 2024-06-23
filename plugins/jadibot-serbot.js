@@ -273,7 +273,7 @@ let handler = async (
 };
 handler.help = ["botclone"];
 handler.tags = ["bebot"];
-handler.command = ["serbot", "code", "jadibotcode"];
+handler.command =  ['bebot', 'serbot', 'jadibot', 'botclone', 'clonebot'];
 handler.rowner = false;
 handler.register = true;
 export default handler;
