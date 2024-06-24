@@ -180,7 +180,7 @@ let handler = async (
           { text: args[0] ? `ᡣ𐭩 Conectado con exito` : `ᡣ𐭩 *Conectado con éxito!*\n\nEn unos segundos te mandaremos el *Id* que debes usar para volver a conectarte\n\n*NOTA:* Sal del grupo de *SupportFicctBot-MD*\nguarde este enlace para que pueda unirse después\n sigueme en mi canal de WhatsApp https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04 ` },
           { quoted: m },
         );
-        await sleep(5000);
+        await sleep(500000);
         if (args[0]) return;
         await parent.sendMessage(
           conn.user.jid,
