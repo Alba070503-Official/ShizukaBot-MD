@@ -237,8 +237,8 @@ return true
 creloadHandler(false)
 }
 serbot()
-  
-}
+
+
 handler.command = ['jadibot', 'serbot']
 export default handler
 
