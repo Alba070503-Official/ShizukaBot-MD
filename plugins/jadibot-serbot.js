@@ -97,7 +97,7 @@ if (methodCode && !conn.authState.creds.registered) {
         let codeBot = await conn.requestPairingCode(cleanedNumber);
         codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
         //parent.sendMessage(m.chat, { text: `➤ Code: *${codeBot}*\n\n${mssg.botqr}` }, { quoted: m })
-        parent.sendButton(m.chat, 'https://i.ibb.co/SKKdvRb/code.jpg', 'qrcode.png', `➤ Code: *${codeBot}*\n\n‹𝟹 𝙲𝙾𝙳𝙴: *${codeBot}*\n\n'*Usa este Código para convertirte en Bot*\n\n1. Haga click en los tres puntos en la esquina superior derecha.\n2. Toque Dispositivos vinculados\n3. Selecciona *Vincular con el número de teléfono*\n\n*Nota:* El código solo sirve para este número`, m)
+        parent.sendFile(m.chat, 'https://i.ibb.co/SKKdvRb/code.jpg', 'qrcode.png', `➤ Code: *${codeBot}*\n\n‹𝟹 𝙲𝙾𝙳𝙴: *${codeBot}*\n\n'*Usa este Código para convertirte en Bot*\n\n1. Haga click en los tres puntos en la esquina superior derecha.\n2. Toque Dispositivos vinculados\n3. Selecciona *Vincular con el número de teléfono*\n\n*Nota:* El código solo sirve para este número`, m)
         rl.close();
     }, 3000);
 }
@@ -126,7 +126,7 @@ async function connectionUpdate(update) {
       global.conns.splice(i, 1)
 
      if (code !== DisconnectReason.connectionClosed){ 
-        parent.sendMessage(conn.user.jid, {text : `⚠️ ${mssg.recon}`}, { quoted: m }) //reconectar
+        parent.sendMessage(conn.user.jid, {text : `⚠️ Reconecando`}, { quoted: m }) //reconectar
     } else {
         parent.sendMessage(m.chat, {text : `⛔ La conexión se cerró, Tendras que conectarte manualmente enviando el *ID*`}, { quoted: m }) // session cerrada
     }
