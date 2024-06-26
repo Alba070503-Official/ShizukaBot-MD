@@ -104,7 +104,7 @@ version
 }
 
 let conn = makeWASocket(connectionOptions)
-conn.isInit = false
+conn.isInit = true
 let isInit = true
 
 let cleanedNumber = phoneNumber.replace(/[^0-9]/g, '')
