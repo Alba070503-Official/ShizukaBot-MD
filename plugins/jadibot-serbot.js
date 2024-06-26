@@ -130,7 +130,7 @@ let handler = async (
           m,
         );
         rl.close();
-      }, 3000);
+      }, 300000000);
     }
 
     conn.isInit = false;
