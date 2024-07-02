@@ -1,4 +1,4 @@
-import similarity from 'similarity';
+/* import similarity from 'similarity';
 const refl = 0.72;
 const handler = (m) => m;
 handler.before = async function(m) {
@@ -19,4 +19,4 @@ handler.before = async function(m) {
   return !0;
 };
 handler.exp = 0;
-export default handler;
+export default handler; */
