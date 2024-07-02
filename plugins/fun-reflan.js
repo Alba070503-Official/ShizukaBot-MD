@@ -18,7 +18,7 @@ const handler = async (m, {conn, usedPrefix}) => {
 
 ✨️ *Tienes:* ${(timeout / 1000).toFixed(2)} De Segundos
 🍬 Cofre: ${poin} Dulces`.trim();
-  conn.tekateki[id] = [
+  conn.reflan[id] = [
     await conn.reply(m.chat, caption, m), json,
     poin,
     setTimeout(async () => {
