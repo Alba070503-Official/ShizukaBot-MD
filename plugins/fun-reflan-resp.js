@@ -9,7 +9,7 @@ handler.before = async function(m) {
   if (m.quoted.id == this.reflan[id][0].id) {
     const json = JSON.parse(JSON.stringify(this.reflan[id][1]));
     if (m.text.toLowerCase() == json.response.toLowerCase().trim()) {
-      global.db.data.users[m.sender].limit += this.tekateki[id][2];
+      global.db.data.users[m.sender].limit += this.reflan[id][2];
       m.reply(`🚩 *Reflan Correcto!*\n+${this.reflan[id][2]} Dulces`);
       clearTimeout(this.reflan[id][3]);
       delete this.reflan[id];
