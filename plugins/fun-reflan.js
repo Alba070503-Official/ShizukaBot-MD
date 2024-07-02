@@ -4,8 +4,8 @@ const poin = 2;
 const handler = async (m, {conn, usedPrefix}) => {
   conn.reflan = conn.reflan ? conn.reflan : {};
   const id = m.chat;
-  if (id in conn.reflan) {
-    conn.reply(m.chat, 'Todavía hay reflan sin responder en este chat', conn.reflan[id][0]);
+ // if (id in conn.reflan) {
+  //  conn.reply(m.chat, 'Todavía hay reflan sin responder en este chat', conn.reflan[id][0]);
     throw false;
   }
   const reflan = JSON.parse(fs.readFileSync(`./src/game/reflan.json`));
