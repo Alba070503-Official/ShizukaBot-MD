@@ -1,5 +1,5 @@
 import similarity from 'similarity';
-const threshold = 0.72;
+const refl = 0.72;
 const handler = (m) => m;
 handler.before = async function(m) {
   const id = m.chat;
@@ -13,7 +13,7 @@ handler.before = async function(m) {
       m.reply(`🚩 *Reflan Correcto!*\n+${this.reflan[id][2]} Dulces`);
       clearTimeout(this.reflan[id][3]);
       delete this.reflan[id];
-    } else if (similarity(m.text.toLowerCase(), json.response.toLowerCase().trim()) >= threshold) m.reply(`Ups Casi! 🚩`);
+    } else if (similarity(m.text.toLowerCase(), json.response.toLowerCase().trim()) >= refl) m.reply(`Ups Casi! 🚩`);
     else m.reply('No es la respuesta!');
   }
   return !0;
