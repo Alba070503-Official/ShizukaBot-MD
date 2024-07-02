@@ -2,14 +2,14 @@ import fs from 'fs';
 const timeout = 60000;
 const poin = 2;
 const handler = async (m, {conn, usedPrefix}) => {
-  conn.tekateki = conn.tekateki ? conn.tekateki : {};
+  conn.reflan = conn.reflan ? conn.reflan : {};
   const id = m.chat;
-  if (id in conn.tekateki) {
-    conn.reply(m.chat, 'Todavía hay reflan sin responder en este chat', conn.tekateki[id][0]);
+  if (id in conn.reflan) {
+    conn.reply(m.chat, 'Todavía hay reflan sin responder en este chat', conn.reflan[id][0]);
     throw false;
   }
-  const tekateki = JSON.parse(fs.readFileSync(`./src/game/reflan.json`));
-  const json = tekateki[Math.floor(Math.random() * tekateki.length)];
+  const reflan = JSON.parse(fs.readFileSync(`./src/game/reflan.json`));
+  const json = reflan[Math.floor(Math.random() * reflan.length)];
   const _clue = json.response;
   const clue = _clue.replace(/[A-Za-z]/g, '_');
   const caption = `
@@ -22,8 +22,8 @@ const handler = async (m, {conn, usedPrefix}) => {
     await conn.reply(m.chat, caption, m), json,
     poin,
     setTimeout(async () => {
-      if (conn.tekateki[id]) await conn.reply(m.chat, `🚩 Se acabó el tiempo!\n*Respuesta:* ${json.response}`, conn.tekateki[id][0]);
-      delete conn.tekateki[id];
+      if (conn.reflan[id]) await conn.reply(m.chat, `🚩 Se acabó el tiempo!\n*Respuesta:* ${json.response}`, conn.tekateki[id][0]);
+      delete conn.reflan[id];
     }, timeout)];
 };
 handler.help = ['reflan'];
