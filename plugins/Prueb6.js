@@ -1,4 +1,4 @@
-
+let handler = async (m, { conn, usedPrefix, text, args, command }) => {
   let totalusr = Object.keys(global.db.data.users).length;
     let _uptime = process.uptime() * 1000;
     let uptime = clockString(_uptime);
@@ -70,8 +70,8 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
   let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
 
 
-  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo);
-let handler = async (m, { conn, usedPrefix, text, args, command }) => {
+  await conn.sendList(m.chat, menu, menu2, `Precione Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo);
+}
 handler.command = ["menu5"];
 
 export default handler;
