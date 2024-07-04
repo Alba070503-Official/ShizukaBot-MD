@@ -71,7 +71,7 @@ rows: [{ header: "Menu Completo", title: "", id: `.allmenu`, description: `Para 
   await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections,);
 };
 
-handler.command = ["menu4"];
+handler.command = ["menu6"];
 
 export default handler;
 
