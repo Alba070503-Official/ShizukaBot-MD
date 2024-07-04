@@ -72,7 +72,7 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
 
   await conn.sendList(m.chat, menu, menu2, `Precione Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo);
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
-handler.command = ["menu5"];
+handler.command = ["menu6"];
 
 export default handler;
 
