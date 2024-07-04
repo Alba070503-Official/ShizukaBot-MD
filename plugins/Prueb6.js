@@ -113,4 +113,3 @@ switch(hour){
   case 23: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
 }
   var greeting = hour;
-@⁨Gata Dios - Asistencia⁩ este code es de @⁨~🌴]▸ⲉ𝖽αⲅ◂[🇭🇳⁩ que me prestó nose porque no agarra a gata bot ya lo probé XD
