@@ -20,42 +20,40 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
       ? ""
       : `Sᴏʏ Sᴜʙʙᴏᴛ Dᴇ:  Wa.me/${global.conn.user.jid.split`@`[0]}`;
 
-  const fkontak2 = {'key': {'participants': '0@s.whatsapp.net', 'remoteJid': 'status@broadcast', 'fromMe': false, 'id': 'Halo'}, 'message': {'contactMessage': {'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}, 'participant': '0@s.whatsapp.net'};
-      conn.sendMessage(m.chat, {image: img, caption: str.trim(), mentions: [...str.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net')}, {quoted: fkontak2});
-    }
+  global.fcontact = {
+    key: {
+      fromMe: false,
+      participant: `0@s.whatsapp.net`,
+      remoteJid: "status@broadcast",
+    },
+    message: {
+      contactMessage: {
+        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${username}\nitem1.TEL;waid=${m.sender.split("@")[0]}:${m.sender.split("@")[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
+      },
+    },
+  };
   let menu = ``;
 
   let menu2 = `
 *╭─╮︹︹︹⊹︹︹︹⊹︹︹︹⊹*
-*┆  Bienvenido al Sud menu xd*
+*┆  ${username}*
 *╰─ ⊹꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦⊹*
 
 ╭─╮︹︹︹⊹︹︹︹⊹︹︹︹⊹─╮
 ┆   *🌹 ɪɴғᴏ  ᴅᴇ ʟᴀ ʙᴏᴛ 🍒*
 ┝╾─────────────────╯
-┆⏱ *en desarrollo xd*
+┆⏱ *𝘓𝘭𝘦𝘷𝘰 𝘈𝘤𝘵𝘪𝘷o: ${uptime}*
 ┆Este menu esta en fase prueba 
 ╰ׄ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ┄ׅׄ─ׂׅ┄ׅׄ─ׂׅ┄ׅׄ─ׅׄ─ׂׅ┄ׅׄ─ׂ╯`;
 
-  let listSections = [];
-
-  listSections.push({
-    title: `AVISO: LA BOT TODAVIA ESTA EN BETA`,
-    rows: [
-      {
-        header: "allmenu",
-        title: "Menu Completo",
-        description: `para ver todos los comandos`,
-        id: `${usedPrefix}play`,
-      },
-      {
-        header: ".",
-        title: ".",
-        description: `.`,
-        id: `${usedPrefix}test`,
-      },
-    ],
-  });
+  let listSections = []    
+listSections.push({
+title: '',
+rows: [{ header: "Menu Completo", title: "", id: `.allmenu`, description: `Para ver todos los comandos\n` }, { header: "SudBot", title: "", id: `.serbot --code`, description: `Para volverte sudbot 🤖\n` },
+{ header: "Velocidad", title: "", id: `.ping`, description: `Ver velocidad del bot\n` },
+{ header: "Play", title: "", id: `.play`, description: `Para descargar musica 🎧\n` },
+{ header: "creador", title: "", id: `.owner`, description: `comunicate con mi creador ⚙️` }
+]});
 
   let img = "https://i.ibb.co/wstbFdW/file.jpg";
   let img2 = "https://i.ibb.co/gwm5mXm/file.png";
@@ -69,10 +67,11 @@ await conn.reply(m.chat, '⏱ _Cargando Menu_', m )
   let img10 = "https://i.ibb.co/SKm0T9S/file.jpg";
   let img11 = "https://telegra.ph/file/20633f54b3d054c95cd58.jpg";
 
+  
+  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections,);
+};
 
-  await conn.sendList(m.chat, menu, menu2, `Click Aqui`, [img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11].getRandom(), listSections, estilo);
-
-handler.command = ["menu5"];
+handler.command = ["menu4"];
 
 export default handler;
 
@@ -114,3 +113,4 @@ switch(hour){
   case 23: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
 }
   var greeting = hour;
+@⁨Gata Dios - Asistencia⁩ este code es de @⁨~🌴]▸ⲉ𝖽αⲅ◂[🇭🇳⁩ que me prestó nose porque no agarra a gata bot ya lo probé XD
