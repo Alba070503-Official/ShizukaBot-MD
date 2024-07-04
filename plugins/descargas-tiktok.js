@@ -19,13 +19,13 @@ import fg from 'api-dylux';
  try { 
  const tTiktok = await tiktokdlF(args[0]) 
  //let desc2 = `🔗 *Url:* ${tTiktok.video}`     
- let desc2 =  `_🍁  ᩭ✎Tiktok sin marca de agua descargado con éxito_` 
+ let desc2 =  `_🍁  ᩭ✎Tiktok sin marca de agua descargado con éxito Powered @Alba070503_` 
  await conn.sendMessage(m.chat, { video: { url: tTiktok.video }, caption: desc2 }, { quoted: m })       
  } catch (e2) { 
  try { 
  let p = await fg.tiktok(args[0])  
  //let te = `*USUARIO:* ${p.author || 'Indefinido'}` 
- let te =  `_🍁  ᩭ✎Tiktok sin marca de agua descargado con éxito_` 
+ let te =  `_🍁  ᩭ✎Tiktok sin marca de agua descargado con éxito Powered @Alba070503_` 
  await conn.sendMessage(m.chat, { video: { url: p.nowm}, caption: te }, { quoted: m })   
  } catch (e3) { 
  try {  
