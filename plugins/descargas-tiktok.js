@@ -13,7 +13,7 @@ import fg from 'api-dylux';
  await conn.relayMessage(m.chat, prep.message, { messageId: prep.key.id, mentions: [m.sender] })     
  const dataF = await tiktok.v1(args[0]) 
  //let desc1 =  `*USUARIO:* ${dataF.nickname || 'Indefinido'}` 
- let desc1 =  `_🍁  ᩭ✎Tiktok sin marca de agua descargado con éxito_` 
+ let desc1 =  `_🍁  ᩭ✎Tiktok sin marca de agua descargado con éxito By @Alba070503_` 
  await conn.sendMessage(m.chat, { video: { url: dataF.play }, caption: desc1 }, { quoted: m })   
  } catch (e1) { 
  try { 
