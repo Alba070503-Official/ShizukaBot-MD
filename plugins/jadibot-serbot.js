@@ -93,8 +93,8 @@ if (methodCode && !conn.authState.creds.registered) {
             txt += `│  ✩  *3* : Selecciona *Vincular con el número de teléfono*\n` 
             txt += `└  ✩  *4* : Escriba el Codigo\n\n`
             txt += `*Nota:* Este Código solo funciona en el número que lo solicito`
-         await parent.reply(m.chat, txt, m, rcanal)
-         await parent.reply(m.chat, codeBot, m, rcanal)
+         await parent.reply(m.chat, txt, m)
+         await parent.reply(m.chat, codeBot, m)
         rl.close()
     }, 3000)
 }
