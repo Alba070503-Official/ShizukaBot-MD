@@ -50,7 +50,7 @@ if (!global.db.data.settings[conn.user.jid].jadibotmd) return _conn.sendMessage(
 let parent = args[0] && args[0] == 'plz' ? _conn : await global.conn
 text = (text ? text : (args[0] ? args[0] : '')).toLowerCase()
 
-//let message1 = `*Si desea convertirse en bot, diríjase al número principal*\n\nwa.me/${global.conn.user.jid.split('@')[0]}?text=${usedPrefix}serbot`
+let message1 = `*Si desea convertirse en bot, diríjase al número principal*\n\nwa.me/${global.conn.user.jid.split('@')[0]}?text=${usedPrefix}serbot`
 if (!((args[0] && args[0] == 'plz') || (await global.conn).user.jid == _conn.user.jid)) {
 if (text.includes('qr')) {
 return parent.sendMessage(m.chat, { text: message1 + '%20qr' }, { quoted: m })
