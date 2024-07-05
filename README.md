@@ -129,7 +129,7 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 > npm start
 ```
 ## `AGRADECIMIENTOS & CREDITOS` 
-<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="200" height="200" alt="Azamk"/></a>
+<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="100" height="100" alt="GataDioa"/></a>
 
 <a href="https://www.youtube.com/@gatadios">
 <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
@@ -139,7 +139,7 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 </a>
 
   ## `CREADOR  & PROPIETARIO DEL BOT` 
-<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="300" height="300" alt="Alba070503"/></a>
+<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="150" height="150" alt="Alba070503"/></a>
 
 `ShizukaBot-MD - By @Alba070503 `
 #### COLABORADORES 
