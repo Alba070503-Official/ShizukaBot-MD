@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 let handler = async (m) => {
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || ''
-  if (!mime) return conn.reply(m.chat, '🚩 Responde a una *Imagen* o *Vídeo.*', m)
+  if (!mime) return conn.reply(m.chat, '🚩 Responde a una *Imagen* o *Vídeo.*', m , canal1)
   await m.react('🕓')
   try {
   let media = await q.download()
@@ -19,7 +19,7 @@ let handler = async (m) => {
       txt += `  *» Expiración* : ${isTele ? 'No expira' : 'Desconocido'}\n\n`
       txt += `🚩 *${textbot}*`
 
-await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m, null)
+await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m, null, canal1)
 await m.react('✅')
 } catch {
 await m.react('✖️')
