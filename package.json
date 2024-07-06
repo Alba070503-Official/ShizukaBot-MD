@@ -1,6 +1,6 @@
 {
 "name": "ShizukaBot-MD",
-"version": "1.7.0", 
+"version": "1.8.0", 
 "description": "Super Bot WhatsApp",
 "main": "index.js",
 "type": "module",
@@ -93,6 +93,8 @@
 "terminal-image": "^2.0.0",
 "url-regex-safe": "^3.0.0",
 "javascript-obfuscator": "^4.0.0",
+    "@StarlightsTeam/Scraper": "github:StarlightsTeam/StarlightsTeam-Scraper",
+    
 "wa-sticker-formatter": "^4.3.2",
 "yargs": "^17.3.1",
 "yt-search": "^2.10.3",
