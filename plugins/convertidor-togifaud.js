@@ -12,7 +12,7 @@ if (!/(mp4)/.test(mime)) return conn.reply(m.chat, `🤍 Responde a un *Video.*`
 await m.react(rwait)
 let media = await q.download()
 let listo = '💭 *Aquí Tienes* 💥'
-conn.sendMessage(m.chat, { video: media, gifPlayback: true, caption: listo }, { quoted: fkontak })
+conn.sendMessage(m.chat, { video: media, gifPlayback: true, caption: listo }, { quoted: m })
 await m.react(done)
 }
 handler.help = ['togifaud']
