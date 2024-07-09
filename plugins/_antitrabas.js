@@ -1,7 +1,7 @@
 //
 //By @NeKosmic || https://github.com/NeKosmic/
 //
-import * as fs from 'fs'
+/*import * as fs from 'fs'
 
 let handler = m => m
 handler.before = async function (m, { conn, isAdmin, isBotAdmin, text, participants, usedPrefix }) {
