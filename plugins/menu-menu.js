@@ -612,7 +612,7 @@ ${readMore}
 
 ShizukaBot-MD|| Alba070503`.trim()
 //conn.sendFile(m.chat, pp, 'lp.jpg', menu, m, false, { contextInfo: { mentionedJid }})
-let img = await (await fetch('https://qu.ax/vCmg.jpg')).buffer()  
+let img = await (await fetch('https://telegra.ph/file/d98277d3445273bd9d122.png')).buffer()  
 await conn.sendMessage(m.chat, {
 text: menu,
 contextInfo: { 
