@@ -69,7 +69,7 @@ let mentionedJid = [who]
 let username = conn.getName(who)
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 //let enlace = { contextInfo: { externalAdReply: {title: wm, body: 'support group' , sourceUrl: nna, thumbnail: await(await fetch(img)).buffer() }}}
-  let pp = './Menu2.jpg'
+  let pp = './Menu.png'
 //let pp = gataVidMenu.getRandom()
 await conn.sendMessage(m.chat, {
         text: `*Hey @${m.sender.split`@`[0]} estamos enviando el menu*
