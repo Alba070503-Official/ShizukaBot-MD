@@ -23,8 +23,7 @@ const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, is
     const document = doc[Math.floor(Math.random() * doc.length)];
     const { key } = await conn.sendMessage(m.chat, {text: `${wait}`}, {quoted: m})
 await conn.sendMessage(m.chat, {text: `Bienvenido al menu esperame un rato que cargue:-)`, edit: key})
-  await conn.sendMessage(m.chat, {text: ` Sigueme en Mi canal de WhatsApp:  https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04
-     `, edit: key})                                             
+                                            
     const str = `╭═══〘 ✯✯✯✯✯✯✯✯✯ 〙══╮
 ║    ◉— *⛩️ ShizukaBot-MD ⛩️* —◉
 ║≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡║
