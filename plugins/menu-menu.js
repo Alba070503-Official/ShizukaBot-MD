@@ -373,7 +373,7 @@ await conn.sendMessage(m.chat, buttonMessage, {quoted: fkontak})
 conn.reply(m.chat, '*⚠️ EL MENU TIENE UN ERROR PRUEBE CON EL MENU COMPLETO: (.menucompleto)*', fpoll, m)
 }}
 handler.tags = ['main']
-handler.command = /^(menu)$/i
+handler.command = /^(allmenu)$/i
 handler.register = true
 export default handler
 
