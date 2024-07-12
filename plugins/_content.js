@@ -104,6 +104,29 @@ global.logogit = 'https://qu.ax/KcGf.jpg'
 global.gataVidMenu = ['https://qu.ax/AAvg.mp4', 'https://qu.ax/SeFS.mp4', 'https://qu.ax/NqZN.mp4'].getRandom()
 global.gataMenu = [img, img2, img6, img7, img8, img9, img13, img14, img15, img17, img18].getRandom()
 global.gataImg = [imagen1, imagen2, imagen3, imagen4, imagen5, imagen6, imagen7, imagen8, imagen9, imagen10, imagen11, imagen12, imagen13].getRandom()
+  // Whatsapp 
+ global.rcanal = {
+    contextInfo: {
+    	isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: "120363198641161536@newsletter",
+      serverMessageId: 100,
+      newsletterName: 'ShizukaBot-MD Alba070503',
+    },
+	    externalAdReply: {
+				    showAdAttribution: true,
+					title: wm,
+					body: 'Hola',
+					mediaUrl: null,
+					description: null,
+					previewType: "PHOTO",
+					thumbnailUrl: 'https://telegra.ph/file/5510d197a2ad0826c5434.jpg',
+		           sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
+		           mediaType: 1,
+                   renderLargerThumbnail: false
+	    },
+    },
+ }
 
 // Fake
 global.fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
