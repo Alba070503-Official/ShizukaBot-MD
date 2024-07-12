@@ -4,11 +4,11 @@ const handler = async (m, {conn, usedPrefix, command}) => {
   try {    
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || q.mediaType || ""
-  if (!mime) return conn.reply(m.chat, `🍭 Responde a una *Imagen.*`, m, rcanal)
+  if (!mime) return conn.reply(m.chat, `🍭 Responde a una *Imagen.*`, m, canal1)
   await m.react('🕓')
   let img = await q.download?.()
   let pr = await remini(img, "enhance")
-  await conn.sendFile(m.chat, pr, 'thumbnail.jpg', listo, m, null, rcanal)
+  await conn.sendFile(m.chat, pr, 'thumbnail.jpg', listo, m, null, canal1)
   await m.react('✅')
   } catch {
   await m.react('✖️')
