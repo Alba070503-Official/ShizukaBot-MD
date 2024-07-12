@@ -349,7 +349,7 @@ return _0x1a2b8a;
 }
 let buttonMessage = {
     'document': {
-        'url': md,
+        'url': 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
     },
     'mimetype': td,
     'fileName': '☰ MENU PRINCIPAL ☰',
@@ -363,14 +363,14 @@ let buttonMessage = {
             'title': 'Hola Bienvenido al menu principal de Kumiko-MD!',
             'thumbnail': 'https://telegra.ph/file/035ec76eb46a10980bfd7.png',
             'renderLargerThumbnail': !![],
-            'sourceUrl': 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04'
+            'sourceUrl': 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
         }
     },
   'caption': menu['trim']()
 }
 await conn.sendMessage(m.chat, buttonMessage, {quoted: fkontak})
 } catch {
-conn.reply(m.chat, '*⚠️ EL MENU TIENE UN ERROR PRUEBE CON EL MENU COMPLETO: (.menucompleto)*', fpoll, m)
+conn.reply(m.chat, '*⚠️ EL MENU TIENE UN ERROR PRUEBE CON EL MENU COMPLETO: (.menucompleto)*', m)
 }}
 handler.tags = ['main']
 handler.command = /^(allmenu)$/i
