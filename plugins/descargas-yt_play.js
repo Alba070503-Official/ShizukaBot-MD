@@ -32,7 +32,7 @@ sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
 mediaType: 1,
 showAdAttribution: true,
 renderLargerThumbnail: true
-}}} , { quoted: m })
+}}} , { quoted: m , rcanal})
 if (command == 'play') {	
 try {
 let q = '128kbps'
