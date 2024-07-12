@@ -155,9 +155,11 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    
-    let pp = 'https://telegra.ph/file/19631e87aca87dbcacdc6.mp4'
-    await conn.sendFile(m.chat, pp, 'thumbnail.gif', text.trim(), m, null, rcanal)
+
+    const vi = ['https://telegra.ph/file/19631e87aca87dbcacdc6.mp4',
+'https://telegra.ph/file/19631e87aca87dbcacdc6.mp4',
+'https://telegra.ph/file/19631e87aca87dbcacdc6.mp4']
+    await conn.sendFile(m.chat, { video: { url: vi.getRandom() }, gifPlayback: true} m, null, rcanal)
 
   } catch (e) {
     conn.reply(m.chat, 'Lo sentimos, el menú tiene un error.', m)
