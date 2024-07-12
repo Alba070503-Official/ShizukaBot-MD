@@ -31,11 +31,22 @@ const defaultMenu = {
 “ hello *%name*, Cómo se encuentra el día de hoy? ”
 
 ╭──⬣「 *Info User* 」⬣
-│  ≡◦ *🍭 Nombre ∙* %name
-│  ≡◦ *🍬 Dulces ∙* %limit
-│  ≡◦ *💫 XP ∙* %totalexp
-│  ≡◦ *🐢 Nivel ∙* %level
+│  ≡◦ 💌 *Cliente:* %name
+│  ≡◦ ⚡️ *Exp:* %exp
+│  ≡◦ 🌟 *Estrellas:* %limit
+│  ≡◦ 🐢 *Nivel:* %level
+│  ≡◦ ⚓ *Rango:* %role
 ╰──⬣
+
+╭──⬣「 *Info Bot* 」⬣
+│  ≡◦ 👑 *Creador:* Alba070503 
+│  ≡◦ 🚩 *Bot:* 💜 ShizukaBot-MD 💜
+│  ≡◦ ⏰️ *Actividad:* %muptime
+│  ≡◦ 📇 *Registrados:* %totalreg
+│  ≡◦ 💥 *Versión* %version
+│  ≡◦ 📆 *Fecha* %date
+╰──⬣
+
 %readmore
 *꒷꒦꒷꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷*
 
