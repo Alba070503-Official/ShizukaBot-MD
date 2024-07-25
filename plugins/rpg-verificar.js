@@ -35,7 +35,7 @@ global.db.data.users[m.sender].joincount += 2
 • 97 Experiencia 💸
 • 2 Tokens 🪙
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '✅️  R E G I S T R O  ✅️',  body: '👑 Registro Completado', previewType: 0, thumbnail: imagen1, sourceUrl: canales}}})
+Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '✅️  R E G I S T R O  ✅️',  body: '👑 Registro Completado', previewType: 0, thumbnail:  'https://telegra.ph/file/4ff38ffd07a9efefc41b1.jpg', sourceUrl: canales}}})
 await m.reply(`${sn}`)}
 handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
 handler.tags = ['xp']
