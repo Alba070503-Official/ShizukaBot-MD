@@ -1,4 +1,4 @@
-import pkg from "@whiskeysockets/baileys";
+/*import pkg from "@whiskeysockets/baileys";
 import moment from "moment-timezone";
 import NodeCache from "node-cache";
 import readline from "readline";
