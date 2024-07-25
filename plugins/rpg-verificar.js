@@ -1,42 +1,43 @@
-import {createHash} from 'crypto';
-const Reg = /\|?(.*)([.|] *?)([0-9]*)$/i;
-const handler = async function(m, {conn, text, usedPrefix, command}) {
-  const user = global.db.data.users[m.sender];
-  const name2 = conn.getName(m.sender);
-  const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => global.imagen1);
-  if (user.registered === true) throw `[❗𝐈𝐍𝐅𝐎❗] 𝚈𝙰 𝙴𝚂𝚃𝙰𝚂 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝙳𝙾\n\n¿𝚀𝚄𝙸𝚁𝚁𝙴 𝚅𝙾𝙻𝚅𝙴𝚁 𝙰 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝚁𝚂𝙴?\n\n 📌𝚄𝚂𝙴 𝙴𝚂𝚃𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙿𝙰𝚁𝙰 𝙴𝙻𝙸𝙼𝙸𝙽𝙰𝚁 𝚂𝚄 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙾\n*${usedPrefix}unreg* <Número de serie>`;
-  if (!Reg.test(text)) throw `*[❗𝐈𝐍𝐅𝐎❗] 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 𝙸𝙽𝙲𝙾𝚁𝚁𝙴𝙲𝚃𝙾*\n\n*—◉ 𝚄𝚂𝙾 𝙳𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾: ${usedPrefix + command} nombre.edad*\n*—◉ Ejemplo: ${usedPrefix + command} Shadow.18*`;
-  let [_, name, splitter, age] = text.match(Reg);
-  if (!name) throw '*[❗𝐈𝐍𝐅𝐎❗] 𝙳𝙴𝙱𝙴𝚂 𝙿𝙾𝙽𝙴𝚁 𝚄𝙽 𝙽𝙾𝙼𝙱𝚁𝙴*';
-  if (!age) throw '*[❗𝐈𝐍𝐅𝐎❗] 𝙻𝙰 𝙴𝙳𝙰𝙳 𝙽𝙾 𝙿𝚄𝙴𝙳𝙴 𝙴𝚂𝚃𝙰𝚁 𝚅𝙰𝙲𝙸𝙰*';
-  if (name.length >= 30) throw '[❗𝐈𝐍𝐅𝐎❗] 𝙴𝙻 𝙽𝙾𝙼𝙱𝚁𝙴 𝙴𝚂 𝙳𝙴𝙼𝙰𝚂𝙸𝙰𝙳𝙾 𝙻𝙰𝚁𝙶𝙾';
-  age = parseInt(age);
-  if (age > 100) throw '*[❗] Kheee, como sigues vivo con esa edad? 👴🏻*';
-  if (age < 5) throw '*[❗] Kheee, un bebé que sabe usar WhatsApp? 😲*';
-  user.name = name.trim();
-  user.age = age;
-  user.regTime = + new Date;
-  user.registered = true;
-  const sn = createHash('md5').update(m.sender).digest('hex');
-  const caption = `┏┅ ━━━━━━━━━━━━ ┅ ━
-┇「 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂𝐈𝐎𝐍 」
-┣┅ ━━━━━━━━━━━━ ┅ ━
-┃ *𝙽𝙾𝙼𝙱𝚁𝙴:* ${name}
-┃ *𝙴𝙳𝙰𝙳:* ${age} años
-┃ *𝙽𝚄𝙼𝙴𝚁𝙾 𝙳𝙴 𝚂𝙴𝚁𝙸𝙴:* 
-┃ ${sn}
-┣┅ ━━━━━━━━━━━━ ┅ ━
-┃ ¡𝚃𝚄 𝙽𝚄𝙼𝙴𝚁𝙾 𝙳𝙴 𝚂𝙴𝚁𝙸𝙴 𝚃𝙴 𝚂𝙴𝚁𝚅𝙸𝚁𝙰 
-┃ 𝙿𝙾𝚁 𝚂𝙸 𝙳𝙴𝚂𝙴𝙰𝚂 𝙱𝙾𝚁𝚁𝙰𝚁 
-┃ 𝚃𝚄 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙾 𝙴𝙽 𝙴𝙻 𝙱𝙾𝚃!
-┗┅ ━━━━━━━━━━━━ ┅ ━`;
-  // let author = global.author
-  await conn.sendFile(m.chat, pp, 'https://telegra.ph/file/4ff38ffd07a9efefc41b1.jpg', m, rcanal, caption)
-  // conn.sendButton(m.chat, caption, `¡𝚃𝚄 𝙽𝚄𝙼𝙴𝚁𝙾 𝙳𝙴 𝚂𝙴𝚁𝙸𝙴 𝚃𝙴 𝚂𝙴𝚁𝚅𝙸𝚁𝙰 𝙿𝙾𝚁 𝚂𝙸 𝙳𝙴𝚂𝙴𝙰𝚂 𝙱𝙾𝚁𝚁𝙰𝚁 𝚃𝚄 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙾 𝙴𝙽 𝙴𝙻 𝙱𝙾𝚃!\n${author}`, [['¡¡𝙰𝙷𝙾𝚁𝙰 𝚂𝙾𝚈 𝚄𝙽 𝚅𝙴𝚁𝙸𝙵𝙸𝙲𝙰𝙳𝙾/𝙰!!', '/profile']], m)
-  global.db.data.users[m.sender].money += 10000;
-  global.db.data.users[m.sender].exp += 10000;
-};
-handler.help = ['verificar'];
-handler.tags = ['xp'];
-handler.command = /^(verify|register|verificar|reg|registrar)$/i;
-export default handler;
+import { createHash } from 'crypto'
+let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
+let handler = async function (m, { conn, text, usedPrefix, command }) {
+let user = db.data.users[m.sender]
+let totalreg = Object.keys(global.db.data.users).length
+let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
+  let name2 = conn.getName(m.sender)
+  if (user.registered === true) throw `*✅️ Ya estas en mi base de Datos.*`
+  if (!Reg.test(text)) throw `*Uso Del Comando:*\n- ${usedPrefix + command} nombre.edad\n🗣 *Ejemplo:*\n- ${usedPrefix + command} ${name2}.16`
+  let [_, name, splitter, age] = text.match(Reg)
+  if (!name) throw '🚩 El nombre no puede estar vacio'
+  if (!age) throw '🚩 La edad en necesaria'
+  if (name.length >= 30) throw '💫 El nombre es muy largo' 
+  age = parseInt(age)
+  if (age > 100) throw '😊 Un abuelo quiere ser la bot'
+  if (age < 5) throw '✏️ la bebé juega con WhatsApp'
+  user.name = name.trim()
+  user.age = age
+  user.regTime = + new Date
+  user.registered = true
+global.db.data.users[m.sender].money += 20
+global.db.data.users[m.sender].limit += 4
+global.db.data.users[m.sender].exp += 97
+global.db.data.users[m.sender].joincount += 2
+  let sn = createHash('md5').update(m.sender).digest('hex')
+  await conn.reply(m.chat,  `✅️ *R E G I S T R O*
+
+• ✨️ *Nombre:* ${name}
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+• 🐇 *Edad:* ${age} Años
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+👑 *Recompensas de la Bot:*
+• 4 Diamantes 💎
+• 20 Coins 💰
+• 97 Experiencia 💸
+• 2 Tokens 🪙
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '✅️  R E G I S T R O  ✅️',  body: '👑 Registro Completado', previewType: 0, thumbnail: imagen1, sourceUrl: canales}}})
+await m.reply(`${sn}`)}
+handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
+handler.tags = ['xp']
+handler.command = /^(verify|verificar|registrar|reg(ister)?)$/i
+export default handler
