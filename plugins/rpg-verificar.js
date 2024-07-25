@@ -35,7 +35,7 @@ global.db.data.users[m.sender].joincount += 2
 • 97 Experiencia 💸
 • 2 Tokens 🪙
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '✅️  R E G I S T R O  ✅️',  body: '👑 Registro Completado', previewType: 0, thumbnail:  'https://telegra.ph/file/4ff38ffd07a9efefc41b1.jpg', sourceUrl: canales}}})
+Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '✅️  R E G I S T R O  ✅️',  body: '👑 Registro Completado', previewType: 0, thumbnail:  'https://telegra.ph/file/4ff38ffd07a9efefc41b1.jpg', sourceUrl:  'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04'}}})
 await m.reply(`${sn}`)}
 handler.help = ['daftar', 'register'].map(v => v + ' <nama>.<umur>')
 handler.tags = ['xp']
