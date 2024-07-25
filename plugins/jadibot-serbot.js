@@ -89,7 +89,7 @@ if (methodCode && !conn.authState.creds.registered) {
     setTimeout(async () => {
         let codeBot = await conn.requestPairingCode(cleanedNumber);
         codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
-        _conn.sendButton2(m.chat, `\`➩ Code:\` *${codeBot}*\n\n${mssg.botqr}`, mssg.ig, 'https://i.ibb.co/SKKdvRb/code.jpg', [], codeBot, null, m)   
+        _conn.sendButton2(m.chat, `\`➩ Code:\` *${codeBot}*\n\naqui tienes el codigo`, mssg.ig, 'https://i.ibb.co/SKKdvRb/code.jpg', [], codeBot, null, m)   
 	    
 rl.close();
     }, 3000);
