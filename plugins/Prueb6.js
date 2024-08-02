@@ -63,7 +63,7 @@ let handler = async (m, { conn, usedPrefix }) => {
         ]
     }];
 
-    let img = "https://i.ibb.co/SKm0T9S/file.jpg"; // Link de imagen para la portada del menú
+    let img = "https://telegra.ph/file/fe2647343e68d7a257778.jpg"; // Link de imagen para la portada del menú
 
     await conn.sendMessage(m.chat, {
         image: { url: img },
