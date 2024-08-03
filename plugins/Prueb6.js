@@ -13,8 +13,22 @@ const handler = async (m, { conn, text, usedPrefix: prefix }) => {
 
     const messageMedia = await prepareWAMessageMedia({ image: imageBuffer }, { upload: conn.waUploadToServer });
 
+    // Asegurarse de que global.commands está definido
+    if (!global.commands) {
+        global.commands = new Map(); // o la estructura correcta que estés utilizando
+    }
+
+    // Construir el contenido del menú
+    let menuContent = `╭────《 *ts sk* 》─────⊷\n│ ╭──────────────◆\n│ │ usuario: ${await conn.getName(m.sender)}\n│ │ creador: Skid\n│ │ Comandos: ${global.commands.size}\n│ ╰──────────────◆\n╰───────────────⊷\n╭────❏ *MENÚ* ❏\n`;
+
+    global.commands.forEach((cmd, name) => {
+        menuContent += `\n│ ${prefix}${name} - ${cmd.description}`;
+    });
+
+    menuContent += `\n╰━━━━━━━━━━━━━──⊷\n\nBuenas noches 🌙`;
+
     const menuMessage = {
-        body: { text: `╭────《 *ts sk* 》─────⊷\n│ ╭──────────────◆\n│ │ usuario: ${await conn.getName(m.sender)}\n│ │ creador: Skid\n│ │ Comandos: ${global.commands.size}\n│ ╰──────────────◆\n╰───────────────⊷\n╭────❏ *MENÚ* ❏\n\n│ ${prefix}comando1 - Descripción del comando 1\n│ ${prefix}comando2 - Descripción del comando 2\n│ ${prefix}comando3 - Descripción del comando 3\n╰━━━━━━━━━━━━━──⊷\n\nBuenas noches 🌙`.trim() },
+        body: { text: menuContent.trim() },
         footer: { text: 'Agradecimiento a la comunidad de "WSApp • Developers"\nhttps://chat.whatsapp.com/FaQunmlp9BmDRk6lEEc9FJ\nAgradecimiento especial a Carlos (PT) por los códigos de interactiveMessage (botones)\nhttps://github.com/darlyn1234\nAdaptación de imagen en tipo lista, código y funcionamiento por BrunoSobrino\nhttps://github.com/BrunoSobrino'.trim() },
         header: {
             title: 'MENÚ',
