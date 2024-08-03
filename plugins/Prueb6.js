@@ -22,7 +22,7 @@ let tags = {
   'sticker': 'STICKERS',
   'nsfw': 'NSFW',
   'owner': 'CREADOR',
-  'advanced': 'AVANZADO',
+  'advanced': 'AVAZADO',
 }
 
 const defaultMenu = {
