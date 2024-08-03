@@ -36,6 +36,6 @@ const handler = async (m, { conn, text, usedPrefix: prefix }) => {
 
 handler.help = ['menu'];
 handler.tags = ['general'];
-handler.command = /^(menu)$/i;
+handler.command = /^(menu8)$/i;
 
 export default handler;
