@@ -1,15 +1,15 @@
 import { prepareWAMessageMedia, generateWAMessageFromContent } from '@whiskeysockets/baileys';
-import fs from 'fs';
+import axios from 'axios';
 
-// Carga la imagen desde el sistema de archivos
-const loadImage = async () => {
-    const imagePath = 'https://telegra.ph/file/8648870907494d8806af2.jpg'; // Ruta de la imagen que subiste
-    const imageBuffer = fs.readFileSync(imagePath);
-    return imageBuffer;
+// Carga la imagen desde la URL
+const loadImage = async (url) => {
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    return Buffer.from(response.data, 'binary');
 };
 
 const handler = async (m, { conn, text, usedPrefix: prefix }) => {
-    const imageBuffer = await loadImage();
+    const imageUrl = 'https://telegra.ph/file/8648870907494d8806af2.jpg'; // URL de la imagen
+    const imageBuffer = await loadImage(imageUrl);
 
     const messageMedia = await prepareWAMessageMedia({ image: imageBuffer }, { upload: conn.waUploadToServer });
 
@@ -36,6 +36,6 @@ const handler = async (m, { conn, text, usedPrefix: prefix }) => {
 
 handler.help = ['menu'];
 handler.tags = ['general'];
-handler.command = /^(menu8)$/i;
+handler.command = /^(menu)$/i;
 
 export default handler;
