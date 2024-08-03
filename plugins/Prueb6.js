@@ -47,7 +47,7 @@ const handler = async (m, { conn, text }) => {
 
 handler.help = ['menu'];
 handler.tags = ['main'];
-handler.command = ['menu2', 'help', 'menú'];
+handler.command = ['menu8', 'help', 'menú'];
 handler.register = true;
 
 export default handler;
