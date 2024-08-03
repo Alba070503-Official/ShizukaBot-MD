@@ -1,7 +1,7 @@
-import { prepareWAMessageMedia, generateWAMessageFromContent } from '@whiskeysockets/baileys';
+import { prepareWAMessageMedia, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys';
 import axios from 'axios';
 
-// Carga la imagen desde la URL
+// Función para cargar la imagen desde una URL
 const loadImage = async (url) => {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     return Buffer.from(response.data, 'binary');
@@ -27,25 +27,20 @@ const handler = async (m, { conn, text, usedPrefix: prefix }) => {
 
     menuContent += `\n╰━━━━━━━━━━━━━──⊷\n\nBuenas noches 🌙`;
 
-    const menuMessage = {
-        body: { text: menuContent.trim() },
-        footer: { text: 'Agradecimiento a la comunidad de "WSApp • Developers"\nhttps://chat.whatsapp.com/FaQunmlp9BmDRk6lEEc9FJ\nAgradecimiento especial a Carlos (PT) por los códigos de interactiveMessage (botones)\nhttps://github.com/darlyn1234\nAdaptación de imagen en tipo lista, código y funcionamiento por BrunoSobrino\nhttps://github.com/BrunoSobrino'.trim() },
-        header: {
-            title: 'MENÚ',
-            hasMediaAttachment: true,
-            imageMessage: messageMedia.imageMessage,
-        }
+    const buttons = [
+        { buttonId: `${prefix}help`, buttonText: { displayText: 'Ayuda' }, type: 1 },
+        { buttonId: `${prefix}info`, buttonText: { displayText: 'Info' }, type: 1 }
+    ];
+
+    const buttonMessage = {
+        image: messageMedia.imageMessage,
+        caption: menuContent.trim(),
+        footer: 'Agradecimiento a la comunidad de "WSApp • Developers"\nhttps://chat.whatsapp.com/FaQunmlp9BmDRk6lEEc9FJ\nAgradecimiento especial a Carlos (PT) por los códigos de interactiveMessage (botones)\nhttps://github.com/darlyn1234\nAdaptación de imagen en tipo lista, código y funcionamiento por BrunoSobrino\nhttps://github.com/BrunoSobrino'.trim(),
+        buttons: buttons,
+        headerType: 4
     };
 
-    let msg = generateWAMessageFromContent(m.chat, {
-        viewOnceMessage: {
-            message: {
-                interactiveMessage: menuMessage,
-            },
-        },
-    }, { userJid: conn.user.jid, quoted: m });
-
-    await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
+    await conn.sendMessage(m.chat, buttonMessage, { quoted: m });
 };
 
 handler.help = ['menu'];
