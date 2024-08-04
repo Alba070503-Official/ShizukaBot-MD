@@ -1,1 +1,42 @@
-const _0x42c82b=_0x5e63;(function(_0x24d6ff,_0x463464){const _0x18d658=_0x5e63,_0x11242c=_0x24d6ff();while(!![]){try{const _0x10f44f=-parseInt(_0x18d658(0xab))/0x1+-parseInt(_0x18d658(0xc4))/0x2*(-parseInt(_0x18d658(0xbc))/0x3)+-parseInt(_0x18d658(0xa8))/0x4*(parseInt(_0x18d658(0xbe))/0x5)+parseInt(_0x18d658(0xa9))/0x6*(-parseInt(_0x18d658(0xba))/0x7)+parseInt(_0x18d658(0xbd))/0x8+-parseInt(_0x18d658(0xbf))/0x9*(-parseInt(_0x18d658(0xb6))/0xa)+parseInt(_0x18d658(0xb9))/0xb*(parseInt(_0x18d658(0xaa))/0xc);if(_0x10f44f===_0x463464)break;else _0x11242c['push'](_0x11242c['shift']());}catch(_0x462ff1){_0x11242c['push'](_0x11242c['shift']());}}}(_0x22ed,0xd058f));import _0x6502e6 from'node-fetch';import _0x50e300 from'axios';import _0x69af09 from'cheerio';import{JSDOM}from'jsdom';function _0x5e63(_0x421121,_0x34e688){const _0x22ed9f=_0x22ed();return _0x5e63=function(_0x5e638e,_0x325198){_0x5e638e=_0x5e638e-0xa5;let _0x4217d4=_0x22ed9f[_0x5e638e];return _0x4217d4;},_0x5e63(_0x421121,_0x34e688);}let handler=async(_0x3c69fa,{conn:_0x1ef580,command:_0x4941d0,text:_0x329919,usedPrefix:_0x4edc32})=>{const _0x527e1d=_0x5e63;if(!_0x329919)throw _0x527e1d(0xb8)+_0x4edc32+_0x4941d0+_0x527e1d(0xb7);_0x3c69fa['reply'](wait);try{let _0x550665=await FaceBook(_0x329919);await _0x1ef580[_0x527e1d(0xc5)](_0x3c69fa['chat'],_0x550665[_0x527e1d(0xb2)],'anu.mp4',_0x550665[_0x527e1d(0xb4)],_0x3c69fa);}catch(_0x21dee6){_0x3c69fa['reply'](eror);}};handler['help']=[_0x42c82b(0xc9)],handler[_0x42c82b(0xc0)]=[_0x42c82b(0xac)],handler[_0x42c82b(0xad)]=/^(facebook|fbdl|fb|facebookdl)$/i,handler[_0x42c82b(0xc1)]=!![];export default handler;async function FaceBook(_0x22de28){return new Promise(async(_0x27c955,_0x1966bb)=>{const _0x4e8761=_0x5e63;try{const _0x294d8c={'id':_0x22de28,'locale':'id'},{data:_0x4f1a84,status:_0x369039}=await _0x50e300(_0x4e8761(0xb0),{'method':_0x4e8761(0xc7),'data':new URLSearchParams(Object[_0x4e8761(0xa5)](_0x294d8c)),'headers':{'user-agent':_0x4e8761(0xbb),'cookie':'PHPSESSID=914a5et39uur28e84t9env0378;\x20popCookie=1;\x20prefetchAd_4301805=true'}});if(_0x369039===0xc8){const _0x166475=_0x69af09[_0x4e8761(0xa7)](_0x4f1a84),_0xb3e5f2=_0x166475(_0x4e8761(0xa6))[_0x4e8761(0xb3)](_0x4e8761(0xaf))['attr'](_0x4e8761(0xc6)),_0x5262c7=_0x166475(_0x4e8761(0xc2))[_0x4e8761(0xc3)]()[_0x4e8761(0xb1)](),_0x210b95=_0x166475('div.container\x20>\x20div.results-download\x20>\x20ul\x20>\x20li:nth-child(1)\x20>\x20a')['attr'](_0x4e8761(0xb5)),_0x232790=_0x166475(_0x4e8761(0xc8))['attr']('href'),_0x15a043={'desc':_0x5262c7,'thumb':_0xb3e5f2,'video_sd':_0x232790,'video_hd':_0x210b95};_0x27c955(_0x15a043);}else console[_0x4e8761(0xae)]('No\x20result\x20found');}catch(_0x199aa5){console['error'](_0x199aa5);}});}function _0x22ed(){const _0x5721f4=['825813wBRsfi','tags','limit','div.container\x20>\x20div.results-item\x20>\x20div.results-item-text','text','58QyWBLU','sendFile','src','POST','div.container\x20>\x20div.results-download\x20>\x20ul\x20>\x20li:nth-child(2)\x20>\x20a','ғᴀᴄᴇʙᴏᴏᴋ','entries','div.container\x20>\x20div.results-item\x20>\x20div.results-item-image-wrapper','load','2044HorpbI','18twzvax','1572LVdbVW','700864mhCaDe','downloader','command','log','img','https://getmyfb.com/process','trim','video_hd','find','desc','href','30ECXWZn','\x20https://www.facebook.com/100010929794713/posts/1885825845125057/','ᴄᴏɴᴛᴏʜ;\x20','101981SYyHlV','3036439DtMEZG','Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/105.0.0.0\x20Safari/537.36','42111JAiBxa','11022088aqPcWa','4100wBtDtn'];_0x22ed=function(){return _0x5721f4;};return _0x22ed();}
+
+ import { igdl } from 'ruhend-scraper';
+
+const handler = async (m, { text, conn, args, usedPrefix, command }) => {
+  if (!args[0]) {
+    return conn.reply(m.chat, 'Ingresa Un Link De Facebook', m);
+  }
+
+  let res;
+  try {
+    res = await igdl(args[0]);
+  } catch (error) {
+    return conn.reply(m.chat, 'Error al obtener datos. Verifica el enlace.', m);
+  }
+
+  let result = res.data;
+  if (!result || result.length === 0) {
+    return conn.reply(m.chat, 'No se encontraron resultados.', m);
+  }
+
+  let data;
+  try {
+    data = result.find(i => i.resolution === "720p (HD)") || result.find(i => i.resolution === "360p (SD)");
+  } catch (error) {
+    return conn.reply(m.chat, 'Error al procesar los datos.', m);
+  }
+
+  if (!data) {
+    return conn.reply(m.chat, 'No se encontró una resolución adecuada.', m);
+  }
+
+  let video = data.url;
+  try {
+    await conn.sendMessage(m.chat, { video: { url: video }, caption: null, fileName: 'fb.mp4', mimetype: 'video/mp4' }, { quoted: m });
+  } catch (error) {
+    return conn.reply(m.chat, 'Error al enviar el video.', m);
+  }
+};
+
+handler.command = /^(facebook)$/i;
+
+export default handler;       
