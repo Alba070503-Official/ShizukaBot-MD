@@ -20,7 +20,7 @@ Recuerda siempre lo especial que eres para todos los que te rodean. Tu presencia
         // Enviar imagen con un texto corto
         await conn.sendMessage(m.chat, { 
             image: { url: imageUrl }, 
-            caption: "🎂 ¡Feliz Cumpleaños! 🎂" 
+            caption: "🎂 ¡Feliz Cumpleaños! Abi Betsabe 🎂" 
         }, { quoted: m });
 
         // Enviar audio
