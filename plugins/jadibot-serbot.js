@@ -1,132 +1,283 @@
-require("./settings")
-const store = makeInMemoryStore({ "logger": pino({ "level": "silent" }).child({ "level": "silent" })})
-const nodeCache = new NodeCache()
-const useCODE = true
-const useQR = !useCODE
+import pkg from "@whiskeysockets/baileys";
+import moment from "moment-timezone";
+import NodeCache from "node-cache";
+import readline from "readline";
+import qrcode from "qrcode";
+import crypto from "crypto";
+import fs from "fs";
+import pino from "pino";
+import * as ws from "ws";
+const { CONNECTING } = ws;
+import { Boom } from "@hapi/boom";
+import { makeWASocket } from "../lib/simple.js";
 
-const client = {}
+const {
+  useMultiFileAuthState,
+  DisconnectReason,
+  fetchLatestBaileysVersion,
+  makeCacheableSignalKeyStore,
+  jidNormalizedUser,
+  PHONENUMBER_MCC,
+} = pkg;
 
-const jadibot = async (x, nx, from) => {
-  const { state, saveCreds } = await useMultiFileAuthState(`./jadibts/${nx.sender.split("@")[0]}`)
-  try {
-    async function startJadibot() {
-      const { version, isLatest } = await fetchLatestBaileysVersion()
-      client[from] = require("./x").makeWASocket({
-        version,
-        keepAliveInternalMs: 30000,
-        printQRInTerminal: useQR && !useCODE,
-        generateHighQualityLinkPreview: true,
-        msgRetryCounterCache: nodeCache,
-        markOnlineOnConnect: true,
-        defaultQueryTimeoutMs: undefined,
-        logger: pino({ level: "fatal" }),
-        auth: state,
-        browser: ["Ubuntu", "Chrome", "20.0.04"]
-      })
-      store.bind(client[from].ev)
-      
-      if (useCODE && !client[from].user && !client[from].authState.creds.registered) {
-        setTimeout(async () => {
-          code = await client[from].requestPairingCode(nx.sender.split("@")[0])
-          code = code?.match(/.{1,4}/g)?.join("-") || code
-          x.sendMessage(from, { video: tutorvid, caption: `Kode Pairing @${nx.sender.split("@")[0]} Adalah : ${code}\n\n*TUTORIAL MASUKIN CODE CEK VIDEO DI ATAS, KALAU MAU STOP KETIK .stopjadibot*`, mentions: [nx.sender] }, { quoted: nx })
-        }, 3000)
-      }
-      
-      client[from].ev.on("connection.update", async up => {
-        const { lastDisconnect, connection } = up
-        const reason = new Boom(lastDisconnect?.error)?.output.statusCode
-        if (connection == "open") {
-          console.log("Terhubung ( " + client[from].user?.["id"]["split"](":")[0] + " )")
-        }
-        if (connection === "close") {
-          if (reason === DisconnectReason.restartRequired) {
-            console.log("Restart Required, Restarting...")
-            return startJadibot()
-          } else if (reason === DisconnectReason.timedOut) {
-            console.log(color("Connection TimedOut, Reconnecting..."))
-            return startJadibot()
-          } else {
-            return x.sendMessage(from, { text: "Anda sudah tidak lagi menjadi bot." })
-          }
-        }
-      })
-      
-      client[from].ev.process(async (events) => {
-        if (events['messages.upsert']) {
-          const upsert = events['messages.upsert']
-          for (let msg of upsert.messages) {
-            if (!msg.message) {
-              return
-            }
-            if (msg.key.remoteJid === 'status@broadcast') {
-              if (msg.message?.protocolMessage) return
-              console.log(`Lihat Status ${msg.pushName} ${msg.key.participant.split('@')[0]}`)
-              await client[from].readMessages([msg.key])
-              await delay(1000)
-              return await client[from].readMessages([msg.key])
-            }
-            const nx = smsg(client[from], msg)
-            require("./case")(client[from], nx, store)
-          }
-        }
-      })
-      
-      client[from].ev.on('group-participants.update', async (anu) => {
-        try {
-          var isWelcome = welcome.includes(anu.id)
-        } catch {
-          var isWelcome = false
-        }
-        if (isWelcome) {
-          console.log(anu)
-          const metadata = await client[from].groupMetadata(anu.id)
-          const participants = anu.participants
-          for (let num of participants) {
-            try {
-              ppuser = await client[from].profilePictureUrl(num, 'image')
-            } catch {
-              ppuser = 'https://telegra.ph/file/e323980848471ce8e2150.png'
-            }
-            if (anu.action == 'add') {
-              const txtwel = `Welcome Sis @${num.split("@")[0]}, I hope you feel at home and always healthy`
-              await client[from].sendMessage(anu.id, { image: { url: ppuser }, caption: txtwel, contextInfo: { forwardingScore: 9999999, isForwarded: true, mentionedJid: [num] }})
-            } else if (anu.action == 'remove') {
-              const txtlea = `Goodbye sis @${num.split("@")[0]}, don't forget your friends here, I hope you are always healthy`
-              await client[from].sendMessage(anu.id, { image: { url: ppuser }, caption: txtlea, contextInfo: { forwardingScore: 9999999, isForwarded: true, mentionedJid: [num] }})
-            }
-          }
-        }
-      })
-      
-      client[from].ev.on('creds.update', saveCreds)
+if (!Array.isArray(global.conns)) global.conns = [];
+
+//const mssg = {
+  nobbot: "𝙽𝚘 𝚙𝚞𝚎𝚍𝚎𝚜 𝚞𝚜𝚊𝚛 𝚎𝚕 𝚋𝚘𝚝 ShizukaBot-MD.",
+  recon: "𝚁𝙴𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙽𝙳𝙾 𝚁𝙴𝙼 𝙱𝙾𝚃",
+  sesClose: "𝙻𝙰 𝚂𝙴𝚂𝚂𝙸𝙾𝙽 𝙵𝚄𝙴 𝙲𝙴𝚁𝚁𝙰𝙳𝙰",
+  botqr: `𝚄𝚂𝙰 𝙴𝚂𝚃𝙴 𝙲𝙾𝙳𝙸𝙶𝙾 𝙿𝙰𝚁𝙰 𝚂𝙴𝚁 𝚂𝚄𝙱 𝙱𝙾𝚃.\n
+> *\`𝙶𝚄𝙸𝙰:\`* \n
+> *\`1\`* : 𝙷𝚊𝚐𝚊 𝚌𝚕𝚒𝚌𝚔 𝚎𝚗 𝚕𝚘𝚜 𝟹 𝚙𝚞𝚗𝚝𝚘𝚜\n
+> *\`2\`* : 𝚃𝚘𝚚𝚞𝚎 𝚍𝚒𝚜𝚙𝚘𝚜𝚒𝚝𝚒𝚟𝚘𝚜 𝚟𝚒𝚗𝚌𝚞𝚕𝚊𝚍𝚘𝚜\n
+> *\`3\`* : 𝚂𝚎𝚕𝚎𝚌𝚌𝚒𝚘𝚗𝚊 *𝚅𝚒𝚗𝚌𝚞𝚕𝚊𝚛 𝚌𝚘𝚗 𝚎𝚕 𝚗ú𝚖𝚎𝚛𝚘 𝚍𝚎 𝚝𝚎𝚕é𝚏𝚘𝚗𝚘*\n
+> *\`4\`* : 𝙴𝚜𝚌𝚛𝚒𝚋𝚊 𝚎𝚕 𝙲𝚘𝚍𝚒𝚐𝚘\n\n
+> \`Nota :\` 𝙴𝚜𝚝𝚎 𝙲ó𝚍𝚒𝚐𝚘 𝚜𝚘𝚕𝚘 𝚏𝚞𝚗𝚌𝚒𝚘𝚗𝚊 𝚎𝚗 𝚎𝚕 𝚗ú𝚖𝚎𝚛𝚘 𝚚𝚞𝚎 𝚕𝚘 𝚜𝚘𝚕𝚒𝚌𝚒𝚝𝚘`,
+  connet: "𝙲𝙾𝙽𝙴𝚇𝙸𝙾𝙽 𝙴𝚂𝚃𝙰𝙱𝙻𝙴𝙲𝙸𝙳𝙰 𝙲𝙾𝙽 𝙴𝚇𝙸𝚃𝙾",
+  connID: "𝙲𝙾𝙽𝙴𝚇𝙸𝙾𝙽 𝙴𝚂𝚃𝙰𝙱𝙻𝙴𝙲𝙸𝙳𝙰 𝙲𝙾𝙽 𝙴𝚇𝙸𝚃𝙾",
+  connMsg: "𝙴𝙻 𝙱𝙾𝚃 𝚂𝙴 𝙰𝙷 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙾 𝙴𝚇𝙸𝚃𝙾𝚂𝙰𝙼𝙴𝙽𝚃𝙴.",
+};
+
+let handler = async (
+  m,
+  { conn: _conn, args, usedPrefix, command, isOwner },
+) => {
+  let parent = _conn;
+
+  async function bbts() {
+    let authFolderB = crypto.randomBytes(10).toString("hex").slice(0, 8);
+
+    if (!fs.existsSync("./bots/" + authFolderB)) {
+      fs.mkdirSync("./bots/" + authFolderB, { recursive: true });
     }
-    return startJadibot()
-  } catch (e) {
-    console.log(e)
-  }
-}
+    if (args[0]) {
+      fs.writeFileSync(
+        "./bots/" + authFolderB + "/creds.json",
+        JSON.stringify(
+          JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")),
+          null,
+          "\t",
+        ),
+      );
+    }
 
-async function stopjadibot(x, from) {
-  if (!Object.keys(client).includes(from)) {
-    return x.sendMessage(from, { text: "Anda tidak ada di list jadi bot." })
-  }
-  try {
-    client[from].end("Stop")
-  } catch {}
-  delete client[from]
-  rimraf.sync(`./jadibts/${from.split("@")[0]}`)
-}
+    const { state, saveState, saveCreds } = await useMultiFileAuthState(
+      `./bots/${authFolderB}`,
+    );
+    const msgRetryCounterCache = new NodeCache();
+    const { version } = await fetchLatestBaileysVersion();
+    let phoneNumber = m.sender.split("@")[0];
 
-async function listjadibot(x, nx) {
-  let from = nx.key.remoteJid
-  let mentions = []
-  let text = "List Jadi Bot :\n"
-  for (let jadibot of Object.values(client)) {
-    mentions.push(jadibot.user.jid)
-    text += ` × @${jadibot.user.jid.split("@")[0]}\n`
-  }
-  return x.sendMessage(from, { text: text.trim(), mentions, })
-}
+    const methodCodeQR = process.argv.includes("qr");
+    const methodCode = !!phoneNumber || process.argv.includes("code");
+    const MethodMobile = process.argv.includes("mobile");
 
-module.exports = { jadibot, stopjadibot, listjadibot }
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    const question = (texto) =>
+      new Promise((resolver) => rl.question(texto, resolver));
+
+    const connectionOptions = {
+      logger: pino({ level: "silent" }),
+      printQRInTerminal: false,
+      mobile: MethodMobile,
+      browser: ["Ubuntu", "Chrome", "20.0.04"],
+      auth: {
+        creds: state.creds,
+        keys: makeCacheableSignalKeyStore(
+          state.keys,
+          pino({ level: "fatal" }).child({ level: "fatal" }),
+        ),
+      },
+      markOnlineOnConnect: true,
+      generateHighQualityLinkPreview: true,
+      getMessage: async (clave) => {
+        let jid = jidNormalizedUser(clave.remoteJid);
+        let msg = await store.loadMessage(jid, clave.id);
+        return msg?.message || "";
+      },
+      msgRetryCounterCache,
+      defaultQueryTimeoutMs: undefined,
+      version,
+    };
+
+    let conn = makeWASocket(connectionOptions);
+
+    if (methodCode && !conn.authState.creds.registered) {
+      if (!phoneNumber) {
+        process.exit(0);
+      }
+      let cleanedNumber = phoneNumber.replace(/[^0-9]/g, "");
+      if (
+        !Object.keys(PHONENUMBER_MCC).some((v) => cleanedNumber.startsWith(v))
+      ) {
+        process.exit(0);
+      }
+
+      setTimeout(async () => {
+        let codeBot = await conn.requestPairingCode(cleanedNumber);
+        codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
+        parent.sendButton=(
+          m.chat,
+          `‹𝟹 𝙲𝙾𝙳𝙴: *${codeBot}*\n\n'*Usa este Código para convertirte en Bot*\n\n1. Haga click en los tres puntos en la esquina superior derecha.\n2. Toque Dispositivos vinculados\n3. Selecciona *Vincular con el número de teléfono*\n\n*Nota:* El código solo sirve para este número`,
+          mssg.ig,
+          "https://telegra.ph/file/7da1a559312d75620e776.png",
+          [],
+          codeBot,
+          null,
+          m,
+        );
+        rl.close();
+      }, 3000);
+    }
+
+    conn.isInit = false;
+
+    let isInit = true;
+
+    async function connectionUpdate(update) {
+      const { connection, lastDisconnect, isNewLogin, qr } = update;
+      if (isNewLogin) conn.isInit = true;
+
+      const code =
+        lastDisconnect?.error?.output?.statusCode ||
+        lastDisconnect?.error?.output?.payload?.statusCode;
+      if (
+        code &&
+        code !== DisconnectReason.loggedOut &&
+        conn?.ws.socket == null
+      ) {
+        let i = global.conns.indexOf(conn);
+        if (i < 0)
+          return console.log(await creloadHandler(true).catch(console.error));
+        delete global.conns[i];
+        global.conns.splice(i, 1);
+
+        if (code !== DisconnectReason.connectionClosed) {
+          parent.sendMessage(
+            conn.user.jid,
+            { text: `⚠️ Reconectando` },
+            { quoted: m },
+          );
+        } else {
+          parent.sendMessage(
+            m.chat,
+            { text: `⛔ Se ha cerrado sección` },
+            { quoted: m },
+          );
+        }
+      }
+
+      if (global.db.data == null) loadDatabase();
+
+      if (connection == "open") {
+        conn.isInit = true;
+        global.conns.push(conn);
+        await parent.sendMessage(
+          m.chat,
+          { text: args[0] ? `ᡣ𐭩 Conectado con exito` : `ᡣ𐭩 *Conectado con éxito!*\n\nEn unos segundos te mandaremos el *Id* que debes usar para volver a conectarte\n\n*NOTA:* Alba Is Gay?*\nguarde este enlace para que pueda unirse después\n sigueme en mi canal de WhatsApp https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04 ` },
+          { quoted: m },
+        );
+        await sleep(50000);
+        if (args[0]) return;
+        await parent.sendMessage(
+          conn.user.jid,
+          { text: `ᡣ𐭩 La siguiente vez que se conecte envía el siguiente mensaje para iniciar sesión sin escanear otro código` },
+          { quoted: m },
+        );
+        parent.sendMessage(
+          conn.user.jid,
+          {
+            text:
+              usedPrefix +
+              command +
+              " " +
+              Buffer.from(
+                fs.readFileSync("./bots/" + authFolderB + "/creds.json"),
+                "utf-8",
+              ).toString("base64"),
+          },
+          { quoted: m },
+        );
+      }
+    }
+
+    setInterval(async () => {
+      if (!conn.user) {
+        try {
+          conn.ws.close();
+        } catch {}
+        conn.ev.removeAllListeners();
+        let i = global.conns.indexOf(conn);
+        if (i < 0) return;
+        delete global.conns[i];
+        global.conns.splice(i, 1);
+      }
+    }, 60000);
+
+    let handler = await import("../handler.js");
+    let creloadHandler = async function (restatConn) {
+      try {
+        const Handler = await import(
+          `../handler.js?update=${Date.now()}`
+        ).catch(console.error);
+        if (Object.keys(Handler || {}).length) handler = Handler;
+      } catch (e) {
+        console.error(e);
+      }
+      if (restatConn) {
+        try {
+          conn.ws.close();
+        } catch {}
+        conn.ev.removeAllListeners();
+        conn = makeWASocket(connectionOptions);
+        isInit = true;
+      }
+
+      if (!isInit) {
+        conn.ev.off("messages.upsert", conn.handler);
+        conn.ev.off("group-participants.update", conn.participantsUpdate);
+        conn.ev.off("groups.update", conn.groupsUpdate);
+        conn.ev.off("message.delete", conn.onDelete);
+        conn.ev.off("call", conn.onCall);
+        conn.ev.off("connection.update", conn.connectionUpdate);
+        conn.ev.off("creds.update", conn.credsUpdate);
+      }
+
+      conn.welcome = global.conn.welcome + "";
+      conn.bye = global.conn.bye + "";
+      conn.spromote = global.conn.spromote + "";
+      conn.sdemote = global.conn.sdemote + "";
+
+      conn.handler = handler.handler.bind(conn);
+      conn.participantsUpdate = handler.participantsUpdate.bind(conn);
+      conn.groupsUpdate = handler.groupsUpdate.bind(conn);
+      conn.onDelete = handler.deleteUpdate.bind(conn);
+      conn.connectionUpdate = connectionUpdate.bind(conn);
+      conn.credsUpdate = saveCreds.bind(conn, true);
+
+      conn.ev.on("messages.upsert", conn.handler);
+      conn.ev.on("group-participants.update", conn.participantsUpdate);
+      conn.ev.on("groups.update", conn.groupsUpdate);
+      conn.ev.on("message.delete", conn.onDelete);
+      conn.ev.on("connection.update", conn.connectionUpdate);
+      conn.ev.on("creds.update", conn.credsUpdate);
+      isInit = false;
+      return true;
+    };
+    creloadHandler(false);
+  }
+  bbts();
+};
+handler.help = ["botclone"];
+handler.tags = ["bebot"];
+handler.command =  ['bebot', 'code', 'serbot --code', 'botclone', 'clonebot'];
+handler.rowner = false;
+handler.register = true;
+export default handler;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
