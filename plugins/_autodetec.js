@@ -67,7 +67,7 @@ handler.before = async function (m, { conn, participants, groupMetadata }) {
             "showAdAttribution": true,
             "containsAutoReply": true,
             "renderLargerThumbnail": true,
-            "title": global.packname,
+            "title": `ShizukaBot-MD Powered SpaceNigth Team `,
             "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
             "containsAutoReply": true,
             "mediaType": 1,
