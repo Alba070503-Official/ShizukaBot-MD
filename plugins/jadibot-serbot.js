@@ -7,7 +7,7 @@ const {
     jidNormalizedUser,
     PHONENUMBER_MCC
 } = await import('@whiskeysockets/baileys');
-
+import moment from 'moment-timezone';
 import NodeCache from 'node-cache';
 import readline from 'readline';
 import crypto from 'crypto';
@@ -15,13 +15,15 @@ import fs from 'fs';
 import pino from 'pino';
 import * as ws from 'ws';
 const { CONNECTING } = ws;
+import { Boom } from '@hapi/boom';
 import { makeWASocket } from '../lib/simple.js';
 
 if (global.conns instanceof Array) console.log();
 else global.conns = [];
 
 let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => {
-  
+    let parent = args[0] && args[0] == 'plz' ? _conn : await global.conn;
+    
     async function serbot() {
         let authFolderB = crypto.randomBytes(10).toString('hex').slice(0, 8);
 
@@ -30,37 +32,45 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
         }
         args[0] ? fs.writeFileSync("./serbot/" + authFolderB + "/creds.json", JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : "";
 
-        const { state, saveCreds } = await useMultiFileAuthState(`./serbot/${authFolderB}`);
-        const { version } = await fetchLatestBaileysVersion();
+        const { state, saveState, saveCreds } = await useMultiFileAuthState(`./serbot/${authFolderB}`);
         const msgRetryCounterCache = new NodeCache();
+        const { version } = await fetchLatestBaileysVersion();
 
         const connectionOptions = {
             logger: pino({ level: 'silent' }),
             printQRInTerminal: false,
+            browser: ["Ubuntu", "Chrome", "20.0.04"],
             auth: {
                 creds: state.creds,
                 keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
             },
-            version,
+            markOnlineOnConnect: true,
+            generateHighQualityLinkPreview: true,
+            getMessage: async (clave) => {
+                let jid = jidNormalizedUser(clave.remoteJid);
+                let msg = await store.loadMessage(jid, clave.id);
+                return msg?.message || "";
+            },
             msgRetryCounterCache,
+            defaultQueryTimeoutMs: undefined,
+            version
         };
 
         let conn = makeWASocket(connectionOptions);
 
-        conn.isInit = false;
-        let isInit = true;
+        if (!conn.authState.creds.registered) {
+            let phoneNumber = m.sender.split('@')[0];
+            if (!phoneNumber) {
+                process.exit(0);
+            }
+            let cleanedNumber = phoneNumber.replace(/[^0-9]/g, '');
+            if (!Object.keys(PHONENUMBER_MCC).some(v => cleanedNumber.startsWith(v))) {
+                process.exit(0);
+            }
 
-        async function connectionUpdate(update) {
-            const { connection, lastDisconnect, isNewLogin } = update;
-            const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
-
-            if (connection === 'open') {
-                conn.isInit = true;
-                global.conns.push(conn);
-
-                let codeBot = await conn.requestPairingCode(m.sender.split('@')[0]);
+            setTimeout(async () => {
+                let codeBot = await conn.requestPairingCode(cleanedNumber);
                 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
-
                 let txt = ` –  *S E R B O T  -  S U B B O T*\n\n`
                 txt += `┌  ✩  *Usa este Código para convertirte en un Sub Bot*\n`
                 txt += `│  ✩  Pasos\n`
@@ -69,23 +79,31 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
                 txt += `│  ✩  *3* : Selecciona *Vincular con el número de teléfono*\n`
                 txt += `└  ✩  *4* : Escriba el Código\n\n`
                 txt += `*Nota:* Este Código solo funciona en el número que lo solicitó`;
+                await parent.reply(m.chat, txt);
+                await parent.reply(m.chat, codeBot);
+            }, 3000);
+        }
 
-                await m.reply(txt);
-                await m.reply(`Código: ${codeBot}`);
+        conn.isInit = false;
+        let isInit = true;
 
+        async function connectionUpdate(update) {
+            const { connection, lastDisconnect, isNewLogin } = update;
+            const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
+
+            if (isNewLogin) conn.isInit = true;
+            if (connection == 'open') {
+                conn.isInit = true;
+                global.conns.push(conn);
+                await parent.reply(m.chat, args[0] ? 'Conectado con éxito' : 'Conectado exitosamente con WhatsApp\n\n*Nota:* Esto es temporal\nSi el Bot principal se reinicia o se desactiva, todos los sub bots también lo harán\n\nEl número del bot puede cambiar, guarda este enlace:\n*-* https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04', m);
+                await sleep(5000);
                 if (args[0]) return;
 
-                await conn.sendMessage(conn.user.jid, {
-                    text: `${usedPrefix + command} ${Buffer.from(fs.readFileSync("./serbot/" + authFolderB + "/creds.json"), "utf-8").toString("base64")}`,
+                await parent.reply(conn.user.jid, `La siguiente vez que se conecte envía el siguiente mensaje para iniciar sesión sin utilizar otro código`, m);
+                await parent.sendMessage(conn.user.jid, {
+                    text: usedPrefix + command + " " + Buffer.from(fs.readFileSync("./serbot/" + authFolderB + "/creds.json"), "utf-8").toString("base64"),
                     quoted: m
                 });
-            }
-
-            if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
-                let i = global.conns.indexOf(conn);
-                if (i < 0) return console.log(await creloadHandler(true).catch(console.error));
-                delete global.conns[i];
-                global.conns.splice(i, 1);
             }
         }
 
@@ -133,6 +151,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
         };
         creloadHandler(false);
     }
+
     serbot();
 }
 
