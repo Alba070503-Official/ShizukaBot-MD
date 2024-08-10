@@ -34,24 +34,23 @@ handler.before = async function (m, { conn, participants, groupMetadata }) {
         txt1 += `Le otorgó admin: @${sender1}`;
         
         await conn.sendMessage(m.chat, {
-            text: txt1,
-            mentions: [`${mentioned1}@s.whatsapp.net`, `${sender1}@s.whatsapp.net`],
-            contextInfo: {
-                mentionedJid: [`${mentioned1}@s.whatsapp.net`, `${sender1}@s.whatsapp.net`],
-                "externalAdReply": {
-                    "showAdAttribution": true,
-                    "containsAutoReply": true,
-                    "renderLargerThumbnail": true,
-                    "title": global.packname,
-                    "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
-                    "containsAutoReply": true,
-                    "mediaType": 1,
-                    "thumbnail": img,
-                    "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
-                    "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
-                }
-            }
-        });
+    text: txt1,
+    mentions: [`${mentioned1}@s.whatsapp.net`, `${sender1}@s.whatsapp.net`],
+    contextInfo: {
+        mentionedJid: [`${mentioned1}@s.whatsapp.net`, `${sender1}@s.whatsapp.net`],
+        externalAdReply: {
+            showAdAttribution: true,
+            containsAutoReply: true,
+            renderLargerThumbnail: true,
+            title: `ShizukaBot-MD Powered SpaceNigth Team `
+            body: `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
+            mediaType: 1,
+            thumbnail: `https://telegra.ph/file/2828af24b9bd004bad80c.jpg`
+            mediaUrl: `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
+            sourceUrl: `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
+        }
+    }
+});
     } else if (chat.detect && m.messageStubType == 30) {
         let mentioned2 = m.messageStubParameters[0].split('@')[0];
         let sender2 = m.sender.split('@')[0];
