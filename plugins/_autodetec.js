@@ -59,24 +59,24 @@ handler.before = async function (m, { conn, participants, groupMetadata }) {
         txt2 += `Le quitó admin: @${sender2}`;
         
         await conn.sendMessage(m.chat, {
-            text: txt2,
-            mentions: [`${mentioned2}@s.whatsapp.net`, `${sender2}@s.whatsapp.net`],
-            contextInfo: {
-                mentionedJid: [`${mentioned2}@s.whatsapp.net`, `${sender2}@s.whatsapp.net`],
-                "externalAdReply": {
-                    "showAdAttribution": true,
-                    "containsAutoReply": true,
-                    "renderLargerThumbnail": true,
-                    "title": global.packname,
-                    "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
-                    "containsAutoReply": true,
-                    "mediaType": 1,
-                    "thumbnail": img,
-                    "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
-                    "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
-                }
-            }
-        });
+    text: txt2,
+    mentions: [`${mentioned2}@s.whatsapp.net`, `${sender2}@s.whatsapp.net`],
+    contextInfo: {
+        mentionedJid: [`${mentioned2}@s.whatsapp.net`, `${sender2}@s.whatsapp.net`],
+        "externalAdReply": {
+            "showAdAttribution": true,
+            "containsAutoReply": true,
+            "renderLargerThumbnail": true,
+            "title": global.packname,
+            "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
+            "containsAutoReply": true,
+            "mediaType": 1,
+            "thumbnail": img,  // Asegúrate de que la variable 'img' esté definida y tenga un valor válido.
+            "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
+            "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
+        }
+    }
+});
     } else if (chat.detect && m.messageStubType == 72) {
         await this.sendMessage(m.chat, { text: lenguajeGB['smsAvisoIIG']() + mid.smsAutodetec9(usuario, m), mentions: [m.sender] }, { quoted: fkontak })
     } else if (chat.detect && m.messageStubType == 123) {
