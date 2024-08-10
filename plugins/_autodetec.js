@@ -36,15 +36,59 @@ await this.sendMessage(m.chat, { text: lenguajeGB['smsAvisoIIG']() + mid.smsAuto
 } else if (chat.detect && m.messageStubType == 26) {
 await this.sendMessage(m.chat, { text: lenguajeGB['smsAvisoIIG']() + mid.smsAutodetec6(m), mentions: [m.sender] }, { quoted: fkontak })
 } else if (chat.detect && m.messageStubType == 29) {
-let txt1 = `🌸 *Nuevo admin*\n\n`
-txt1 += `Nombre: @${m.messageStubParameters[0].split`@`[0]}\n`
-txt1 += `Le otorgó admin: @${m.sender.split`@`[0]}`
-await conn.sendMessage(m.chat, {text: txt1, mentions: [...txt1.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net'), contextInfo: { mentionedJid: [...txt1.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net'), "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.packname, "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`, "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`}}})
+    let mentioned1 = m.messageStubParameters[0].split('@')[0];
+    let sender1 = m.sender.split('@')[0];
+    let txt1 = `🌸 *Nuevo admin*\n\n`;
+    txt1 += `Nombre: @${mentioned1}\n`;
+    txt1 += `Le otorgó admin: @${sender1}`;
+    
+    await conn.sendMessage(m.chat, {
+        text: txt1,
+        mentions: [`${mentioned1}@s.whatsapp.net`, `${sender1}@s.whatsapp.net`],
+        contextInfo: {
+            mentionedJid: [`${mentioned1}@s.whatsapp.net`, `${sender1}@s.whatsapp.net`],
+            "externalAdReply": {
+                "showAdAttribution": true,
+                "containsAutoReply": true,
+                "renderLargerThumbnail": true,
+                "title": global.packname,
+                "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
+                "containsAutoReply": true,
+                "mediaType": 1,
+                "thumbnail": img,
+                "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
+                "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
+            }
+        }
+    });
 } else if (chat.detect && m.messageStubType == 30) {
-let txt2 = `🌸 *Un admin menos*\n\n`
-txt2 += `Nombre: @${m.messageStubParameters[0].split`@`[0]}\n`
-txt2 += `Le quitó admin: @${m.sender.split`@`[0]}`
-await conn.sendMessage(m.chat, {text: txt2, mentions: [...txt2.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net'), contextInfo: { mentionedJid: [...txt2.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net'), "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.packname, "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚ `, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`, "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`}}})                                                                                                                                                                                                                                                         
+    let mentioned2 = m.messageStubParameters[0].split('@')[0];
+    let sender2 = m.sender.split('@')[0];
+    let txt2 = `🌸 *Un admin menos*\n\n`;
+    txt2 += `Nombre: @${mentioned2}\n`;
+    txt2 += `Le quitó admin: @${sender2}`;
+    
+    await conn.sendMessage(m.chat, {
+        text: txt2,
+        mentions: [`${mentioned2}@s.whatsapp.net`, `${sender2}@s.whatsapp.net`],
+        contextInfo: {
+            mentionedJid: [`${mentioned2}@s.whatsapp.net`, `${sender2}@s.whatsapp.net`],
+            "externalAdReply": {
+                "showAdAttribution": true,
+                "containsAutoReply": true,
+                "renderLargerThumbnail": true,
+                "title": global.packname,
+                "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
+                "containsAutoReply": true,
+                "mediaType": 1,
+                "thumbnail": img,
+                "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
+                "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
+            }
+        }
+    });
+}
+  
 } else if (chat.detect && m.messageStubType == 72) {
 await this.sendMessage(m.chat, { text: lenguajeGB['smsAvisoIIG']() + mid.smsAutodetec9(usuario, m), mentions: [m.sender] }, { quoted: fkontak })
 } else if (chat.detect && m.messageStubType == 123) {
