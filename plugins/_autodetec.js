@@ -42,10 +42,10 @@ handler.before = async function (m, { conn, participants, groupMetadata }) {
             showAdAttribution: true,
             containsAutoReply: true,
             renderLargerThumbnail: true,
-            title: `ShizukaBot-MD Powered SpaceNigth Team `
+            title: `ShizukaBot-MD Powered SpaceNigth Team `,
             body: `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
             mediaType: 1,
-            thumbnail: `https://telegra.ph/file/2828af24b9bd004bad80c.jpg`
+            thumbnail: `https://telegra.ph/file/2828af24b9bd004bad80c.jpg`,
             mediaUrl: `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
             sourceUrl: `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
         }
@@ -71,7 +71,7 @@ handler.before = async function (m, { conn, participants, groupMetadata }) {
             "body": `*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚`,
             "containsAutoReply": true,
             "mediaType": 1,
-            "thumbnail": img,  // Asegúrate de que la variable 'img' esté definida y tenga un valor válido.
+            "thumbnail": `https://telegra.ph/file/2828af24b9bd004bad80c.jpg`,
             "mediaUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`,
             "sourceUrl": `https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04`
         }
