@@ -350,8 +350,8 @@ conn.ev.off('creds.update', conn.credsUpdate);
 //Información para Grupos
 conn.welcome = '*┌─★ShizukaBot-MD*\n*│「 Bienvenido a @subject *\n*└┬★「 @user 」*\n   *│✑ Lee las reglas*\n   *│✑ Creador @Alba07503*\n*   └───────────────┈ ⳹*';
 conn.bye = '┌─★ShizukaBot-MD\n│「 ADIOS 👋 」*\n*└┬★「 @user 」*\n*  │✑  *Nos vemos*\n   │✑  *Sigueme en mi canal*\n   *└───────────────┈ ⳹*';
-conn.spromote = lenguajeGB['smsSpromote']() 
-conn.sdemote = lenguajeGB['smsSdemote']() 
+conn.spromote = '❏ 💭 @user Ahora es admi en este grupo'
+conn.sdemote = '❏ 💭 @user Joderte ya no eres admin'
 conn.sDesc = lenguajeGB['smsSdesc']() 
 conn.sSubject = lenguajeGB['smsSsubject']() 
 conn.sIcon = lenguajeGB['smsSicon']() 
