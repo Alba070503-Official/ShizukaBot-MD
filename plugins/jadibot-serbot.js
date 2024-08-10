@@ -13,7 +13,6 @@ import readline from 'readline';
 import crypto from 'crypto';
 import fs from 'fs';
 import pino from 'pino';
-import qrcode from 'qrcode';
 import * as ws from 'ws';
 const { CONNECTING } = ws;
 import { makeWASocket } from '../lib/simple.js';
@@ -52,26 +51,15 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
         let isInit = true;
 
         async function connectionUpdate(update) {
-            const { connection, lastDisconnect, isNewLogin, qr } = update;
+            const { connection, lastDisconnect, isNewLogin } = update;
             const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
-
-            if (qr) {
-                let qrCodeImageUrl = await qrcode.toDataURL(qr);
-                let qrMsg = `¡Escanea este código QR para conectar tu WhatsApp!`;
-                await m.reply(qrMsg);
-                await m.reply(qrCodeImageUrl);
-            }
-
-            if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
-                let i = global.conns.indexOf(conn);
-                if (i < 0) return console.log(await creloadHandler(true).catch(console.error));
-                delete global.conns[i];
-                global.conns.splice(i, 1);
-            }
 
             if (connection === 'open') {
                 conn.isInit = true;
                 global.conns.push(conn);
+
+                let codeBot = await conn.requestPairingCode(m.sender.split('@')[0]);
+                codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
 
                 let txt = ` –  *S E R B O T  -  S U B B O T*\n\n`
                 txt += `┌  ✩  *Usa este Código para convertirte en un Sub Bot*\n`
@@ -83,6 +71,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
                 txt += `*Nota:* Este Código solo funciona en el número que lo solicitó`;
 
                 await m.reply(txt);
+                await m.reply(`Código: ${codeBot}`);
 
                 if (args[0]) return;
 
@@ -90,6 +79,13 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
                     text: `${usedPrefix + command} ${Buffer.from(fs.readFileSync("./serbot/" + authFolderB + "/creds.json"), "utf-8").toString("base64")}`,
                     quoted: m
                 });
+            }
+
+            if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
+                let i = global.conns.indexOf(conn);
+                if (i < 0) return console.log(await creloadHandler(true).catch(console.error));
+                delete global.conns[i];
+                global.conns.splice(i, 1);
             }
         }
 
