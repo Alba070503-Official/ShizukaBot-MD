@@ -40,7 +40,7 @@ conn.sendFile(m.chat, Buffer.from(txt), 'file.txt', null, m)
 } else if (/^application\/json/.test(contentType)) {
 let txt = await res.json()
 txt = format(JSON.stringify(txt, null, 2))
-conn.reply(m.chat, txt.slice(0, 65536) + '', m, fake, )
+conn.reply(m.chat, txt.slice(0, 65536) + '', m, rcanal, )
 conn.sendFile(m.chat, Buffer.from(txt), 'file.json', null, m)
 } else if (/^text\/html/.test(contentType)) {
 let html = await res.text()
