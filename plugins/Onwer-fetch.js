@@ -35,7 +35,7 @@ if (/^image\//.test(contentType)) {
 conn.sendFile(m.chat, redirectUrl, filename, text, m)
 } else if (/^text\//.test(contentType)) {
 let txt = await res.text()
-conn.reply(m.chat, txt.slice(0, 65536) + '', m, fake, )
+conn.reply(m.chat, txt.slice(0, 65536) + '', m, rcanal, )
 conn.sendFile(m.chat, Buffer.from(txt), 'file.txt', null, m)
 } else if (/^application\/json/.test(contentType)) {
 let txt = await res.json()
