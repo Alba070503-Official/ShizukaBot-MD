@@ -21,5 +21,5 @@ const handler = async (m, {conn, usedPrefix, command}) => {
 };
 handler.help = ['tovideo'];
 handler.tags = ['sticker'];
-handler.command = ['tovideo', 'tomp4', 'mp4', 'togif'];
+handler.command = ['tovideo', 'tomp4', 'MP4', 'togif'];
 export default handler;
