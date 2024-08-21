@@ -49,5 +49,5 @@ await conn.reply(m.chat, `${lenguajeGB['smsMalError3']()}#report ${lenguajeGB['s
 console.log(`❗❗ ${lenguajeGB['smsMensError2']()} ${usedPrefix + command} ❗❗`)
 console.log(e)}
 }}}
-handler.command = /^audio|fgmp3|dlmp3|getaud|yt(a|mp3)$/i
+handler.command = /^audio|fgmp3|dlmp3|getaud|yt(a|MP3)$/i
 export default handler
