@@ -53,11 +53,11 @@ const signatureBuffer = Buffer.from("CkphZGlib3QsIEhlY2hvIHBvciBAQWlkZW5fTm90TG9
     async function initBot() {
       let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
       let mentionedNumber = '' + mentionedJid.split`@`[0];
-      let isCode = args[0] && args[0].includes("--code") ? true : !!(args[1] && args[1].includes("--code"));
+      let isCode = args[0] && args[0].includes("code") ? true : !!(args[1] && args[1].includes("code"));
 
       if (isCode) {
-        args[0] = args[0].replace("--code", '').trim();
-        if (args[1]) args[1] = args[1].replace("--code", '').trim();
+        args[0] = args[0].replace("code", '').trim();
+        if (args[1]) args[1] = args[1].replace("code", '').trim();
         if (args[0] == '') args[0] = undefined;
       }
 
@@ -88,7 +88,7 @@ const signatureBuffer = Buffer.from("CkphZGlib3QsIEhlY2hvIHBvciBAQWlkZW5fTm90TG9
           keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "silent" }))
         },
         logger: pino({ level: "silent" }),
-        browser: isCode ? ['Ubuntu', "Chrome", "20.0.04"] : ["TheMystic-Bot-MD", "Safari", "2.0.0"],
+        browser: isCode ? ['Ubuntu', "Chrome", "20.0.04"] : ["Shizuka-Bot-MD", "Safari", "2.0.0"],
         markOnlineOnConnect: true,
         generateHighQualityLinkPreview: true,
         getMessage: async key => {
@@ -112,7 +112,7 @@ const signatureBuffer = Buffer.from("CkphZGlib3QsIEhlY2hvIHBvciBAQWlkZW5fTm90TG9
         if (qr && !isCode) {
           conn.sendMessage(m.chat, {
             image: await qrcode.toBuffer(qr, { scale: 8 }),
-            caption: "*👑 𝐓𝐇𝐄 𝐌𝐘𝐒𝐓𝐈𝐂 - 𝐁𝐎𝐓 - 𝐌𝐃 👑*\n               *𝐒𝐄𝐑 𝐒𝐔𝐁𝐁𝐎𝐓*\n\n*Escanea este codigo QR para convertirte en un Bot (SubBot), puedes usar otro dispositivo para escanear*\n\n*Pasos para escanear:*\n*1.- Haga click en los 3 puntos ubicados en la esquina superior derecha en el inicio de su WhatsApp*\n*2.- Toca en donde dice WhatsApp web o dispositivos vinculados*\n*3.- Escanee este codigo QR*\n*El codigo QR expira en 60 segundos!!*\n\n*—◉ The Shadow Brokers - TEAM no se hace respondable del uso, numeros, mensajes, multimedias, etcétera enviado, usado o gestionado por ustedes o el Bot*" + signatureBuffer.toString("utf-8")
+            caption: "*🍁 ShizukaBot-MD 🍁*\n\n               *Ser Bot Por Codigo*\n\n*Escanea este codigo QR para convertirte en un Bot (SubBot), puedes usar otro dispositivo para escanear*\n\n*Pasos para escanear:*\n*1.- Haga click en los 3 puntos ubicados en la esquina superior derecha en el inicio de su WhatsApp*\n*2.- Toca en donde dice WhatsApp web o dispositivos vinculados*\n*3.- Escanee este codigo QR*\n*El codigo QR expira en 60 segundos!!*\n\n*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚ no se hace respondable del uso, numeros, mensajes, multimedias, etcétera enviado, usado o gestionado por ustedes o el Bot*" + signatureBuffer.toString("utf-8")
           }, { quoted: m });
         }
 
@@ -121,7 +121,7 @@ const signatureBuffer = Buffer.from("CkphZGlib3QsIEhlY2hvIHBvciBAQWlkZW5fTm90TG9
           if (senderNumber.startsWith('52')) senderNumber = "521" + senderNumber.slice(2);
           let pairingCode = await socket.requestPairingCode(senderNumber);
           conn.sendMessage(m.chat, {
-            text: "*👑 𝐓𝐇𝐄 𝐌𝐘𝐒𝐓𝐈𝐂 - 𝐁𝐎𝐓 - 𝐌𝐃 👑*\n               *𝐒𝐄𝐑 𝐒𝐔𝐁𝐁𝐎𝐓*\n\n*En breve, Se le enviara un codigo que debera introducir para instalar el bot*\n\n*Pasos a seguir:*\n*1.- Haga click en los 3 puntos ubicados en la esquina superior derecha en el inicio de su WhatsApp*\n*2.- Toca en donde dice WhatsApp web o dispositivos vinculados*\n*3.- De click en donde dice \"Vincular con el numero de telefono\"*\n*4.- Introduzca el codigo*\n*El codigo expira en 60 segundos!!*\n*El codigo solo funciona con el numero solicitado!!*\n\n*—◉ The Shadow Brokers - TEAM no se hace respondable del uso, numeros, mensajes, multimedias, etcétera enviado, usado o gestionado por ustedes o el Bot*" + signatureBuffer.toString('utf-8')
+            text: "*🍁 ShizukaBot-MD 🍁*\n               *Ser Bot Por Codigo*\n\n*En breve, Se le enviara un codigo que debera introducir para instalar el bot*\n\n*Pasos a seguir:*\n*1.- Haga click en los 3 puntos ubicados en la esquina superior derecha en el inicio de su WhatsApp*\n*2.- Toca en donde dice WhatsApp web o dispositivos vinculados*\n*3.- De click en donde dice \"Vincular con el numero de telefono\"*\n*4.- Introduzca el codigo*\n*El codigo expira en 60 segundos!!*\n*El codigo solo funciona con el numero solicitado!!*\n\n**ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚ no se hace respondable del uso, numeros, mensajes, multimedias, etcétera enviado, usado o gestionado por ustedes o el Bot*" + signatureBuffer.toString('utf-8')
           }, { quoted: m });
           await delay(5000);
           conn.sendMessage(m.chat, { text: pairingCode }, { quoted: m });
@@ -179,7 +179,7 @@ const signatureBuffer = Buffer.from("CkphZGlib3QsIEhlY2hvIHBvciBAQWlkZW5fTm90TG9
           await conn.sendMessage(m.chat, { text: args[0] ? "*[❗] Reconectado con éxito!!*" : "*[❗] Conectado con éxito!! Para volver a conectarte usa " + (usedPrefix + command) + '*' }, { quoted: m });
           if (connection === "open") {
             dataconst[socket.user.id.split('@')] = 1;
-            conn.sendMessage(m.chat, { text: "*[❗] Ya estas conectado, se paciente los mensajes se estan cargando...*\n\n*—◉ Para dejar de ser Bot puedes usar:*\n*◉ #deletebot*\n*—◉ Para volver a ser Bot y reescanear el codigo QR puedes usar:*\n*◉ " + (usedPrefix + command) + '*' }, { quoted: m });
+            conn.sendMessage(m.chat, { text: "*[❗] Ya estas conectado*\n\nSiguenos en nuestro canal de WhatsApp: https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04\n\n*se paciente los mensajes se estan cargando...*\n\n*—◉ Para dejar de ser Bot puedes usar:*\n*◉ #deletebot*\n*—◉ Para volver a ser Bot y reescanear el codigo QR puedes usar:*\n*◉ " + (usedPrefix + command) + '*' }, { quoted: m });
             return console.log(await reloadHandler(false).catch(console.error));
           }
           await sleep(5000);
@@ -257,7 +257,7 @@ const signatureBuffer = Buffer.from("CkphZGlib3QsIEhlY2hvIHBvciBAQWlkZW5fTm90TG9
 handler.help = ["jadibot", 'serbot', 'getcode', "rentbot"];
 handler.tags = ['jadibot'];
 handler.command = /^(jadibot|serbot|getcode|rentbot|code)$/i;
-handler.private = true;
+handler.private = false;
 
 export default handler;
 
