@@ -54,7 +54,7 @@ await conn.reply(m.chat, `${lenguajeGB['smsMalError3']()}#report ${lenguajeGB['s
 console.log(`❗❗ ${lenguajeGB['smsMensError2']()} ${usedPrefix + command} ❗❗`)
 console.log(E3)}
 }}}
-handler.command = /^video|fgmp4|dlmp4|getvid|yt(v|mp4)?$/i
+handler.command = /^video|fgmp4|dlmp4|getvid|yt(v|MP4)?$/i
 export default handler
 
 function bytesToSize(bytes) {
