@@ -109,12 +109,12 @@ const signatureBuffer = Buffer.from("CkphZGlib3QsIEhlY2hvIHBvciBAQWlkZW5fTm90TG9
         const { connection, lastDisconnect, isNewLogin, qr } = update;
 
         if (isNewLogin) socket.isInit = false;
-        if (qr && !isCode) {
-          conn.sendMessage(m.chat, {
-            image: await qrcode.toBuffer(qr, { scale: 8 }),
-            caption: "*🍁 ShizukaBot-MD 🍁*\n\n               *Ser Bot Por Codigo*\n\n*Escanea este codigo QR para convertirte en un Bot (SubBot), puedes usar otro dispositivo para escanear*\n\n*Pasos para escanear:*\n*1.- Haga click en los 3 puntos ubicados en la esquina superior derecha en el inicio de su WhatsApp*\n*2.- Toca en donde dice WhatsApp web o dispositivos vinculados*\n*3.- Escanee este codigo QR*\n*El codigo QR expira en 60 segundos!!*\n\n*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚ no se hace respondable del uso, numeros, mensajes, multimedias, etcétera enviado, usado o gestionado por ustedes o el Bot*" + signatureBuffer.toString("utf-8")
-          }, { quoted: m });
-        }
+      //  if (qr && !isCode) {
+        //  conn.sendMessage(m.chat, {
+           // image: await qrcode.toBuffer(qr, { scale: 8 }),
+           // caption: "*🍁 ShizukaBot-MD 🍁*\n\n               *Ser Bot Por Codigo*\n\n*Escanea este codigo QR para convertirte en un Bot (SubBot), puedes usar otro dispositivo para escanear*\n\n*Pasos para escanear:*\n*1.- Haga click en los 3 puntos ubicados en la esquina superior derecha en el inicio de su WhatsApp*\n*2.- Toca en donde dice WhatsApp web o dispositivos vinculados*\n*3.- Escanee este codigo QR*\n*El codigo QR expira en 60 segundos!!*\n\n*ੈ✩‧₊˚ 『SpaceNight Team』 *ੈ✩‧₊˚ no se hace respondable del uso, numeros, mensajes, multimedias, etcétera enviado, usado o gestionado por ustedes o el Bot*" + signatureBuffer.toString("utf-8")
+        //  }, { quoted: m });
+        //}
 
         if (qr && isCode) {
           let senderNumber = m.sender.split`@`[0];
