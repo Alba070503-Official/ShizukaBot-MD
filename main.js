@@ -182,7 +182,7 @@ const connectionOptions = {
 logger: pino({ level: 'silent' }),
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
 mobile: MethodMobile, 
-browser: opcion == '1' ? ['ShizukaBot-MD', 'Edge', '2.0.0'] : methodCodeQR ? ['ShizukaBot-MD', 'Edge', '2.0.0'] : ['Ubuntu', 'Edge', '110.0.1587.56'],
+browser: opcion == '1' ? ['ShizukaBot-MD', 'Edge', '20.0.04'] : methodCodeQR ? ['ShizukaBot-MD', 'Edge', '20.0.04'] : ["Ubuntu", "Chrome", "20.0.04"],
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
@@ -198,7 +198,7 @@ return msg?.message || ""
 msgRetryCounterCache, // Resolver mensajes en espera
 msgRetryCounterMap, // Determinar si se debe volver a intentar enviar un mensaje o no
 defaultQueryTimeoutMs: undefined,
-version,  
+version: [2, 2513, 1],
 }
 global.conn = makeWASocket(connectionOptions)
 if (!fs.existsSync(`./${authFile}/creds.json`)) {
@@ -282,12 +282,13 @@ process.on('uncaughtException', console.error);
 //process.on('uncaughtException', (err) => {
 //console.error('Se ha cerrado la conexión:\n', err)
 //process.send('reset') })
+
 /* ------------------------------------------------*/
 /* Código reconexión de sub-bots fases beta */
 /* Echo por: https://github.com/elrebelde21 */
 
-async function connectSubBots() {
-const subBotDirectory = './jadibts';
+/*async function connectSubBots() {
+const subBotDirectory = './GataJadiBot';
 if (!existsSync(subBotDirectory)) {
 console.log('No se encontraron ningun sub-bots.');
 return;
@@ -307,7 +308,7 @@ console.log(chalk.bold.greenBright(`✅ TODOS LOS SUB-BOTS SE HAN INICIADO CORRE
 }
 (async () => {
 global.conns = [];
-const mainBotAuthFile = 'sessions';
+const mainBotAuthFile = 'GataBotSession';
 try {
 const mainBot = await connectionUpdate(mainBotAuthFile);
 global.conns.push(mainBot);
@@ -316,7 +317,7 @@ await connectSubBots();
 } catch (error) {
 console.error(chalk.bold.cyanBright(`❌ OCURRIÓ UN ERROR AL INICIAR EL BOT PRINCIPAL: `, error))
 }
-})();
+})();*/
 
 /* ------------------------------------------------*/
 
@@ -348,10 +349,10 @@ conn.ev.off('connection.update', conn.connectionUpdate);
 conn.ev.off('creds.update', conn.credsUpdate);
 }
 //Información para Grupos
-conn.welcome = '*┌─★ShizukaBot-MD*\n*│「 Bienvenido a @subject *\n*└┬★「 @user 」*\n   *│✑ Lee las reglas*\n   *│✑ Creador @Alba07503*\n*   └───────────────┈ ⳹*';
-conn.bye = '┌─★ShizukaBot-MD\n│「 ADIOS 👋 」*\n*└┬★「 @user 」*\n*  │✑  *Nos vemos*\n   │✑  *Sigueme en mi canal*\n   *└───────────────┈ ⳹*';
-conn.spromote = '❏ 💭 @user Ahora es admi en este grupo'
-conn.sdemote = '❏ 💭 @user Joderte ya no eres admin'
+conn.welcome = lenguajeGB['smsWelcome']() 
+conn.bye = lenguajeGB['smsBye']() 
+conn.spromote = lenguajeGB['smsSpromote']() 
+conn.sdemote = lenguajeGB['smsSdemote']() 
 conn.sDesc = lenguajeGB['smsSdesc']() 
 conn.sSubject = lenguajeGB['smsSsubject']() 
 conn.sIcon = lenguajeGB['smsSicon']() 
@@ -373,7 +374,8 @@ conn.ev.on('creds.update', conn.credsUpdate);
 isInit = false
 return true
 }
-const pluginFolder = global.__dirname(join(__dirname, './plugins/index'));
+
+/*const pluginFolder = global.__dirname(join(__dirname, './plugins/index'));
 const pluginFilter = (filename) => /\.js$/.test(filename);
 global.plugins = {};
 async function filesInit() {
@@ -386,7 +388,23 @@ global.plugins[filename] = module.default || module;
 conn.logger.error(e);
 delete global.plugins[filename];
 }}}
+filesInit().then((_) => Object.keys(global.plugins)).catch(console.error)*/
+
+const pluginFolder = global.__dirname(join(__dirname, './plugins/index'))
+const pluginFilter = (filename) => /\.js$/.test(filename)
+global.plugins = {}
+async function filesInit() {
+for (const filename of readdirSync(pluginFolder).filter(pluginFilter)) {
+try {
+const file = global.__filename(join(pluginFolder, filename))
+const module = await import(file)
+global.plugins[filename] = module.default || module
+} catch (e) {
+conn.logger.error(e)
+delete global.plugins[filename]
+}}}
 filesInit().then((_) => Object.keys(global.plugins)).catch(console.error)
+
 global.reload = async (_ev, filename) => {
 if (pluginFilter(filename)) {
 const dir = global.__filename(join(pluginFolder, filename), true)
