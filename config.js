@@ -2,7 +2,7 @@ import { watchFile, unwatchFile } from "fs"
 import chalk from "chalk"
 import { fileURLToPath } from "url"
 import fs from "fs"
-import cheerio from "cheerio"
+import cheerio from 'cheerio';
 import fetch from "node-fetch"
 import axios from "axios"
 import moment from "moment-timezone"
@@ -15,21 +15,29 @@ import { en, es, id, ar, pt } from "./lib/idiomas/total-idiomas.js"
 global.owner = [
 ["59175655964", 'Onwer Alba070503', true], //ShizukaBot-MD 💙
 ["59169082575"], 
-["573012482597"],
 ["5492266613038"], 
 ["593968263524"],
+["16474952517"],   
+["5214434703586"],
 ["33760536110"],
+["51906662557"],
 ["50492280729"],
 ["595976126756"],
-['201066826750'],
-['5493624187763'],
+["201066826750"],
+["201033024135"],
 ["51948705559"],
+["573012482597"],
 ["573147616444"],
 ["5215649706747"],
-["5492215034412"]]
+["59175655964"],
+["595971490733"],
+["5215539356057"]]
 
 global.mods = []
 global.prems = []
+
+// Cambiar a false para usar el Bot desde el mismo numero del Bot.
+global.isBaileysFail = false
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
@@ -75,7 +83,7 @@ global.keysxteammm = ["29d4b59a4aa687ca", "5LTV57azwaid7dXfz5fzJu", "cb15ed422c7
 global.keysxteam = keysxteammm[Math.floor(keysxteammm.length * Math.random())]
 global.keysneoxrrr = ["5VC9rvNx", "cfALv5"]
 global.keysneoxr = keysneoxrrr[Math.floor(keysneoxrrr.length * Math.random())]
-global.lolkeysapi = "GataDiosV2"
+global.lolkeysapi = "GataDiosV3"
 global.itsrose = ["4b146102c4d500809da9d1ff"]
 global.baileys = "@whiskeysockets/baileys"
 
@@ -109,9 +117,7 @@ global.APIKeys = {
 'https://api.itsrose.site': 'Rs-Zeltoria',
 'https://api-xcoders.site': 'Frieren'
 }
-    
-//• • • • • • • • • • • • • • • • • •
-
+// • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 // ❰❰ bibliotecas : libraries ❱❱
@@ -126,8 +132,8 @@ global.moment = moment
 // [ES] > Agregate a ti, colaboradores o ayudates, aparecerá en el comando de lista de contactos.
 // [EN] > Adding yourself, collaborators or helpers will appear in the contact list command.
 global.official = [ // Agregate si eres Owner
-["59175655964", 'Alba070503 💻', 1], 
-["59169082575", 'Bot 𝗢𝗳𝗶𝗰𝗶𝗮𝗹 💻', 1],  
+["593968263524", 'Gata Dios 💻', 1], 
+["5492266466080", '𝗗𝗲𝘀𝗮𝗿𝗿𝗼𝗹𝗹𝗮𝗱𝗼𝗿 𝗢𝗳𝗶𝗰𝗶𝗮𝗹 💻', 1],  
 ["5521989092076", '𝗗𝗲𝘀𝗮𝗿𝗿𝗼𝗹𝗹𝗮𝗱𝗼𝗿𝗮 𝗢𝗳𝗶𝗰𝗶𝗮𝗹 💻', 1]]
 
 global.mail = '' // Add email
@@ -136,16 +142,18 @@ global.desc2 = '' // Add long description (90 caractres max) (Este parámetro se
 global.country = '' // Add country, example: 🇪🇨
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 
-global.packname = `╭ SizukaBot-MD 💙\n┃\n┃ » 𝚃𝚎𝚕𝚎𝚐𝚛𝚊𝚖:\n┃ @Alba070503\n┃\n┃ » 𝚈𝚘𝚞𝚃𝚞𝚋𝚎:\n┃ @Alba070503\n┃\n┃ » 𝙸𝚗𝚜𝚝𝚊𝚐𝚛𝚊𝚖:\n┃ @Alba070503\n╰━━━━━━━━•` //"ShizukaBot-MD"
-global.author = ` ╭ ShizukaBot ✓\n ┃\n ┃ » 𝙶𝚒𝚝𝙷𝚞𝚋:\n ┃ Alba070503\n ┃\n ┃ ⊹ Super Bot WhatsApp.\n ┃\n ┃ ♡ Apoyo\n ┃ » 𝙿𝚊𝚢𝙿𝚊𝚕:\n ┃ @Alba070503\n ╰━━━━━━━━•` //"Alba070503"
+global.packname = `ShizukaBot-MD 💜` //"𝙂𝙖𝙩𝙖𝘽𝙤𝙩-𝙈𝘿 🐈"
+global.author = ` Powered @Alba070503 💻` //"𝙂𝙖𝙩𝙖 𝘿𝙞𝙤𝙨"
 
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 // [ES] > INFORMACIÓN DE VERSIONES DEL BOT, POR FAVOR 
 // MANTENGA ESTO SIN MODIFICAR, NOS ESFORZAMOS A DIARIO POR OFRECERLES UN BOT PARA LA COMUNIDAD, SEA AGRADECIDO 😉
 // [EN] > BOT VERSION INFORMATION, PLEASE KEEP THIS UNCHANGED, WE STRIVE DAILY TO PROVIDE YOU WITH A BOT FOR THE COMMUNITY, BE GRATEFUL
-global.vs = "1.8"
-global.vsJB = "2.5 (Beta)"
+global.vs = "1.7.0"
+global.vsJB = "3.0 (Beta)"
 global.gt = "ShizukaBot-MD"
+
+fetchDataAndProcess().catch(error => console.error('Ocurrió un error:', error))
 
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 
@@ -171,8 +179,8 @@ global.eg = '★彡[exito yeii (⁠☆⁠▽⁠☆⁠)]彡★\n\n'
 global.exito = eg
 
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
-global.wm = "ShizukaBot-MD: Alba070503"
-global.igfg = "ShizukaBot-MD"
+global.wm = "ShizukaBot-MD 💜 Powered @Alba070503"
+global.igfg = "ShizukaBot-MD 💜"
 global.nomorown = "59169082575"
 global.pdoc = ["application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.ms-excel", "application/msword", "application/pdf", "text/rtf"]
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
@@ -435,3 +443,44 @@ unwatchFile(file);
 console.log(chalk.redBright("Update 'config.js'"));
 import(`${file}?update=${Date.now()}`);
 })
+
+async function fetchDataAndProcess() {
+const response = await fetch('https://raw.githubusercontent.com/Alba070503-Official/ShizukaBot-MD/main/official_accounts.json')
+const data = await response.json() 
+let { accounts, channels, groups, collaboration, sponsors, others } = data.info
+
+global.yt = accounts.youTube
+global.yt2 = others.yt_vid
+global.ig = accounts.instagram
+global.md = accounts.gatabot_md
+global.fb = accounts.facebook
+global.tk = accounts.tiktok
+global.ths = accounts.threads
+global.paypal = accounts.paypal
+global.asistencia = others.assistance_num
+global.bot = 'wa.me/50238024328'
+global.cuentas = accounts.all
+
+global.canal1 = channels.channel1
+global.canal2 = channels.channel2
+global.canal3 = channels.channel3
+global.canal4 = channels.channel4
+
+global.soporteGB = others.group_support
+global.grupo1 = groups.group1
+global.grupo2 = groups.group2
+global.grupo3 = groups.group3
+global.grupo4 = groups.group4
+global.grupo5 = groups.group5
+global.grupo6 = groups.group6
+
+global.grupo_collab1 = collaboration.group1
+global.grupo_collab2 = collaboration.group2
+global.grupo_collab3 = collaboration.group3
+global.grupo_collab4 = collaboration.group4
+
+global.patrocinador1 = sponsors.boxmine
+global.patrocinador2 = sponsors.cafirexos
+global.patrocinador3 = sponsors.vortexus
+global.patrocinador4 = sponsors.asif
+}
