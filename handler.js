@@ -971,7 +971,7 @@ global.db.data.chats[m.chat] = {}
 if (chat) {
 if (!('isBanned' in chat)) chat.isBanned = false         
 if (!('welcome' in chat)) chat.welcome = true           
-if (!('detect' in chat)) chat.detect = true               
+if (!('detect' in chat)) chat.detect = false               
 if (!('sWelcome' in chat)) chat.sWelcome = ''          
 if (!('sBye' in chat)) chat.sBye = ''                    
 if (!('sPromote' in chat)) chat.sPromote = ''             
@@ -999,12 +999,12 @@ if (!('antifake' in chat)) chat.antifake = false
 if (!('reaction' in chat)) chat.reaction = true    
 if (!('viewonce' in chat)) chat.viewonce = false       
 if (!('modoadmin' in chat)) chat.modoadmin = false    
-if (!('antitoxic' in chat)) chat.antitoxic = false
+if (!('antitoxic' in chat)) chat.antitoxic = true
 if (!('game' in chat)) chat.game = true
 if (!('game2' in chat)) chat.game2 = true
 if (!('simi' in chat)) chat.simi = false
 if (!('antiTraba' in chat)) chat.antiTraba = true
-if (!('autolevelup' in chat))  chat.autolevelup = false
+if (!('autolevelup' in chat))  chat.autolevelup = true
 if (!isNumber(chat.expired)) chat.expired = 0
 } else
 global.db.data.chats[m.chat] = {
@@ -1016,7 +1016,7 @@ sBye: '',
 sPromote: '',
 sDemote: '', 
 sCondition: JSON.stringify([{ grupo: { usuario: [], condicion: [], admin: '' }, prefijos: []}]), 
-delete: true,
+delete: false,
 modohorny: true,
 stickers: false,
 autosticker: false,
@@ -1036,14 +1036,14 @@ antiThreads: false,
 antiTwitch: false,
 antifake: false,
 reaction: true,
-viewonce: true,
+viewonce: false,
 modoadmin: false,
-antitoxic: false,
+antitoxic: true,
 game: true, 
 game2: true, 
 simi: false,
 antiTraba: true,
-autolevelup: false,
+autolevelup: true,
 expired: 0,
 }
 let settings = global.db.data.settings[this.user.jid]
@@ -1058,7 +1058,7 @@ if (!('antiPrivate' in settings)) settings.antiPrivate = false
 if (!('antiCall' in settings)) settings.antiCall = true
 if (!('antiSpam' in settings)) settings.antiSpam = true 
 if (!('modoia' in settings)) settings.modoia = false
-if (!('jadibotmd' in settings)) settings.jadibotmd = true  
+if (!('jadibotmd' in settings)) settings.jadibotmd = true 
 } else global.db.data.settings[this.user.jid] = {
 self: false,
 autoread: false,
@@ -1097,7 +1097,11 @@ if (opts['swonly'] && m.chat !== 'status@broadcast') return
 if (typeof m.text !== 'string')
 m.text = ''
 
-if (m.isBaileys) return
+//if (m.isBaileys) return 
+if (m.isBaileys || isBaileysFail && m?.sender === this?.this?.user?.jid) {
+return
+}
+	
 m.exp += Math.ceil(Math.random() * 10)
 let usedPrefix
 let _user = global.db.data && global.db.data.users && global.db.data.users[m.sender]
@@ -1118,9 +1122,6 @@ continue
 if (plugin.disabled)
 continue
 const __filename = join(___dirname, name)
-/* if (m.sender === this.user.jid) {
-continue
-} */
 if (typeof plugin.all === 'function') {
 try {
 await plugin.all.call(this, m, {
@@ -1269,18 +1270,18 @@ m.reply('Exp limit') // Hehehe
 else               
 if (!isPrems && plugin.money && global.db.data.users[m.sender].money < plugin.money * 1) {
 //this.reply(m.chat, `🐈 𝙉𝙊 𝙏𝙄𝙀𝙉𝙀 𝙂𝘼𝙏𝘼𝘾𝙊𝙄𝙉𝙎`, m)
-this.sendMessage(m.chat, {text: `🪙 No tienes Coins Suficiente`,  contextInfo: {externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: gt, body: ' ⛩️ ShizukaBot-MD By @Alba070503 ', previewType: 0, thumbnail: gataImg, sourceUrl: accountsgb }}}, { quoted: m })         
+this.sendMessage(m.chat, {text: `No tienes coins suficiente 🪙`,  contextInfo: {externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: gt, body: '💜ShizukaBot-MD By @Alba070503', previewType: 0, thumbnail: gataImg, sourceUrl: accountsgb }}}, { quoted: m })         
 continue     
 }
 			
 m.exp += xp
 if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-this.sendMessage(m.chat, {text: `${lenguajeGB['smsCont7']()} *${usedPrefix}buy*`,  contextInfo: {externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: gt, body: ' ⛩️ ShizukaBot-MD By @Alba070503 ', previewType: 0, thumbnail: gataImg, sourceUrl: accountsgb }}}, { quoted: m })         
+this.sendMessage(m.chat, {text: `${lenguajeGB['smsCont7']()} *${usedPrefix}buy*`,  contextInfo: {externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: gt, body: ' 💜ShizukaBot-MD By @Alba070503 ', previewType: 0, thumbnail: gataImg, sourceUrl: accountsgb }}}, { quoted: m })         
 //this.reply(m.chat, `${lenguajeGB['smsCont7']()} *${usedPrefix}buy*`, m)
 continue //Sin límite
 }
 if (plugin.level > _user.level) {
-this.sendMessage(m.chat, {text: `${lenguajeGB['smsCont9']()} *${plugin.level}* ${lenguajeGB['smsCont10']()} *${_user.level}* ${lenguajeGB['smsCont11']()} *${usedPrefix}nivel*`,  contextInfo: {externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: gt, body: ' ⛩️ShizukaBot-MD By @Alba070503 ', previewType: 0, thumbnail: gataImg, sourceUrl: accountsgb }}}, { quoted: m })         
+this.sendMessage(m.chat, {text: `${lenguajeGB['smsCont9']()} *${plugin.level}* ${lenguajeGB['smsCont10']()} *${_user.level}* ${lenguajeGB['smsCont11']()} *${usedPrefix}nivel*`,  contextInfo: {externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: gt, body: ' 💜ShizukaBot-MD By @Alba070503 ', previewType: 0, thumbnail: gataImg, sourceUrl: accountsgb }}}, { quoted: m })         
 //this.reply(m.chat, `${lenguajeGB['smsCont9']()} *${plugin.level}* ${lenguajeGB['smsCont10']()} *${_user.level}* ${lenguajeGB['smsCont11']()} *${usedPrefix}nivel*`, m)
 continue // Si no se ha alcanzado el nivel
 }
@@ -1434,7 +1435,7 @@ pp = await this.profilePictureUrl(user, 'image')
 let apii = await this.getFile(pp)                                      
 const botTt2 = groupMetadata.participants.find(u => this.decodeJid(u.id) == this.user.jid) || {} 
 const isBotAdminNn = botTt2?.admin === "admin" || false
-text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || ' ⛩️ ShizukaBot-MD By @Alaba070503 ') :
+text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '💜ShizukaBot-MD By @Alba070503') :
 (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
 			    
 if (chat.antifake && isBotAdminNn && action === 'add') {
@@ -1470,10 +1471,10 @@ mentionedJid:[user],
 "showAdAttribution": true,
 "renderLargerThumbnail": true,
 "thumbnail": apii.data, 
-"title": [wm, 'Hola soy ShizukaBot-MD' +  'ShizukaBot-MD By @Alba070503'].getRandom(),
+"title": [wm, 'Hola que tal 👋🏻  Soy ShizukaBot-MD 💜' , 'Powered @Alba070503'].getRandom(),
 "containsAutoReply": true,
 "mediaType": 1, 
-sourceUrl: accountsgb }}}, { quoted: fkontak2 })
+sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04' }}}, { quoted: fkontak2 })
 apii.data = ''
 //this.sendFile(id, apii.data, 'pp.jpg', text, null, false, { mentions: [user] }, { quoted: fkontak2 })
 }}}
@@ -1535,7 +1536,7 @@ let chat = global.db.data.chats[msg?.chat] || {}
 if (!chat?.delete) return 
 if (!msg) return 
 if (!msg?.isGroup) return 
-const antideleteMessage = `*╭━━⬣ ${lenguajeGB['smsCont19']()} ⬣━━ *
+const antideleteMessage = `*╭━━⬣ ${lenguajeGB['smsCont19']()} ⬣━━ 𓃠*
 ${lenguajeGB['smsCont20']()} @${participant.split`@`[0]}
 ${lenguajeGB['smsCont21']()}
 *╰━━━⬣ ${lenguajeGB['smsCont19']()} ⬣━━╯*`.trim();
@@ -1562,7 +1563,7 @@ restrict: lenguajeGB['smsRestrict'](),
 //if (msg) return m.reply(msg)
 	
 let tg = { quoted: m, userJid: conn.user.jid }
-let prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: lenguajeGB.smsAvisoAG().slice(0,-2), body: [wm, 'ShizukaBot-MD ' +  ' Hola Soy ShizukaBot-MD', 'ShizukaBot-MD By @Alba070503'].getRandom(), thumbnail: gataImg, sourceUrl: accountsgb }}}}, tg)
+let prep = generateWAMessageFromContent(m.chat, { extendedTextMessage: { text: msg, contextInfo: { externalAdReply: { title: lenguajeGB.smsAvisoAG().slice(0,-2), body: [wm, 'Gracias Por eligir ShizukaBot-MD 💜' , 'Powered By @Alba070503 '].getRandom(), thumbnail: gataImg, sourceUrl: accountsgb }}}}, tg)
 if (msg) return conn.relayMessage(m.chat, prep.message, { messageId: prep.key.id })
 }
 
