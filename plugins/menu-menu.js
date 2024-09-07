@@ -619,7 +619,7 @@ contextInfo: {
 mentionedJid: [m.sender],
 forwardingScore: 9, 
 externalAdReply: {
-title: '❑— ShizukaBot-MD —❑\nWʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
+title: '❑— ShizukaBot-MD —❑\nPowered CorinPlus Hosting',
 //body: 'Wʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
 thumbnail: img,
 sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
