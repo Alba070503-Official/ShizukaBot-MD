@@ -612,7 +612,7 @@ ${readMore}
 
 ShizukaBot-MD|| Alba070503`.trim()
 //conn.sendFile(m.chat, pp, 'lp.jpg', menu, m, false, { contextInfo: { mentionedJid }})
-let img = await (await fetch('https://qu.ax/UPwP.jpg')).buffer()  
+let img = await (await fetch('https://qu.ax/pqqq.jpg')).buffer()  
 await conn.sendMessage(m.chat, {
 text: menu,
 contextInfo: { 
