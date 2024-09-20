@@ -28,7 +28,7 @@ console.error('Error al obtener:', error);
 let query = m.text;
 let username = `${m.pushName}`;
 
-let syms1 = `Actuaras como un Bot de WhatsApp el cual fue creado por GataNina-Li, tu seras GataBot-MD 🐈`;  
+let syms1 = `Actuaras como un Bot de WhatsApp el cual fue creado por Alba070503, tu seras ShizukaBot-MD 🍁`;  
 
 let result = await luminsesi(query, username, syms1);
  await m.reply(result)
