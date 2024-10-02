@@ -10,9 +10,6 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     ], m);
 };
 
-handler.command = ['start']; // El comando inicial será .start
-export default handler;
-
 // Acción si el usuario elige "Sí"
 let siHandler = async (m, { conn }) => {
     const yesImageUrl = 'https://qu.ax/abKS.jpg'; // Imagen para la respuesta "Sí"
@@ -29,9 +26,6 @@ let siHandler = async (m, { conn }) => {
         mimetype: 'audio/mpeg'
     }, { quoted: m });
 };
-
-siHandler.command = ['si']; // El comando para la opción "Sí"
-export default siHandler;
 
 // Acción si el usuario elige "No"
 let noHandler = async (m, { conn }) => {
@@ -50,5 +44,5 @@ let noHandler = async (m, { conn }) => {
     }, { quoted: m });
 };
 
-noHandler.command = ['no']; // El comando para la opción "No"
-export default noHandler;
+// Exportar los manejadores sin 'default'
+export { handler, siHandler, noHandler };
