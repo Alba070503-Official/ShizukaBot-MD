@@ -8,7 +8,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 
         await conn.sendButton(m.chat, messageText, 'Declaración', imageUrl, [
             ['Sí Acepto Salir Contigo', `${usedPrefix}Si`],
-            ['No Lo Siento Mucho', `${usedPrefix}no`]
+            ['No Lo Siento Mucho', `${usedPrefix}No`]
         ], m);
     }
 };
