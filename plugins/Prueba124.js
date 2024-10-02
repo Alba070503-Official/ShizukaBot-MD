@@ -52,7 +52,7 @@ let noHandler = async (m, { conn }) => {
 // Exportar todos los handlers juntos
 export default {
     handler: {
-        command: ['start'],
+        command: ['hola'],
         handler
     },
     siHandler: {
