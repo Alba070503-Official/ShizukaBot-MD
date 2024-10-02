@@ -2,12 +2,17 @@ import fetch from 'node-fetch'; // Para obtener las imágenes y audios desde URL
 
 // Comando inicial: .start
 let handler = async (m, { conn, usedPrefix }) => {
-    const imageUrl = 'https://qu.ax/lpPQ.jpg'; // Imagen para el mensaje inicial
-    const messageText = 'Hola Estela\n\nHay algo que llevo guardando en mi corazón desde hace tiempo, algo que, a pesar de lo mucho que he intentado poner en palabras, siempre parece escaparse de ellas. Pero hoy, quiero ser valiente y decirte lo que siento\n\nDesde el primer momento en que nuestras miradas se cruzaron, sentí una conexión especial. Con cada conversación, cada sonrisa que compartimos, me he dado cuenta de que ocupas un lugar muy especial en mi vida.\n\nHoy quiero confesarte que me gustas. Me gustas de una manera que ni siquiera sabía que era posible. Quiero saber si te gustaría salir conmigo. Presiona sí o no.';
+    const imageUrl = 'https://qu.ax/lpPQ.jpg'; // URL de la imagen inicial
+    const messageText = `
+        Hola Estela 💖\n
+        Hay algo que llevo guardando en mi corazón desde hace tiempo. Hoy quiero ser valiente y decirte lo que siento. Desde que nuestras miradas se cruzaron, sentí una conexión especial.\n
+        Me encantaría saber si quieres salir conmigo. ¿Qué dices?\n\n
+        Pulsa en una opción para responder.
+    `.trim();
 
     await conn.sendButton(m.chat, messageText, wm, imageUrl, [
-        ['Sí Acepto Salir Contigo', `${usedPrefix}acepto`],
-        ['No Lo Siento Mucho', `${usedPrefix}rechazo`]
+        ['💌 Sí Acepto', `${usedPrefix}acepto`],
+        ['💔 No, Lo siento', `${usedPrefix}rechazo`]
     ], m);
 };
 
@@ -15,7 +20,10 @@ let handler = async (m, { conn, usedPrefix }) => {
 let siHandler = async (m, { conn }) => {
     const yesImageUrl = 'https://qu.ax/abKS.jpg'; // Imagen para la opción "Sí"
     const yesAudioUrl = 'https://qu.ax/lyds.mp3'; // Audio para la opción "Sí"
-    const yesMessageText = 'No te imaginas lo feliz que me hace saber que has aceptado. Mi corazón está latiendo a mil por hora solo de pensar en todo lo que está por venir. ¡Estoy emocionado por todo lo que está por venir! 💖';
+    const yesMessageText = `
+        ¡Qué alegría! Me hace muy feliz saber que has aceptado. 💖\n
+        Prometo que cada momento a tu lado será especial y lleno de sonrisas. Estoy emocionado por lo que está por venir. 💫
+    `.trim();
 
     // Enviar imagen con mensaje
     await conn.sendMessage(m.chat, { 
@@ -33,7 +41,10 @@ let siHandler = async (m, { conn }) => {
 // Acción si el usuario elige "No"
 let noHandler = async (m, { conn }) => {
     const noImageUrl = 'https://qu.ax/eFBg.jpg'; // Imagen para la opción "No"
-    const noMessageText = 'Primero que todo, quiero agradecerte por ser honesta conmigo. Aunque las cosas no resultaron como esperaba, respeto completamente tu decisión y valoro muchísimo tu sinceridad. Sigamos siendo amigos. 😊';
+    const noMessageText = `
+        Entiendo y te agradezco por ser honesta conmigo. Aunque no fue la respuesta que esperaba, valoro mucho tu sinceridad. 😊\n
+        Lo más importante es que sigamos siendo amigos. ¡Aquí estaré siempre para ti! 🤝
+    `.trim();
     const noAudioUrl = 'https://qu.ax/Pgxz.mp3'; // Audio para la opción "No"
 
     // Enviar imagen con mensaje
@@ -41,7 +52,7 @@ let noHandler = async (m, { conn }) => {
         image: { url: noImageUrl }, 
         caption: noMessageText
     }, { quoted: m });
-    
+
     // Enviar audio
     await conn.sendMessage(m.chat, { 
         audio: { url: noAudioUrl }, 
@@ -49,18 +60,9 @@ let noHandler = async (m, { conn }) => {
     }, { quoted: m });
 };
 
-// Exportar todos los handlers juntos
-export default {
-    handler: {
-        command: ['hola'],
-        handler
-    },
-    siHandler: {
-        command: ['acepto'],
-        handler: siHandler
-    },
-    noHandler: {
-        command: ['rechazo'],
-        handler: noHandler
-    }
-};
+// Asignar comandos a las funciones
+handler.command = ['declaracion']; // Comando principal .start
+siHandler.command = ['acepto']; // Comando para aceptar
+noHandler.command = ['rechazo']; // Comando para rechazar
+
+export { handler, siHandler, noHandler };
