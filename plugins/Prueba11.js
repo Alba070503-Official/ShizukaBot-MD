@@ -5,7 +5,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     // Ruta de la imagen y el audio
     const imageUrl = 'https://qu.ax/abKS.jpg';  // Reemplaza con la URL de la imagen
-    const audioUrl = 'hhttps://qu.ax/lyds.mp3';  // Reemplaza con la URL del audio
+    const audioUrl = 'https://qu.ax/lyds.mp3';  // Reemplaza con la URL del audio
 
     try {
         // Enviar mensaje de texto
