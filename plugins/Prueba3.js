@@ -116,7 +116,7 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     let randomImage = [vid, img, img2][Math.floor(Math.random() * 3)];
 
     // Enviar el menú
-    await conn.sendListB(m.chat, menu, txt, ` shizukabug `, randomImage, listSections, esti);
+    await conn.sendListB(m.chat, menu, txt, ` shizukabug `, randomImage, listSections);
 };
 // Función para convertir el tiempo en formato legible
 function clockString(ms) {
