@@ -1,5 +1,3 @@
-import ws from 'ws';
-
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     let uniqueUsers = new Map();
 
@@ -12,7 +10,7 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     let username = conn.getName(m.sender);
     let name = conn.getName(m.sender);
     let locale = 'es';
-    let d = new Date(new Date() + 3600000);  // Corrección en la creación del objeto Date
+    let d = new Date(new Date() + 3600000);
     let time = d.toLocaleTimeString(locale, {
         hour: 'numeric',
         minute: 'numeric',
@@ -23,6 +21,9 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length;
 
     m.react("🐢");
+
+    // Definir el título del menú
+    let menu = '𝙈𝙀𝙉𝙐 𝙋𝙍𝙄𝙉𝘾𝙄𝙋𝘼𝙇';
 
     // Estructura del mensaje de texto
     let txt = `િ ฺ࣭࣪͘ \`ʜᴏʟᴀ\` p𝖾𝗋᷼𝗌᷼♤𝗇᷼𝗂𝗍α    𝗅𝗂𝗇𝖽α   (⁠◍⁠•⁠ᴗ⁠•⁠◍⁠)⁠✧⁠*⁠。\n`;
@@ -117,49 +118,3 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     // Enviar el menú
     await conn.sendListB(m.chat, menu, txt, ` 𓏲᭨ ̤̤֟✧⏤͟͞ू⃪٭ۣۜ ፝͜⁞M͢ᴇɴᴜs۫۫۫۫۫۫۫۫ ᭄፝🍟𑜟꙲𒁑⁩`, randomImage, listSections, esti);
 };
-
-handler.tags = ['main'];
-handler.help = ['menu'];
-handler.command = ["menu", "help", "menú"];
-
-export default handler;
-
-// Función para convertir el tiempo de actividad en formato legible
-function clockString(ms) {
-  const h = Math.floor(ms / 3600000);
-  const m = Math.floor(ms / 60000) % 60;
-  const s = Math.floor(ms / 1000) % 60;
-  console.log({ ms, h, m, s });
-  return [h, m, s].map((v) => v.toString().padStart(2, '0')).join(":");
-}
-
-// Configuración de saludos según la hora
-var ase = new Date();
-var hour = ase.getHours();
-switch(hour){
-  case 0: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 1: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 2: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 3: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 4: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 5: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 6: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 7: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 8: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 9: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 10: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 11: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 12: hour = 'Bᴜᴇɴᴏs Días 🌅'; break;
-  case 13: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌞'; break;
-  case 14: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌞'; break;
-  case 15: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌞'; break;
-  case 16: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌞'; break;
-  case 17: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌞'; break;
-  case 18: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌞'; break;
-  case 19: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 20: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 21: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 22: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  case 23: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
-  default: hour = 'Bᴜᴇɴᴀs 🌟'; break;
-}
