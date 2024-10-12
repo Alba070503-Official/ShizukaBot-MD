@@ -116,18 +116,5 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
     let randomImage = [vid, img, img2][Math.floor(Math.random() * 3)];
 
     // Enviar el menú
-    await conn.sendListB(m.chat, menu, txt, ` shizukabug `, randomImage, listSections);
+    await conn.sendListB(m.chat, menu, txt, ` 𓏲᭨ ̤̤֟✧⏤͟͞ू⃪٭ۣۜ ፝͜⁞M͢ᴇɴᴜs۫۫۫۫۫۫۫۫ ᭄፝🍟𑜟꙲𒁑⁩`, randomImage, listSections, esti);
 };
-// Función para convertir el tiempo en formato legible
-function clockString(ms) {
-    let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000);
-    let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60;
-    let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60;
-    return [h, ' Horas ', m, ' Minutos ', s, ' Segundos '].map(v => v.toString().padStart(2, 0)).join('');
-}
-
-handler.help = ['menu', 'help', '?'];
-handler.tags = ['main', 'info'];
-handler.command = /^(menu|help|\?)$/i;
-
-export default handler;
