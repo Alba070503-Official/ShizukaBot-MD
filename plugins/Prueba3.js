@@ -41,7 +41,7 @@ txt+= "✬✭✰✬"
     let listSections = [];
 
         listSections.push({
-        title: `✎ SELECCIÓNA LO QUE NECESITES`, highlight_label: `Popular YaemoriBot`,
+        title: `✎ SELECCIÓN LO QUE NECESITES`, highlight_label: `Popular YaemoriBot`,
         rows: [
             {
                 header: "𓆩࿔ྀુ⃟🌹⃟𝘼𝙐𝙏𝙊 𝙑𝙀𝙍𝙄𝙁𝙄𝘾𝘼𝙍 ╎✅",
