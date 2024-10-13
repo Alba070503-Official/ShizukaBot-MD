@@ -14,7 +14,7 @@ var handler = async (m, { text, usedPrefix, command, conn }) => {
         conn.sendPresenceUpdate('composing', m.chat);
 
         // Llamada a la API de Gemini
-        const apiUrl = `https://deliriusapi-official.vercel.app/ia/gemini?query=${encodeURIComponent(text)}`;
+        const apiUrl = `https://api.dorratz.com/ai/gpt4?username=diego&query=${encodeURIComponent(text)}`;
         const response = await fetch(apiUrl);
 
         // Verifica si la respuesta es exitosa
