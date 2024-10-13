@@ -1,83 +1,49 @@
 import axios from 'axios';
-import { tiktok } from "@xct007/frieren-scraper"; 
-import { generateWAMessageFromContent } from '@whiskeysockets/baileys';
-import { tiktokdl } from '@bochilteam/scraper';
 
-let handler = async (m, { conn, text, args, usedPrefix, command }) => { 
-    if (!text) throw `*✘error✘*\n\n_. ᩭ✎Use el comandó correctamente_\n\n_Ejemplo : ${usedPrefix + command} https://vm.tiktok.com/kandndbwldnig/🍁_`;
-    if (!/(?:https:?\/{2})?(?:w{3}|vm|vt|t)?\.?tiktok.com\/([^\s&]+)/gi.test(text)) throw `*✘error✘* _. ᩭ✎Use el comandó correctamente_\n\n_Ejemplo : ${usedPrefix + command} https://vm.tiktok.com/nandlwmso/🍁_`;
-    
-    let texto = `_🍁 @${m.sender.split`@`[0]} ᩭ✎Enviando Video, espere un momento...._`;
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+    if (!args || !args[0]) 
+        return conn.reply(m.chat, '🚩 Ingresa un enlace del vídeo de TikTok junto al comando.\n\n`Ejemplo:`\n' + `> *${usedPrefix + command}* https://vm.tiktok.com/ZMrFCX5jf/`, m, rcanal);
+
+    if (!args[0].match(/tiktok/gi)) 
+        return conn.reply(m.chat, `Verifica que el link sea de TikTok`, m, rcanal).then(_ => m.react('✖️'));
+
+    await m.react('🕓');
 
     try {
-        // Enviar mensaje de espera
-        conn.sendMessage(m.chat, { text: texto, mentions: [m.sender] }, { quoted: m });
-
-        // Llamada a la API que me proporcionaste
+        // Llamada a la API para descargar el video
         const response = await axios.get(`https://deliriusapi-official.vercel.app/download/tiktok?url=${encodeURIComponent(args[0])}`);
 
-        // Verificamos si la respuesta contiene el video sin marca de agua
+        // Verificamos si la respuesta de la API es correcta
         if (response.data && response.data.video) {
-            let desc1 = `_🍁 ᩭ✎Tiktok sin marca de agua descargado con éxito By @Alba070503_`;
-            
-            // Enviamos el video descargado de la API
-            await conn.sendMessage(m.chat, { video: { url: response.data.video }, caption: desc1 }, { quoted: m });
+            let txt = '`乂  T I K T O K  -  D O W N L O A D`\n\n';
+            txt += `	✩  *Título* : No disponible\n`;
+            txt += `	✩  *Autor* : No disponible\n`;
+            txt += `	✩  *Duración* : No disponible\n`;
+            txt += `	✩  *Vistas* : No disponible\n`;
+            txt += `	✩  *Likes* : No disponible\n`;
+            txt += `	✩  *Comentarios* : No disponible\n`;
+            txt += `	✩  *Compartidos* : No disponible\n`;
+            txt += `	✩  *Publicado* : No disponible\n`;
+            txt += `	✩  *Descargas* : No disponible\n\n`;
+            txt += `> 🚩 *Descargado desde la API de TikTok*`;
+
+            // Enviar el video descargado de la API
+            await conn.sendFile(m.chat, response.data.video, 'tiktok.mp4', txt, m, null, rcanal);
+            await m.react('✅');
         } else {
-            throw 'No se pudo obtener el video sin marca de agua.';
+            throw 'No se pudo obtener el video.';
         }
 
-    } catch (e1) { 
-        // Si falla el primer intento con la API, probamos con las otras opciones
-        try {
-            const tTiktok = await tiktokdlF(args[0]);
-            let desc2 = `_🍁 ᩭ✎Tiktok sin marca de agua descargado con éxito By @Alba070503_`;
-            await conn.sendMessage(m.chat, { video: { url: tTiktok.video }, caption: desc2 }, { quoted: m });
-        } catch (e2) { 
-            try { 
-                let p = await tiktok(args[0]);  
-                let te = `_🍁 ᩭ✎Tiktok sin marca de agua descargado con éxito By @Alba070503_`;
-                await conn.sendMessage(m.chat, { video: { url: p.nowm }, caption: te }, { quoted: m });
-            } catch (e3) { 
-                try {  
-                    const { author: { nickname }, video, description } = await tiktokdl(args[0]);
-                    const url = video.no_watermark2 || video.no_watermark || 'https://tikcdn.net' + video.no_watermark_raw || video.no_watermark_hd;
-                    let cap = `_🍁 ᩭ✎Tiktok sin marca de agua descargado con éxito By @Alba070503_`;
-                    await conn.sendMessage(m.chat, { video: { url: url }, caption: cap }, { quoted: m });
-                } catch { 
-                    throw `_✘error✘ _Vuelve a intentarlo_`;
-                }
-            }
-        }
+    } catch (error) {
+        console.error(error);
+        await m.react('✖️');
+        conn.reply(m.chat, 'Hubo un error al descargar el video. Intenta de nuevo más tarde.', m, rcanal);
     }
 };
 
-handler.command = /^(tiktok|ttdl|tiktokdl|tiktoknowm|tt|ttnowm|tiktokaudio)$/i;
-export default handler;
+handler.help = ['tiktok *<url tt>*'];
+handler.tags = ['downloader'];
+handler.command = /^(tiktok|ttdl|tiktokdl|tiktoknowm)$/i;
+handler.register = true;
 
-// Función de respaldo para descargar videos desde otro servicio
-async function tiktokdlF(url) { 
-    if (!/tiktok/.test(url)) return 'Enlace incorrecto'; 
-    const gettoken = await axios.get("https://tikdown.org/id"); 
-    const $ = cheerio.load(gettoken.data); 
-    const token = $("#download-form > input[type=hidden]:nth-child(2)").attr("value"); 
-    const param = { url: url, _token: token }; 
-    const { data } = await axios.request("https://tikdown.org/getAjax?", { 
-        method: "post", 
-        data: new URLSearchParams(Object.entries(param)), 
-        headers: { 
-            "content-type": "application/x-www-form-urlencoded; charset=UTF-8", 
-            "user-agent": "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36" 
-        }, 
-    }); 
-    var getdata = cheerio.load(data.html); 
-    if (data.status) { 
-        return { 
-            status: true, 
-            thumbnail: getdata("img").attr("src"), 
-            video: getdata("div.download-links > div:nth-child(1) > a").attr("href"), 
-            audio: getdata("div.download-links > div:nth-child(2) > a").attr("href") 
-        };
-    } else {
-        return { status: false };
-    }
-}
+export default handler;
