@@ -1,35 +1,50 @@
-let handler = async (m, { conn, args }) => {
-    if (args.length === 0) {
-        return conn.reply(m.chat, 'Por favor, proporciona un enlace de canal de WhatsApp.', m);
-    }
+import fetch from 'node-fetch'; // Si usas fetch en otros lugares
 
-    // Obtenemos el enlace del canal de WhatsApp
-    let link = args[0];
-
-    // Verificamos que sea un enlace de canal de WhatsApp válido
-    if (!link.includes('whatsapp.com/')) {
-        return conn.reply(m.chat, 'El enlace proporcionado no es válido. Asegúrate de que sea un enlace de canal de WhatsApp.', m);
-    }
+var handler = async (m, { text, usedPrefix, command }) => {
+    if (!text) return conn.reply(m.chat, `🔎 *Ingresa un link de canal o grupo de WhatsApp*\n\nEjemplo: ${usedPrefix + command} https://wa.me/group/120363144038483540`, m);
 
     try {
-        // Extraemos la ID numérica del canal
-        let idCanal = link.match(/\d+/g)?.[0];
+        await m.react('🕒'); // Reacción de espera
 
-        // Si no hay una ID numérica, lanzamos un error
-        if (!idCanal) {
-            return conn.reply(m.chat, 'No se encontró una ID numérica en el enlace proporcionado.', m);
-        }
+        // Simulación de obtener datos de un canal de WhatsApp mediante un link o API externa
+        var channelUrl = `https://api.example.com/getChannelInfo?link=${text}`; // Ajusta esto para usar el link real de tu API
+        var response = await fetch(channelUrl);
+        var data = await response.json();
 
-        // Formateamos la ID en el formato deseado
-        let formattedId = `${idCanal}@newsletter`;
-        
-        // Enviamos la ID del canal como respuesta
-        conn.reply(m.chat, `La ID del canal es: ${formattedId}`, m);
-    } catch (e) {
-        // En caso de error
-        conn.reply(m.chat, 'Hubo un error al intentar extraer la ID del canal. Asegúrate de que el enlace sea correcto.', m);
+        // Estructura de los datos, ajustada al ejemplo que diste
+        var channelInfo = {
+            "channel_id": data.channel_id || 'ID no disponible',
+            "user_mute_state": data.user_mute_state || false,
+            "channel_name_update_time": data.channel_name_update_time || 0,
+            "channel_name": data.channel_name || 'Nombre no disponible',
+            "channel_description_update_time": data.channel_description_update_time || 0,
+            "channel_description": data.channel_description || 'Sin descripción',
+            "channel_profile_picture_update_time": data.channel_profile_picture_update_time || 0,
+            "channel_profile_picture_handle": data.channel_profile_picture_handle || 'Sin imagen',
+            "user_reactions": data.user_reactions || []
+        };
+
+        // Responder con la información del canal
+        let responseMessage = `📋 *Información del Canal*\n\n` +
+                              `ID del canal: ${channelInfo.channel_id}\n` +
+                              `Nombre: ${channelInfo.channel_name}\n` +
+                              `Descripción: ${channelInfo.channel_description}\n` +
+                              `¿Silenciado?: ${channelInfo.user_mute_state}\n` +
+                              `Imagen de perfil: ${channelInfo.channel_profile_picture_handle}\n`;
+
+        await conn.reply(m.chat, responseMessage, m);
+        await m.react('✅️'); // Reacción de éxito
+    } catch (error) {
+        await m.react('✖️'); // Reacción de error
+        console.error(error);
+        return conn.reply(m.chat, '🍀 *Ocurrió un error al obtener la información del canal*', m);
     }
 };
 
-handler.command = ['idcanal'];
+// Definición del comando
+handler.command = ['channelinfo', 'canalinfo']; // El comando para activar este plugin
+handler.help = ['channelinfo'];    // Ayuda sobre este comando
+handler.tags = ['canal'];          // Categoría de comandos
+handler.premium = false;           // Indica si solo es para usuarios premium
+
 export default handler;
