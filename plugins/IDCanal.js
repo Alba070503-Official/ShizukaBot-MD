@@ -14,9 +14,12 @@ let handler = async (m, { conn, args }) => {
     try {
         // Extraemos la ID del canal del enlace
         let idCanal = link.split('/').pop();
+
+        // Formateamos la ID en el formato deseado
+        let formattedId = `${idCanal}@newsletter`;
         
         // Enviamos la ID del canal como respuesta
-        conn.reply(m.chat, `La ID del canal es: ${idCanal}`, m);
+        conn.reply(m.chat, `La ID del canal es: ${formattedId}`, m);
     } catch (e) {
         // En caso de error
         conn.reply(m.chat, 'Hubo un error al intentar extraer la ID del canal. Asegúrate de que el enlace sea correcto.', m);
