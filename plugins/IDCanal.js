@@ -12,8 +12,13 @@ let handler = async (m, { conn, args }) => {
     }
 
     try {
-        // Extraemos la ID del canal del enlace
-        let idCanal = link.split('/').pop();
+        // Extraemos la ID numérica del canal
+        let idCanal = link.match(/\d+/g)?.[0];
+
+        // Si no hay una ID numérica, lanzamos un error
+        if (!idCanal) {
+            return conn.reply(m.chat, 'No se encontró una ID numérica en el enlace proporcionado.', m);
+        }
 
         // Formateamos la ID en el formato deseado
         let formattedId = `${idCanal}@newsletter`;
