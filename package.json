@@ -35,7 +35,6 @@
 "@bochilteam/scraper-sosmed": "^1.0.5",
 "@brandond/findthelyrics": "^2.0.5",
 "@green-code/music-track-data": "^2.0.3",
-"@StarlightsTeam/Scraper": "github:StarlightsTeam/StarlightsTeam-Scraper",
 "@nechlophomeriaa/spotifydl": "1.0.11",
 "@sasmeee/igdl":"^1.0.0",
 "@shineiichijo/marika": "^2.0.6",	
@@ -100,7 +99,9 @@
 "yargs": "^17.3.1",
 "yt-search": "^2.10.3",
 "google-it": "^1.6.3",
-"ytdl-core": "^4.11.4"
+"ytdl-core": "^4.11.4",
+"@StarlightsTeam/Scraper": "github:StarlightsTeam/StarlightsTeam-Scraper"
+    
 },
 "devDependencies": {
 "eslint": "^8.45.0",
