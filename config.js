@@ -15,23 +15,10 @@ import { en, es, id, ar, pt } from "./lib/idiomas/total-idiomas.js"
 global.owner = [
 ["59175655964", 'Onwer Alba070503', true], //ShizukaBot-MD 💙
 ["59169082575"], 
-["5492266613038"], 
-["593968263524"],
-["16474952517"],   
-["5214434703586"],
-["33760536110"],
-["51906662557"],
-["50492280729"],
+["5573031859"],
+["593968585383"],
 ["595976126756"],
-["201066826750"],
-["201033024135"],
-["51948705559"],
-["573012482597"],
-["573147616444"],
-["5215649706747"],
-["59175655964"],
-["595971490733"],
-["5493876639332"],
+["593968263524"],
 ["5215539356057"]]
 
 global.mods = []
@@ -87,6 +74,7 @@ global.keysneoxr = keysneoxrrr[Math.floor(keysneoxrrr.length * Math.random())]
 global.lolkeysapi = "GataDiosV3"
 global.itsrose = ["4b146102c4d500809da9d1ff"]
 global.baileys = "@whiskeysockets/baileys"
+global.apis = 'https://deliriussapi-oficial.vercel.app'
 
 global.APIs = { 
 xteam: 'https://api.xteam.xyz',
@@ -446,7 +434,7 @@ import(`${file}?update=${Date.now()}`);
 })
 
 async function fetchDataAndProcess() {
-const response = await fetch('https://raw.githubusercontent.com/Alba070503-Official/ShizukaBot-MD/main/official_accounts.json')
+const response = await fetch('https://raw.githubusercontent.com/GataNina-Li/GataBot-MD/master/official_accounts.json')
 const data = await response.json() 
 let { accounts, channels, groups, collaboration, sponsors, others } = data.info
 
