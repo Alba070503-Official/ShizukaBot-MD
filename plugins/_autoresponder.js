@@ -51,7 +51,7 @@ console.error(error);
 
 let query = m.text;
 let username = `${m.pushName}`;
-let syms1 = await fetch('https://raw.githubusercontent.com/elrebelde21/LoliBot-MD/main/src/text-chatgpt.txt').then(v => v.text());
+let syms1 = await fetch('https://raw.githubusercontent.com/Alba070503-Official/ShizukaBot-MD/refs/heads/main/src/Chat%20gpt.txt').then(v => v.text());
 
 let result = await luminsesi(query, username, syms1)
 if (result && result.trim().length > 0) {
