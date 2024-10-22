@@ -1,43 +1,57 @@
-import axios from 'axios'
-const { generateWAMessageFromContent } = (await import("@whiskeysockets/baileys")).default
+import axios from 'axios';
 
-let handler = async (message, { conn, text }) => {
-    if (!text) return conn.reply(message.chat, '🍟 *Por favor, proporciona un enlace de TikTok.*', message)
+const { proto, generateWAMessageFromContent } = (await import('@whiskeysockets/baileys')).default;
 
-    let url = text.trim()
-    if (!url.match(/(tiktok\.com)/)) return conn.reply(message.chat, '⚠️ *El enlace proporcionado no parece ser válido de TikTok.*', message)
+async function downloadTikTokVideo(url) {
+  try {
+    const response = await axios.post('https://tikdown.xyz/api/download', {
+      url: url
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36',
+        'Referer': 'https://tikdown.xyz/'
+      }
+    });
 
-    try {
-        await message.react('⏳')  // Indicador de carga
-
-        // Llamada a la API de Dorratz para obtener los datos del video
-        let response = await axios.get(`https://api.dorratz.com/v2/tiktok-dl?url=${url}`)
-        let data = response.data
-
-        // Verificar que la respuesta contiene el video
-        if (!data || !data.video) {
-            throw new Error('No se pudo obtener el video. Verifica el enlace o la API.')
-        }
-
-        // Preparar y enviar el video
-        const videoMessage = await generateWAMessageFromContent(message.chat, {
-            videoMessage: {
-                url: data.video,
-                caption: '🎥 Aquí está tu video de TikTok',
-                mimetype: 'video/mp4'
-            }
-        }, { quoted: message })
-
-        await conn.relayMessage(message.chat, videoMessage.message, { messageId: videoMessage.key.id })
-        await message.react('✅')  // Proceso exitoso
-    } catch (error) {
-        console.error(error)  // Registro de error en la consola
-        await conn.reply(message.chat, `❌ *Hubo un error al descargar el video de TikTok: ${error.message}.*`, message)
+    if (response.data && response.data.status === 'success') {
+      return response.data;
+    } else {
+      throw new Error('No se pudo descargar el video. Intenta de nuevo.');
     }
+  } catch (error) {
+    console.error('Error fetching TikTok video:', error);
+    throw error;
+  }
 }
 
-handler.help = ['tiktok <enlace>']
-handler.tags = ['downloader']
-handler.command = /^(tiktok|tiktokdl|ttdl)$/i
+let handler = async (message, { conn, text }) => {
+  if (!text) return conn.reply(message.chat, '❗ *Proporcione un enlace válido de TikTok.*', message);
 
-export default handler
+  try {
+    const videoData = await downloadTikTokVideo(text); // Pasa la URL que el usuario proporcionó
+    
+    // Si el video se descargó con éxito
+    const videoUrl = videoData.data[0].nowm; // URL sin marca de agua (o puedes usar 'wm' para la versión con marca)
+    
+    // Enviar el video al usuario
+    const messageContent = await generateWAMessageFromContent(message.chat, {
+      videoMessage: {
+        url: videoUrl,
+        caption: '🎬 Aquí está tu video de TikTok descargado.'
+      }
+    }, { quoted: message });
+    
+    await conn.relayMessage(message.chat, messageContent.message, { messageId: messageContent.key.id });
+
+  } catch (error) {
+    // Si hubo un error, notificar al usuario
+    await conn.reply(message.chat, '❌ *Hubo un error al descargar el video de TikTok. Intenta nuevamente.*', message);
+  }
+};
+
+handler.help = ['tiktokdl <url>'];
+handler.tags = ['downloader'];
+handler.command = /^tiktokdl$/i;
+
+export default handler;
