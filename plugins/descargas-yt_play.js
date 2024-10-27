@@ -46,7 +46,7 @@ _*🎶 Enviando música...*_`.trim();
         if (result.data.url) {
             const downloadUrl = result.data.url;
             const filename = `${result.data.title || 'audio'}.mp3`;
-            await conn.sendMessage(m.chat, { audio: { url: downloadUrl }, fileName: filename, mimetype: 'audio/mpeg', caption: `╭━❰  *YouTube*  ❱━⬣\n${filename}\n╰━❰ *${botname}* ❱━⬣`, quoted: m });
+            await conn.sendMessage(m.chat, { audio: { url: downloadUrl }, fileName: filename, mimetype: 'audio/mpeg', caption: `╭━❰  *YouTube*  ❱━⬣\n${filename}\n╰━❰ *Play* ❱━⬣`, quoted: m });
         } else {
             throw new Error('_*[ ❌ ] Ocurrió un error al descargar el archivo mp3_');
         }
