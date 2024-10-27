@@ -7,7 +7,7 @@ const handler = async (m, {conn, command, args, text, usedPrefix}) => {
 
     try { 
         
-        let { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/search/ytsearch?q=${encodeURIComponent(text)}&limit=10`);
+        let { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/search/spotify?q=${encodeURIComponent(text)}&limit=10`);
 
         if (!data.data || data.data.length === 0) {
             throw `_*[ ⚠️ ] No se encontraron resultados para "${text}" en Youtube.*_`;
@@ -39,7 +39,7 @@ _*🎶 Enviando música...*_`.trim();
 
         //＼／＼／＼／＼／＼／ DESCARGAR ＼／＼／＼／＼／＼／
     
-        const apiUrl = `https://deliriussapi-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(url)}`;
+        const apiUrl = `https://deliriussapi-oficial.vercel.app/download/spotifydl?url=${encodeURIComponent(url)}`;
         const response = await fetch(apiUrl);
         const result = await response.json();
         
