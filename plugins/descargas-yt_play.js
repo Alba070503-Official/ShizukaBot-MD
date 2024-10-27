@@ -7,7 +7,7 @@ const handler = async (m, {conn, command, args, text, usedPrefix}) => {
 
     try { 
         
-        let { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/search/spotify?q=${encodeURIComponent(text)}&limit=10`);
+        let { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(text)}&limit=10`);
 
         if (!data.data || data.data.length === 0) {
             throw `_*[ ⚠️ ] No se encontraron resultados para "${text}" en Youtube.*_`;
