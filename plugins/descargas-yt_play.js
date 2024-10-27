@@ -1,61 +1,66 @@
 import fetch from 'node-fetch';
 import axios from 'axios';
 
-const handler = async (m, { conn, command, text }) => {
+const handler = async (m, {conn, command, args, text, usedPrefix}) => {
 
-    if (!text) throw `_*[ ⚠️ ] Por favor, ingresa el título o enlace de YouTube que deseas buscar.*_\n\n_Ejemplo:_\n.play Marshmello Moving On`;
+    if (!text) throw `_*[ ⚠️ ] Agrega lo que quieres buscar*_\n\n_Ejemplo:_\n.play Marshmello Moving On`;
 
     try { 
-        // Buscar en YouTube usando la API de Delirius
-        let { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/search/yt?q=${encodeURIComponent(text)}&limit=1`);
+        
+        let { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/search/ytsearch?q=${encodeURIComponent(text)}&limit=10`);
 
         if (!data.data || data.data.length === 0) {
-            throw `_*[ ⚠️ ] No se encontraron resultados para "${text}" en YouTube.*_`;
+            throw `_*[ ⚠️ ] No se encontraron resultados para "${text}" en Youtube.*_`;
         }
 
-        const video = data.data[0];
-        const title = video.title;
-        const url = video.url;
-        const thumbnail = video.image;
-        
-        // Información del video
-        const info = `🎶 *Título:* ${title}\n📅 *Publicado:* ${video.publish}\n⏳ *Duración:* ${video.duration}\n👤 *Autor:* ${video.author}\n🔗 *URL:* ${url}\n\n_*Procesando descarga...*_`;
+        const img = data.data[0].image;
+        const url = data.data[0].url;
+        const info = `⧁ 𝙏𝙄𝙏𝙐𝙇𝙊
+» ${data.data[0].title}
+﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
+⧁ 𝙋𝙐𝘽𝙇𝙄𝘾𝘼𝘿𝙊
+» ${data.data[0].publish}
+﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
+⧁ 𝗗𝗨𝗥𝗔𝗖𝗜𝗢𝗡
+» ${data.data[0].duration}
+﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
+⧁  𝙋𝙊𝙋𝙐𝙇𝘼𝙍𝙄𝘿𝘼𝘿
+» ${data.data[0].popularity}
+﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
+⧁  𝘼𝙍𝙏𝙄𝙎𝙏𝘼
+» ${data.data[0].artist}
+﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
+⧁ 𝙐𝙍𝙇
+» ${url}
 
-        await conn.sendFile(m.chat, thumbnail, 'thumbnail.jpg', info, m);
+_*🎶 Enviando música...*_`.trim();
 
-        // Determinar el tipo de descarga según el comando
-        const isMp3 = command === 'play';
-        const apiUrl = isMp3 
-            ? `https://deliriussapi-oficial.vercel.app/download/ytmp3?url=${encodeURIComponent(url)}` 
-            : `https://deliriussapi-oficial.vercel.app/download/ytmp4?url=${encodeURIComponent(url)}`;
+        await conn.sendFile(m.chat, img, 'imagen.jpg', info, m);
 
+        //＼／＼／＼／＼／＼／ DESCARGAR ＼／＼／＼／＼／＼／
+    
+        const apiUrl = `https://deliriussapi-oficial.vercel.app/search/ytsearch?q=${encodeURIComponent(url)}`;
         const response = await fetch(apiUrl);
         const result = await response.json();
-
-        if (result.data && result.data.url) {
+        
+        if (result.data.url) {
             const downloadUrl = result.data.url;
-            const filename = `${title || 'archivo'}.${isMp3 ? 'mp3' : 'mp4'}`;
-            const messageType = isMp3 ? 'audio' : 'video';
-
-            // Enviar el archivo de audio o video al usuario
-            await conn.sendMessage(m.chat, {
-                [messageType]: { url: downloadUrl },
-                fileName: filename,
-                mimetype: isMp3 ? 'audio/mpeg' : 'video/mp4',
-                caption: `🎶 Aquí está tu archivo ${isMp3 ? 'MP3' : 'MP4'} de YouTube: ${title}`,
-                quoted: m
-            });
+            const filename = `${result.data.title || 'audio'}.mp3`;
+            await conn.sendMessage(m.chat, { audio: { url: downloadUrl }, fileName: filename, mimetype: 'audio/mpeg', caption: `╭━❰  *YouTube*  ❱━⬣\n${filename}\n╰━❰ *${botname}* ❱━⬣`, quoted: m });
         } else {
-            throw new Error('_*[ ❌ ] Ocurrió un error al descargar el archivo. Inténtalo nuevamente._');
+            throw new Error('_*[ ❌ ] Ocurrió un error al descargar el archivo mp3_');
         }
 
     } catch (e) {
-        await conn.reply(m.chat, `❌ _*El comando #play está fallando. Por favor, repórtalo al creador del bot.*_`, m);
-        console.log(`❌ Error en el comando #play:`, e);
+
+        await conn.reply(m.chat, `❌ _*El comando #play está fallando, repórtalo al creador del bot*_`, m);
+
+        console.log(`❌ El comando #play está fallando`);
+        console.log(e);
     }
 };
 
-handler.help = ['play', 'playmp4'];
-handler.tags = ['downloader'];
-handler.command = ['play', 'playmp4'];
+handler.help = ['play'] 
+handler.tags = ['downloader']
+handler.command = ['play'];
 export default handler;
