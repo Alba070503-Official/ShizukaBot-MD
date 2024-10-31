@@ -10,7 +10,7 @@ externalAdReply: {
 title: "【 🔔 Notificación General 🔔 】",
 body: '🐢 Un usuario anuló su registro.',
 thumbnailUrl: fotoperfil,
-sourceUrl: canales,
+sourceUrl: redes,
 mediaType: 1,
 showAdAttribution: false,
 renderLargerThumbnail: false
