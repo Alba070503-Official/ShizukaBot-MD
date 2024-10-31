@@ -1,61 +1,66 @@
-import yts from 'yt-search' 
-const handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) throw `Ejemplo: ${usedPrefix + command} diles`,m ,rcanal;
+import fetch from 'node-fetch';
+import axios from 'axios';
 
-    const randomReduction = Math.floor(Math.random() * 5) + 1;
-    let search = await yts(text);
-    let f = `\n\n${String.fromCharCode(68,101,118,101,108,111,112,101,100,32,98,121,32,73,39,109,32,70,122,32,126)}`;
-    let isVideo = /vid$/.test(command);
-    let urls = search.all[0].url;
-    let body = `\`YouTube Play\`
+const handler = async (m, {conn, command, args, text, usedPrefix}) => {
 
-    *Título:* ${search.all[0].title}
-    *Vistas:* ${search.all[0].views}
-    *Duración:* ${search.all[0].timestamp}
-    *Subido:* ${search.all[0].ago}
-    *Url:* ${urls}
+    if (!text) throw `_*[ âš ï¸ ] Agrega lo que quieres buscar*_\n\n_Ejemplo:_\n.play Marshmello Moving On`;
 
-🕒 *Su ${isVideo ? 'Video' : 'Audio'} se está enviando, espere un momento...*`;
+    try { 
+        
+        let { data } = await axios.get(`https://deliriussapi-oficial.vercel.app/search/spotify?q=${encodeURIComponent(text)}&limit=10`);
+
+        if (!data.data || data.data.length === 0) {
+            throw `_*[ âš ï¸ ] No se encontraron resultados para "${text}" en Youtube.*_`;
+        }
+
+        const img = data.data[0].image;
+        const url = data.data[0].url;
+        const info = `â§ ð™ð™„ð™ð™ð™‡ð™Š
+Â» ${data.data[0].title}
+ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜
+â§ ð™‹ð™ð˜½ð™‡ð™„ð˜¾ð˜¼ð˜¿ð™Š
+Â» ${data.data[0].publish}
+ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜
+â§ ð——ð—¨ð—¥ð—”ð—–ð—œð—¢ð—¡
+Â» ${data.data[0].duration}
+ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜
+â§  ð™‹ð™Šð™‹ð™ð™‡ð˜¼ð™ð™„ð˜¿ð˜¼ð˜¿
+Â» ${data.data[0].popularity}
+ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜
+â§  ð˜¼ð™ð™ð™„ð™Žð™ð˜¼
+Â» ${data.data[0].artist}
+ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜ï¹˜
+â§ ð™ð™ð™‡
+Â» ${url}
+
+_*ðŸŽ¶ Enviando mÃºsica...*_`.trim();
+
+        await conn.sendFile(m.chat, img, 'imagen.jpg', info, m);
+
+        //ï¼¼ï¼ï¼¼ï¼ï¼¼ï¼ï¼¼ï¼ï¼¼ï¼ DESCARGAR ï¼¼ï¼ï¼¼ï¼ï¼¼ï¼ï¼¼ï¼ï¼¼ï¼
     
-    conn.sendMessage(m.chat, { 
-        image: { url: search.all[0].thumbnail }, 
-        caption: body + f
-    }, { quoted: m,rcanal });
-    m.react('react1')
+        const apiUrl = `https://deliriussapi-oficial.vercel.app/download/spotifydl?url=${encodeURIComponent(url)}`;
+        const response = await fetch(apiUrl);
+        const result = await response.json();
+        
+        if (result.data.url) {
+            const downloadUrl = result.data.url;
+            const filename = `${result.data.title || 'audio'}.mp3`;
+            await conn.sendMessage(m.chat, { audio: { url: downloadUrl }, fileName: filename, mimetype: 'audio/mpeg', caption: `â•­â”â°  *YouTube*  â±â”â¬£\n${filename}\nâ•°â”â° *Play* â±â”â¬£`, quoted: m });
+        } else {
+            throw new Error('_*[ âŒ ] OcurriÃ³ un error al descargar el archivo mp3_');
+        }
 
-    let res = await dl_vid(urls)
-    let type = isVideo ? 'video' : 'audio';
-    let video = res.data.mp4;
-    let audio = res.data.mp3;
-    conn.sendMessage(m.chat, { 
-        [type]: { url: isVideo ? video : audio }, 
-        gifPlayback: false, 
-        mimetype: isVideo ? "video/mp4" : "audio/mpeg" 
-    }, { quoted: m });
-}
+    } catch (e) {
 
-handler.command = ['play', 'playvid'];
-handler.help = ['play', 'playvid'];
-handler.tags = ['dl'];
-export default handler;
+        await conn.reply(m.chat, `âŒ _*El comando #play estÃ¡ fallando, repÃ³rtalo al creador del bot*_`, m);
 
-async function dl_vid(url) {
-    const response = await fetch('https://shinoa.us.kg/api/download/ytdl', {
-        method: 'POST',
-        headers: {
-            'accept': '*/*',
-            'api_key': 'free',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            text: url,
-        })
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        console.log(`âŒ El comando #play estÃ¡ fallando`);
+        console.log(e);
     }
+};
 
-    const data = await response.json();
-    return data;
-}
+handler.help = ['play'] 
+handler.tags = ['downloader']
+handler.command = ['play'];
+export default handler;
