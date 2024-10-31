@@ -19,7 +19,7 @@ externalAdReply: {
 title: "【 ⚠️ COMANDO FALLIDO ⚠️ 】",
 body: '🧋 Un comando con fallas.',
 thumbnailUrl: fotoperfil,
-sourceUrl: canales,
+sourceUrl: redes,
 mediaType: 1,
 showAdAttribution: false,
 renderLargerThumbnail: false
