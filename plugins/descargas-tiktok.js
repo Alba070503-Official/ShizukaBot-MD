@@ -1,9 +1,5 @@
-import fg from 'api-dylux';
 import axios from 'axios';
-import cheerio from 'cheerio';
 import {tiktok} from '@xct007/frieren-scraper';
-import {generateWAMessageFromContent} from '@whiskeysockets/baileys';
-import {tiktokdl} from '@bochilteam/scraper';
 //const CFROSAPI = global.APIs.CFROSAPI;
 const handler = async (m, {conn, text, args, usedPrefix, command}) => {
 //m.react('🕒') 
@@ -63,7 +59,7 @@ export default handler;
 
 async function tiktokdlF(url) {
   if (!/tiktok/.test(url)) return m.reply(`✧ Te falto el enlace de algun video de tiktok`);
-  const gettoken = await axios.get('https://tikdown.org/id');
+  const gettoken = await axios.get('https://deliriussapi-oficial.vercel.app/download/tiktok');
   const $ = cheerio.load(gettoken.data);
   const token = $('#download-form > input[type=hidden]:nth-child(2)').attr( 'value' );
   const param = {url: url, _token: token};
