@@ -36,8 +36,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 • 20 Coins 💰
 • 97 Experiencia 💸
 • 2 Tokens 🪙
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-Usuarios Registrados: ${rtotalreg}`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '✅️  R E G I S T R O  ✅️',  body: '👑 Registro Completado', previewType: 0, thumbnail: imagen1, sourceUrl: canales}}})
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`, m, {contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, title: '✅️  R E G I S T R O  ✅️',  body: '👑 Registro Completado', previewType: 0, thumbnail: imagen1, sourceUrl: canales}}})
 let chtxt = `👤 *Usuario*: ${m.pushName || 'Anónimo'}\n🌎 *Pais:* ${global.userNationality}\n🗃 *Verificación:* ${user.name}\n🌸 *Edad:* ${user.age} años\n🐢 *Bot:* ${packname}`.trim()
 await conn.sendMessage(global.channelid, { text: chtxt, contextInfo: {
 externalAdReply: {
