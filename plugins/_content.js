@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 import moment from 'moment-timezone'
 import axios from 'axios'
 import fs from 'fs'
-const { generateWAMessageFromContent, prepareWAMessageMedia, proto }  = (await import(global.baileys))
+const { generateWAMessageFromContent, prepareWAMessageMedia, proto }  = (await import('@whiskeysockets/baileys'))
 
 var handler = m => m
 handler.all = async function (m) {
