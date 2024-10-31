@@ -27,7 +27,7 @@ async function reportError(e) {
 await m.reply(`✨️ Ocurrió un error.`)
 console.log(e)
 }
-let thumb = fotoperfil
+let thumb = imagen1
 let pp, ch, q, mime, buffer, media, inviteUrlch, imageBuffer
 
 switch (true) {     
