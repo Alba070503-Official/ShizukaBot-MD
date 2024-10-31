@@ -1,73 +1,81 @@
-import axios from 'axios';
-import {tiktok} from '@xct007/frieren-scraper';
-//const CFROSAPI = global.APIs.CFROSAPI;
-const handler = async (m, {conn, text, args, usedPrefix, command}) => {
-//m.react('🕒') 
-  if (!text) return m.reply(`✧ Te falto el enlace de algun video de tiktok`);
-  if (!/(?:https:?\/{2})?(?:w{3}|vm|vt|t)?\.?tiktok.com\/([^\s&]+)/gi.test(text)) if (!text) return m.reply(`✧ Te falto el enlace de algun video de tiktok`);
-  const texto = `_💌 @${m.sender.split`@`[0]}  ᩭ✎Enviando Video, espere un momento...._`;
-  // let buttons = [{ buttonText: { displayText: '♫ 𝙰𝚄𝙳𝙸𝙾 ♫' }, buttonId: `${usedPrefix}tomp3` }]
-  try {
-m.react('🕒') 
-    const aa = {quoted: m, userJid: conn.user.jid};
-    const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: texto, contextInfo: {externalAdReply: {title: packname, body: wm, thumbnail: fotoperfil, sourceUrl: redes}, mentionedJid: [m.sender]}}}, aa);
-    await conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id, mentions: [m.sender]});
-    const dataFn = await conn.getFile(`${CFROSAPI}/api/tiktokv2?url=${args[0]}`);
-    const desc1n = `_💌  ᩭ✎Tiktok sin marca de agua descargado con éxito_`;
-    await conn.sendMessage(m.chat, {video: dataFn.data, caption: desc1n}, {quoted: m});
-  } catch (ee1) {
-  try {
-    //const aa = {quoted: m, userJid: conn.user.jid};
-    //const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: texto, contextInfo: {externalAdReply: {title: packname, body: dev, thumbnail: icons, sourceUrl: yt}, mentionedJid: [m.sender]}}}, aa);
-    //await conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id, mentions: [m.sender]});
-    const dataF = await tiktok.v1(args[0]);
-    // let desc1 =  `*𝙽𝙸𝙲𝙺𝙽𝙰𝙼𝙴:* ${dataF.nickname || 'Indefinido'}`
-    const desc1 = `_💌  ᩭ✎Tiktok sin marca de agua descargado con éxito_`;
-    await conn.sendMessage(m.chat, {video: {url: dataF.play}, caption: desc1}, {quoted: fkontak});
-  } catch (e1) {
-    try {
-      const tTiktok = await tiktokdlF(args[0]);
-      // let desc2 = `🔗 *Url:* ${tTiktok.video}`
-      const desc2 = `_💌  ᩭ✎Tiktok sin marca de agua descargado con éxito_`;
-      await conn.sendMessage(m.chat, {video: {url: tTiktok.video}, caption: desc2}, {quoted: m});
-    } catch (e2) {
-      try {
-        const p = await fg.tiktok(args[0]);
-        // let te = `*𝚄𝚂𝙴𝚁𝙽𝙰𝙼𝙴:* ${p.author || 'Indefinido'}`
-        const te = `_💌  ᩭ✎Tiktok sin marca de agua descargado con éxito_`;
-        await conn.sendMessage(m.chat, {video: {url: p.nowm}, caption: te}, {quoted: m});
-      } catch (e3) {
-        try {
-          const {author: {nickname}, video, description} = await tiktokdl(args[0]);
-          const url = video.no_watermark2 || video.no_watermark || 'https://tikcdn.net' + video.no_watermark_raw || video.no_watermark_hd;
-          // let cap = `*𝙽𝙸𝙲𝙺𝙽𝙰𝙼𝙴:* ${nickname || 'Indefinido'}`
-          const cap = `_💌  ᩭ✎Tiktok sin marca de agua descargado con éxito_`;
-          await conn.sendMessage(m.chat, {video: {url: url}, caption: cap}, {quoted: m});
-        } catch {
-          throw `_*< DESCARGAS - TIKTOK />*_\n\n*🌟 Ocurrió un error. Por favor, inténtalo de nuevo más tarde.*`;
-          }
-        }
-      }
-    }
-  }
-};
-handler.tags = ['descargas'];
-handler.help = ['tiktok'];
-handler.command = ['tiktok', 'ttk', 'tt'];
-handler.register = true;
-export default handler;
+import Scraper from '@SumiFX/Scraper'
+import axios from 'axios'
+import fetch from 'node-fetch'
 
-async function tiktokdlF(url) {
-  if (!/tiktok/.test(url)) return m.reply(`✧ Te falto el enlace de algun video de tiktok`);
-  const gettoken = await axios.get('https://deliriussapi-oficial.vercel.app/download/tiktok');
-  const $ = cheerio.load(gettoken.data);
-  const token = $('#download-form > input[type=hidden]:nth-child(2)').attr( 'value' );
-  const param = {url: url, _token: token};
-  const {data} = await axios.request('https://tikdown.org/getAjax?', {method: 'post', data: new URLSearchParams(Object.entries(param)), headers: {'content-type': 'application/x-www-form-urlencoded; charset=UTF-8', 'user-agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36'}});
-  const getdata = cheerio.load(data.html);
-  if (data.status) {
-    return {status: true, thumbnail: getdata('img').attr('src'), video: getdata('div.download-links > div:nth-child(1) > a').attr('href'), audio: getdata('div.download-links > div:nth-child(2) > a').attr('href')};
-  } else {
-    return {status: false};
-  }
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+    if (!args[0])  m.reply(`🍭 Ingresa un enlace del vídeo de TikTok junto al comando.\n\nEjemplo:\n${usedPrefix + command} https://vm.tiktok.com/ZMMCYHnxf/`)
+
+    try {
+        let { title, published, quality, likes, commentCount, shareCount, views, dl_url } = await Scraper.tiktokdl(args[0])
+            let txt = `╭─⬣「 *TikTok Download* 」⬣\n`
+                txt += `│  ≡◦ *🍭 Título* : ${title}\n`
+                txt += `│  ≡◦ *📅 Publicado* : ${published}\n`
+                txt += `│  ≡◦ *🪴 Calidad* : ${quality}\n`
+                txt += `│  ≡◦ *👍 Likes* : ${likes}\n`
+                txt += `│  ≡◦ *🗣 Comentarios* : ${commentCount}\n`
+                txt += `│  ≡◦ *💫 Share* : ${shareCount}\n`
+                txt += `│  ≡◦ *📹 Visitas* : ${views}\n`
+                txt += `╰─⬣`
+
+        await conn.sendMessage(m.chat, { video: { url: dl_url }, caption: txt }, { quoted: m })
+    } catch {
+    try {
+        const api = await fetch(`https://api-starlights-team.koyeb.app/api/tiktok?url=${args[0]}`)
+        const data = await api.json()
+
+        if (data.status) {
+            const { author, view, comment, play, share, download, duration, title, video } = data.data;
+            let txt = `╭─⬣「 *TikTok Download* 」⬣\n`
+                txt += `│  ≡◦ *🍭 Título* : ${title}\n`
+                txt += `│  ≡◦ *📚 Autor* : ${author.nickname}\n`
+                txt += `│  ≡◦ *🕜 Duración* : ${duration} Segundos\n`
+                txt += `│  ≡◦ *🌵 Descargas* : ${download}\n`
+                txt += `│  ≡◦ *🗣 Comentarios* : ${comment}\n`
+                txt += `│  ≡◦ *💫 Share* : ${share}\n`
+                txt += `│  ≡◦ *🐢 Visitas* : ${play}\n`
+                txt += `╰─⬣`
+
+            await conn.sendMessage(m.chat, { video: { url: video }, caption: txt }, { quoted: m })
+        }
+    } catch {
+    try {
+        const api1 = await fetch(`https://delirius-api-oficial.vercel.app/api/tiktok?url=${args[0]}`)
+        const data1 = await api1.json()
+
+        if (data1.status) {
+            const { author, repro, like, share, comment, download, duration, title, meta, published } = data1.data
+            const publishedDate = formatDate(published)
+            const fileSize = convertBytesToMB(meta.media[0].size_org)
+
+            let txt = `╭─⬣「 *TikTok Download* 」⬣\n`
+                txt += `│  ≡◦ *🍭 Título* : ${title}\n`
+                txt += `│  ≡◦ *🐢 Autor* : ${author.nickname}\n`
+                txt += `│  ≡◦ *🕜 Duración* : ${duration} Segundos\n`
+                txt += `│  ≡◦ *📹 Reproducciones* : ${repro}\n`
+                txt += `│  ≡◦ *👍 Likes* : ${like}\n`;
+                txt += `│  ≡◦ *🗣 Comentarios* : ${comment}\n`
+                txt += `│  ≡◦ *📦 Descargas* : ${download}\n`
+                txt += `│  ≡◦ *💫 Share* : ${share}\n`
+                txt += `│  ≡◦ *📅 Publicado* : ${publishedDate}\n`
+                txt += `│  ≡◦ *🌵 Tamaño* : ${fileSize}\n`
+                txt += `╰─⬣`
+
+            await conn.sendMessage(m.chat, { video: { url: meta.media[0].org }, caption: txt }, { quoted: m })
+        }
+    } catch {
+}}}}
+handler.help = ['tiktok <url tt>']
+handler.tags = ['downloader']
+handler.command = ['tiktok', 'ttdl', 'tiktokdl', 'tiktoknowm']
+handler.register = true
+
+export default handler
+
+function convertBytesToMB(bytes) {
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB'
+}
+
+function formatDate(unixTimestamp) {
+    const date = new Date(unixTimestamp * 1000)
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
 }
