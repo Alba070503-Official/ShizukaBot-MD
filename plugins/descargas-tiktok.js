@@ -1,35 +1,81 @@
-import { ttdl } from 'ruhend-scraper';
+import Scraper from '@SumiFX/Scraper'
+import axios from 'axios'
+import fetch from 'node-fetch'
 
-const handler = async (m, { text, conn, args }) => {
-  if (!args[0]) {
-    return conn.reply(m.chat, 'Por favor, ingresa un enlace de TikTok', m);
-  }
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+    if (!args[0])  m.reply(`🍭 Ingresa un enlace del vídeo de TikTok junto al comando.\n\nEjemplo:\n${usedPrefix + command} https://vm.tiktok.com/ZMMCYHnxf/`)
 
-  let data;
-  try {
-    data = await ttdl(args[0]);
-  } catch (error) {
-    return conn.reply(m.chat, 'Error al obtener datos. Verifica el enlace.', m);
-  }
+    try {
+        let { title, published, quality, likes, commentCount, shareCount, views, dl_url } = await Scraper.tiktokdl(args[0])
+            let txt = `╭─⬣「 *TikTok Download* 」⬣\n`
+                txt += `│  ≡◦ *🍭 Título* : ${title}\n`
+                txt += `│  ≡◦ *📅 Publicado* : ${published}\n`
+                txt += `│  ≡◦ *🪴 Calidad* : ${quality}\n`
+                txt += `│  ≡◦ *👍 Likes* : ${likes}\n`
+                txt += `│  ≡◦ *🗣 Comentarios* : ${commentCount}\n`
+                txt += `│  ≡◦ *💫 Share* : ${shareCount}\n`
+                txt += `│  ≡◦ *📹 Visitas* : ${views}\n`
+                txt += `╰─⬣`
 
-  const { title, author, username, published, like, comment, share, views, bookmark, video, cover, music, profilePicture } = data;
+        await conn.sendMessage(m.chat, { video: { url: dl_url }, caption: txt }, { quoted: m })
+    } catch {
+    try {
+        const api = await fetch(`https://api-starlights-team.koyeb.app/api/tiktok?url=${args[0]}`)
+        const data = await api.json()
 
-  try {
-    await conn.sendMessage(
-      m.chat,
-      {
-        video: { url: video },
-        caption: `*Título:* ${title}\n*Autor:* ${author}\n*Usuario:* ${username}\n*Publicado en:* ${published}\n*Likes:* ${like}\n*Comentarios:* ${comment}\n*Compartidos:* ${share}\n*Vistas:* ${views}`,
-        fileName: 'tiktok.mp4',
-        mimetype: 'video/mp4'
-      },
-      { quoted: m }
-    );
-  } catch (error) {
-    return conn.reply(m.chat, 'Error al enviar el video.', m);
-  }
-};
+        if (data.status) {
+            const { author, view, comment, play, share, download, duration, title, video } = data.data;
+            let txt = `╭─⬣「 *TikTok Download* 」⬣\n`
+                txt += `│  ≡◦ *🍭 Título* : ${title}\n`
+                txt += `│  ≡◦ *📚 Autor* : ${author.nickname}\n`
+                txt += `│  ≡◦ *🕜 Duración* : ${duration} Segundos\n`
+                txt += `│  ≡◦ *🌵 Descargas* : ${download}\n`
+                txt += `│  ≡◦ *🗣 Comentarios* : ${comment}\n`
+                txt += `│  ≡◦ *💫 Share* : ${share}\n`
+                txt += `│  ≡◦ *🐢 Visitas* : ${play}\n`
+                txt += `╰─⬣`
 
-handler.command = /^(tiktok|ttdl)$/i;
+            await conn.sendMessage(m.chat, { video: { url: video }, caption: txt }, { quoted: m })
+        }
+    } catch {
+    try {
+        const api1 = await fetch(`https://delirius-api-oficial.vercel.app/api/tiktok?url=${args[0]}`)
+        const data1 = await api1.json()
 
-export default handler;
+        if (data1.status) {
+            const { author, repro, like, share, comment, download, duration, title, meta, published } = data1.data
+            const publishedDate = formatDate(published)
+            const fileSize = convertBytesToMB(meta.media[0].size_org)
+
+            let txt = `╭─⬣「 *TikTok Download* 」⬣\n`
+                txt += `│  ≡◦ *🍭 Título* : ${title}\n`
+                txt += `│  ≡◦ *🐢 Autor* : ${author.nickname}\n`
+                txt += `│  ≡◦ *🕜 Duración* : ${duration} Segundos\n`
+                txt += `│  ≡◦ *📹 Reproducciones* : ${repro}\n`
+                txt += `│  ≡◦ *👍 Likes* : ${like}\n`;
+                txt += `│  ≡◦ *🗣 Comentarios* : ${comment}\n`
+                txt += `│  ≡◦ *📦 Descargas* : ${download}\n`
+                txt += `│  ≡◦ *💫 Share* : ${share}\n`
+                txt += `│  ≡◦ *📅 Publicado* : ${publishedDate}\n`
+                txt += `│  ≡◦ *🌵 Tamaño* : ${fileSize}\n`
+                txt += `╰─⬣`
+
+            await conn.sendMessage(m.chat, { video: { url: meta.media[0].org }, caption: txt }, { quoted: m })
+        }
+    } catch {
+}}}}
+handler.help = ['tiktok <url tt>']
+handler.tags = ['downloader']
+handler.command = ['tiktok', 'ttdl', 'tiktokdl', 'tiktoknowm']
+handler.register = true
+
+export default handler
+
+function convertBytesToMB(bytes) {
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB'
+}
+
+function formatDate(unixTimestamp) {
+    const date = new Date(unixTimestamp * 1000)
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+}
