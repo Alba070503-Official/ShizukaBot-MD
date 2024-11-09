@@ -1,56 +1,60 @@
-import fetch from 'node-fetch
-import yts from 'yt-search
+import yts from 'yt-search' 
+const handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) throw `Ejemplo: ${usedPrefix + command} diles`,m ,rcanal;
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-if (!text) throw m.reply(`Ingresa una consulta\n*✧ Ejemplo:* ${usedPrefix}${command} ULTIMATE - xneymar`);
-conn.sendMessage(m.chat, { react: { text: "🕒", key: m.key } });
-    let results = await yts(text);
-    let tes = results.all[0]
-    let {
-      title,
-      thumbnail,
-      timestamp,
-      views,
-      ago,
-      url
-    } = tes;
-  let d2 = await fetch(`https://exonity.tech/api/ytdlp2-faster?apikey=adminsepuh&url=${url}`)
-  let dp = await d2.json()
-  m.reply(`_✧ Enviando ${dp.result.title} (${dp.result.duration})_\n\n> ${url}`)
-      const doc = {
-      audio: { url: dp.result.media.mp3 },
-      mimetype: 'audio/mp4',
-      fileName: `${title}.mp3`,
-      contextInfo: {
-        externalAdReply: {
-          showAdAttribution: true,
-          mediaType: 2,
-          mediaUrl: url,
-          title: title,
-          sourceUrl: url,
-          thumbnail: await (await conn.getFile(thumbnail)).data
-        }
-      }
-    };
-    await conn.sendMessage(m.chat, doc, { quoted: m });
+    const randomReduction = Math.floor(Math.random() * 5) + 1;
+    let search = await yts(text);
+    let isVideo = /vid$/.test(command);
+    let urls = search.all[0].url;
+    let body = `\`YouTube Play\`
+
+    *Título:* ${search.all[0].title}
+    *Vistas:* ${search.all[0].views}
+    *Duración:* ${search.all[0].timestamp}
+    *Subido:* ${search.all[0].ago}
+    *Url:* ${urls}
+
+🕒 *Su ${isVideo ? 'Video' : 'Audio'} se está enviando, espere un momento...*`;
     
-/*const getBuffer = async (url) => {
-  try {
-    const response = await fetch(url);
-    const buffer = await response.arrayBuffer();
-    return Buffer.from(buffer);
-  } catch (error) {
-    console.error("Error al obtener el buffer", error);
-    throw new Error("Error al obtener el buffer");
-  }
+    conn.sendMessage(m.chat, { 
+        image: { url: search.all[0].thumbnail }, 
+        caption: body
+    }, { quoted: m,rcanal });
+    m.react('react1')
+
+    let res = await dl_vid(urls)
+    let type = isVideo ? 'video' : 'audio';
+    let video = res.data.mp4;
+    let audio = res.data.mp3;
+    conn.sendMessage(m.chat, { 
+        [type]: { url: isVideo ? video : audio }, 
+        gifPlayback: false, 
+        mimetype: isVideo ? "video/mp4" : "audio/mpeg" 
+    }, { quoted: m });
 }
-    let audiop = await getBuffer(dp.result.media.mp3)
-	await conn.sendFile(m.chat, audiop, `${title}.mp3`, ``, m)*/
-	await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key }})
+
+handler.command = ['play', 'playvid'];
+handler.help = ['play', 'playvid'];
+handler.tags = ['dl'];
+export default handler;
+
+async function dl_vid(url) {
+    const response = await fetch('https://shinoa.us.kg/api/download/ytdl', {
+        method: 'POST',
+        headers: {
+            'accept': '*/*',
+            'api_key': 'free',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            text: url,
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
 }
-handler.help = ['play']
-handler.tags = ['downloader']
-handler.command = /^(play|song)$/i
-handler.premium = false
-handler.register = true
-export default handler```
