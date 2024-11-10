@@ -1,4 +1,5 @@
 // Código elaborado por: https://github.com/GataNina-Li
+// Editado Por @Alba070503
 
 import fetch from 'node-fetch'  
 import fs from 'fs'
@@ -41,7 +42,7 @@ idUsuarioExistente = Object.keys(usuarioExistente)[0];
 nombreImagen = data.infoImg.find(personaje => personaje.code === codigoActual)?.name
 
 if (nombreImagen) {
-estado = `Vendido\n✓ *Comprado por: ${conn.getName(idUsuarioExistente)}*`
+estado = `Vendido\n乂 *Comprado por: ${conn.getName(idUsuarioExistente)}*`
 }}
 
 const personaje = dato.name
@@ -68,9 +69,9 @@ if (nuevoPrecio < 50) {
 nuevoPrecio = 50
 }
 
-let txtNewPrice = nuevoPrecio !== dato.price ? `\n✓ *Precio anterior:* ~\`${dato.price}\`~ *${rpgshop.emoticon('money')}*\n✓ *Nuevo Precio:* \`${nuevoPrecio}\` *${rpgshop.emoticon('money')}*\n*⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯*` : `\n✓ *Precio:* \`\`\`${dato.price}\`\`\` *${rpgshop.emoticon('money')}*`
-let info = `*⛱️ FANTASÍA RPG ⛱️*\n*⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯*\n✓ *Nombre:* ${dato.name}\n✓ *Origen:* ${dato.desp}\n*⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯*${txtNewPrice}\n✓ *Clase:* ${dato.class}\n✓ *ID:* \`\`\`${codigoActual}\`\`\`\n✓ *Tipo:* ${dato.type}\n*⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯*\n✓ *Estado:* ${estado}`
-info += `\n\n${estado === 'Libre' ? '_Responde a este mensaje con "c", "🛒", o "🐱" para comprarlo_\n\n' + listaAvisos(usedPrefix, personaje) : listaAvisos(usedPrefix, personaje)}`
+let txtNewPrice = nuevoPrecio !== dato.price ? `\n乂 *Precio anterior:* ~\`${dato.price}\`~ *${rpgshop.emoticon('money')}*\n乂 *Nuevo Precio:* \`${nuevoPrecio}\` *${rpgshop.emoticon('money')}*\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*` : `\n乂 *Precio:* \`\`\`${dato.price}\`\`\` *${rpgshop.emoticon('money')}*`
+let info = `*乂 P E R S O N A J E  O B T E N I D O 乂*\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*\n乂 *Nombre:* ${dato.name}\n乂 *Origen:* ${dato.desp}\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*${txtNewPrice}\n乂 *Clase:* ${dato.class}\n乂 *ID:* \`\`\`${codigoActual}\`\`\`\n乂 *Tipo:* ${dato.type}\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*\n乂 *Estado:* ${estado}`
+info += `\n\n${estado === 'Libre' ? '_Responde a este mensaje con "c" para comprarlo_\n\n' + listaAvisos(usedPrefix, personaje) : listaAvisos(usedPrefix, personaje)}`
 id_message = (await conn.sendFile(m.chat, dato.url, 'error.jpg', info.trim(), fkontak, true, {
 contextInfo: {
 'forwardingScore': 200,
@@ -214,7 +215,7 @@ break
 fs.writeFileSync(fantasyDBPath, JSON.stringify(fantasyDB, null, 2), 'utf8')}
 }}}}}
       
-if (m.quoted && m.quoted.id === id_message && ['c', '🛒', '🐱'].includes(m.text.toLowerCase())) {
+if (m.quoted && m.quoted.id === id_message && ['c'].includes(m.text.toLowerCase())) {
 //console.log(nuevoPrecio)
 const cantidadFaltante = nuevoPrecio - user.money
 if (user.money < nuevoPrecio) {
@@ -229,7 +230,7 @@ if (idUsuarioExistente) {
 let No_compra = `*${nombreImagen}* ya fue comprado por *${conn.getName(idUsuarioExistente)}*`
 if (usuarioExistente) return conn.reply(m.chat, No_compra, m, fake)
 }
-fake = { contextInfo: { externalAdReply: { title: `¡Insuficientes ${rpgshop.emoticon('money')}!`, body: `😼 Completa misiones del RPG`, sourceUrl: accountsgb, thumbnailUrl: gataMenu } } }
+fake = { contextInfo: { externalAdReply: { title: `¡Insuficientes ${rpgshop.emoticon('money')}!`, body: `乂 Completa misiones`, sourceUrl: accountsgb, thumbnailUrl: gataMenu } } }
 conn.reply(m.chat, `Te falta *${cantidadFaltante} ${rpgshop.emoticon('money')}* para comprar a *${dato.name}*\n\n*Actualmente tienes ${user.money} ${rpgshop.emoticon('money')}*`, m, fake)
 } else {
 response = await fetch(jsonURL)
@@ -253,11 +254,11 @@ const nombrePersonaje = data.infoImg.find(personaje => personaje.code === dato.c
 
 if (nombrePersonaje) {
 if (m.sender == idUsuarioConCodigo) {
-fake = { contextInfo: { externalAdReply: { title: `😊 Ya fue comprado antes`, body: `🌟 ¡Compra más para llegar al top!`, sourceUrl: accountsgb, thumbnailUrl: gataMenu } } }
+fake = { contextInfo: { externalAdReply: { title: `乂 Ya fue comprado antes`, body: `乂 ¡Compra más para llegar al top!`, sourceUrl: accountsgb, thumbnailUrl: gataMenu } } }
 const mensaje_ = `El personaje *${nombrePersonaje}* ya es tuyo!!`
 conn.reply(m.chat, mensaje_, m, fake)
 } else {
-fake = { contextInfo: { externalAdReply: { title: `❌ No puedes comprar esto: ${nombrePersonaje}`, body: `🙂 ¡Compra otro personaje!`, sourceUrl: accountsgb, thumbnailUrl: gataMenu } } }
+fake = { contextInfo: { externalAdReply: { title: `❌ No puedes comprar esto: ${nombrePersonaje}`, body: `乂 ¡Compra otro personaje!`, sourceUrl: accountsgb, thumbnailUrl: gataMenu } } }
 const mensaje = `Este personaje *${nombrePersonaje}* está reclamado por *${nombreUsuario}*`
 conn.reply(m.chat, mensaje, m, fake)
         
@@ -312,7 +313,7 @@ fs.writeFileSync(fantasyDBPath, JSON.stringify(fantasyDB, null, 2), 'utf8')}
 }}}
 //user.fantasy = new Date * 1  
 }}
-handler.command = /^(fantasy|fy)$/i
+handler.command = /^(rollwaifu|rw)$/i
 export default handler
 
 function msToTime(duration) {
@@ -330,15 +331,15 @@ return minutes + " m y " + seconds + " s "
 
 export function listaAvisos(usedPrefix, personaje) {
 const avisos = [
-`> 🤩 ¡Agrega un personaje ahora! usando *${usedPrefix}fyagregar* o *${usedPrefix}fyadd*`,
-`> 👀 *¿Qué tal ${personaje}?* ¡Califica!\n_Responde a este mensaje con:_\n*"${likeEmojisArrays.getRandom()}", "${dislikeEmojisArrays.getRandom()}", o "${superlikeEmojisArrays.getRandom()}"*\n\n> ⚠️ *Solo puede calificar si ha comprado mínimo un Personaje*`,
+`> 乂 ¡Agrega un personaje ahora! usando *${usedPrefix}fyagregar* o *${usedPrefix}fyadd*`,
+`> 乂 *¿Qué tal ${personaje}?* ¡Califica!\n_Responde a este mensaje con:_\n*"${likeEmojisArrays.getRandom()}", "${dislikeEmojisArrays.getRandom()}", o "${superlikeEmojisArrays.getRandom()}"*\n\n> ⚠️ *Solo puede calificar si ha comprado mínimo un Personaje*`,
 `> *¿Sabías que puedes cambiar un Personaje por tiempo premium 🎟️?*\n_¡Inténtalo! usa *${usedPrefix}fycambiar* o *${usedPrefix}fychange*_`,
 `> ¡Para ser un Pro 😎 en *RPG Fantasy* visita la guía 📜!\n*Comienza a explorar usando:*\n\`${usedPrefix}fyguia o ${usedPrefix}fyguide\``,
 `> *Conoce más de ${personaje} usando:*\n\`${usedPrefix}fyinfo\``,
 `> *¿Quieres saber la lista de personajes 🤭?*\n*Consulta usando:* \`${usedPrefix}fylista o ${usedPrefix}fyl\``,
 `> 🛒 Compra, ${superlikeEmojisArrays.getRandom()} califica, 🔄 cambia  y mucho más para ganar *recompensas extras 🎁*`,
 `> 🌟 *¡Mira quien es tendencia!*\n\`${usedPrefix}fytendencia o ${usedPrefix}fyranking\`\n\n👀 _Mira avances de otros respondiendo al mensaje de alguien con *${usedPrefix}fytendencia*_`,
-`> *Te digo un secreto* 😳\n_Mientras más uses los comandos *RPG Fantasy*, las 🎁 Recomepesas futuras se multiplican ☝️🤑_`,
+`> *Te digo un secreto* 😳\n_Mientras más uses los comandos *Gacha-RollWaifu*, las 🎁 Recomepesas futuras se multiplican ☝️🤑_`,
 `> 🌟 *Mira avances, misiones, datos de lo que has conseguido usando:*\n\`${usedPrefix}fymy\``,
 //`> *¡Recuerda responder a este mensaje con "c", "🛒", o "🐱" para comprar personajes!*`,
 `> 😁 *¡Pensamos en todo!* Transfiere cualquier personaje a tú Amigo/a usando:\n*${usedPrefix}fyentregar*, *${usedPrefix}fytransfer* o *${usedPrefix}fytr*`,
