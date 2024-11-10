@@ -1,5 +1,5 @@
 // Código elaborado por: https://github.com/GataNina-Li
-// Editado Por @Alba070503
+// Editado Por @Alba070503 xd
 
 import fetch from 'node-fetch'  
 import fs from 'fs'
