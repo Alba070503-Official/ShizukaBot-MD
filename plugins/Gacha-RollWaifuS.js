@@ -71,7 +71,7 @@ nuevoPrecio = 50
 
 let txtNewPrice = nuevoPrecio !== dato.price ? `\n乂 *Precio anterior:* ~\`${dato.price}\`~ *${rpgshop.emoticon('money')}*\n乂 *Nuevo Precio:* \`${nuevoPrecio}\` *${rpgshop.emoticon('money')}*\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*` : `\n乂 *Precio:* \`\`\`${dato.price}\`\`\` *${rpgshop.emoticon('money')}*`
 let info = `*乂 P E R S O N A J E  O B T E N I D O 乂*\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*\n乂 *Nombre:* ${dato.name}\n乂 *Origen:* ${dato.desp}\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*${txtNewPrice}\n乂 *Clase:* ${dato.class}\n乂 *ID:* \`\`\`${codigoActual}\`\`\`\n乂 *Tipo:* ${dato.type}\n*°°°·.°·..·°¯°·._.··._.·°¯°·.·° .·°°*\n乂 *Estado:* ${estado}`
-info += `\n\n${estado === 'Libre' ? '_Responde a este mensaje con "c" para comprarlo_\n\n' + listaAvisos(usedPrefix, personaje) : listaAvisos(usedPrefix, personaje)}`
+info += `\n\n${estado === 'Libre' ? '_Responde a este mensaje con "c" para comprarlo_\n\n'}`
 id_message = (await conn.sendFile(m.chat, dato.url, 'error.jpg', info.trim(), fkontak, true, {
 contextInfo: {
 'forwardingScore': 200,
@@ -215,7 +215,7 @@ break
 fs.writeFileSync(fantasyDBPath, JSON.stringify(fantasyDB, null, 2), 'utf8')}
 }}}}}
       
-if (m.quoted && m.quoted.id === id_message && ['c'].includes(m.text.toLowerCase())) {
+if (m.quoted && m.quoted.id === id_message && ['c', 'C', 'Claims'].includes(m.text.toLowerCase())) {
 //console.log(nuevoPrecio)
 const cantidadFaltante = nuevoPrecio - user.money
 if (user.money < nuevoPrecio) {
@@ -337,7 +337,7 @@ const avisos = [
 `> ¡Para ser un Pro 😎 en *RPG Fantasy* visita la guía 📜!\n*Comienza a explorar usando:*\n\`${usedPrefix}fyguia o ${usedPrefix}fyguide\``,
 `> *Conoce más de ${personaje} usando:*\n\`${usedPrefix}fyinfo\``,
 `> *¿Quieres saber la lista de personajes 🤭?*\n*Consulta usando:* \`${usedPrefix}fylista o ${usedPrefix}fyl\``,
-`> 🛒 Compra, ${superlikeEmojisArrays.getRandom()} califica, 🔄 cambia  y mucho más para ganar *recompensas extras 🎁*`,
+`> 'c'  Compra, ${superlikeEmojisArrays.getRandom()} califica, 🔄 cambia  y mucho más para ganar *recompensas extras 🎁*`,
 `> 🌟 *¡Mira quien es tendencia!*\n\`${usedPrefix}fytendencia o ${usedPrefix}fyranking\`\n\n👀 _Mira avances de otros respondiendo al mensaje de alguien con *${usedPrefix}fytendencia*_`,
 `> *Te digo un secreto* 😳\n_Mientras más uses los comandos *Gacha-RollWaifu*, las 🎁 Recomepesas futuras se multiplican ☝️🤑_`,
 `> 🌟 *Mira avances, misiones, datos de lo que has conseguido usando:*\n\`${usedPrefix}fymy\``,
