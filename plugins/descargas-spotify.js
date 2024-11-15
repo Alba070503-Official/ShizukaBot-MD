@@ -6,151 +6,137 @@ import { youtubedl, youtubedlv2 } from '@bochilteam/scraper'
 
 import search from 'yt-search'
 
-
-
 async function spotifyxv(query) {
 
-  let token = await tokens();
+let token = await tokens();
 
-  let response = await axios({
+let response = await axios({
 
-    method: 'get',
+method: 'get',
 
-    url: 'https://api.spotify.com/v1/search?q=' + encodeURIComponent(query) + '&type=track',
+url: 'https://api.spotify.com/v1/search?q=' + encodeURIComponent(query) + '&type=track',
 
-    headers: {
+headers: {
 
-      Authorization: 'Bearer ' + token,
+Authorization: 'Bearer ' + token,
 
-    },
+},
 
-  })
+})
 
-  const tracks = response.data.tracks.items
+const tracks = response.data.tracks.items
 
-  const results = tracks.map((track) => ({
+const results = tracks.map((track) => ({
 
-    name: track.name,
+name: track.name,
 
-    artista: track.artists.map((artist) => artist.name),
+artista: track.artists.map((artist) => artist.name),
 
-    album: track.album.name,
+album: track.album.name,
 
-    duracion: timestamp(track.duration_ms),
+duracion: timestamp(track.duration_ms),
 
-    url: track.external_urls.spotify,
+url: track.external_urls.spotify,
 
-    imagen: track.album.images.length ? track.album.images[0].url : '',
+imagen: track.album.images.length ? track.album.images[0].url : '',
 
-  }))
+}))
 
-  return results
+return results
 
 }
-
-
 
 async function tokens() {
 
-  const response = await axios({
+const response = await axios({
 
-    method: 'post',
+method: 'post',
 
-    url: 'https://accounts.spotify.com/api/token',
+url:
 
-    headers: {
+'https://accounts.spotify.com/api/token',
 
-      'Content-Type': 'application/x-www-form-urlencoded',
+headers: {
 
-      Authorization: 'Basic ' + Buffer.from('acc6302297e040aeb6e4ac1fbdfd62c3:0e8439a1280a43aba9a5bc0a16f3f009').toString('base64'),
+'Content-Type': 'application/x-www-form-urlencoded',
 
-    },
+Authorization: 'Basic ' + Buffer.from('acc6302297e040aeb6e4ac1fbdfd62c3:0e8439a1280a43aba9a5bc0a16f3f009').toString('base64'),
 
-    data: 'grant_type=client_credentials',
+},
 
-  })
+data: 'grant_type=client_credentials',
 
-  return response.data.access_token
+})
+
+return response.data.access_token
 
 }
-
-
 
 function timestamp(time) {
 
-  const minutes = Math.floor(time / 60000);
+const minutes = Math.floor(time / 60000);
 
-  const seconds = Math.floor((time % 60000) / 1000);
+const seconds = Math.floor((time % 60000) / 1000);
 
-  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 
 }
-
-
 
 async function getBuffer(url, options) {
 
-  try {
+try {
 
-    options = options || {};
+options = options || {};
 
-    const res = await axios({
+const res = await axios({
 
-      method: 'get',
+method: 'get',
 
-      url,
+url,
 
-      headers: {
+headers: {
 
-        DNT: 1,
+DNT: 1,
 
-        'Upgrade-Insecure-Request': 1,
+'Upgrade-Insecure-Request': 1,
 
-      },
+},
 
-      ...options,
+...options,
 
-      responseType: 'arraybuffer',
+responseType: 'arraybuffer',
 
-    });
+});
 
-    return res.data;
+return res.data;
 
-  } catch (err) {
+} catch (err) {
 
-    return err;
+return err;
 
-  }
-
-}
-
-
+}}
 
 async function getTinyURL(text) {
 
 try {
 
-    let response = await axios.get(`https://tinyurl.com/api-create.php?url=${text}`);
+let response = await axios.get(`https://tinyurl.com/api-create.php?url=${text}`);
 
-    return response.data;
+return response.data;
 
-  } catch (error) {
+} catch (error) {
 
-    return text;
+return text;
 
-  }
-
-}
-
-
+}}
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 
-if (!text) throw `*Uso Correcto*\n\nEjemplo:\n${usedPrefix + command} save yours tear`
+if (!text) throw `${lenguajeGB.smsMalused2()} ⊱ *${usedPrefix + command} Bellyache*`
 
 try {
 
-await m.react('⏳')
+m.react('⌛️')
 
 let songInfo = await spotifyxv(text)
 
@@ -162,21 +148,29 @@ let fileSizeInMB = (await getBuffer(res.url)).length / (1024 * 1024)
 
 let shortURL = await getTinyURL(res.url)
 
-const info = `> S P O T I F Y  乂  D E S C A R G A S\n  
+const info = `✨ *${mid.smsYT1}:*
 
-✩ *Nombre:* ${res.name}\n
+_${res.name}_
 
-✩ *Artista:* ${res.artista.join(', ')}\n
 
-✩ *Album:* ${res.album}\n
 
-✩ *Duracion:* ${res.duracion}\n
+🗣️ *${mid.smsYT13}:*
 
-✩ *Fuente:* *Spotify*\n
+» _${res.artista.join(', ')}_
 
-✩ *Enlace:* ${shortURL}\n\n`
 
-'`- ↻enviando audio espere un momento soy lenta..`'
+
+🌐 *${mid.smsYT4}*:
+
+» _${shortURL}_
+
+
+
+🎶 *${mid.smsSpoti}*
+
+${wm}`
+
+
 
 let resImg = await fetch(res.imagen)
 
@@ -196,17 +190,13 @@ let ttl = await yt.title
 
 let size = await yt.audio[q].fileSizeH
 
-conn.sendMessage(m.chat, { audio: { url: dl_url }, fileName: `${ttl}.mp3`, mimetype: 'audio/mpeg' }, { quoted: m })
-
 let img = await getBuffer(res.imagen)
 
-await conn.sendButton(m.chat, wm, info, songInfo[0].thumbnail, [
+conn.sendMessage(m.chat, { audio: { url: dl_url }, fileName: `${ttl}.mp3`, mimetype: 'audio/mpeg' }, { quoted: m })
 
-	['Creador', `${usedPrefix}creador`],
+await conn.sendMessage(m.chat, {text: info, contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.wm, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": shortURL, "sourceUrl": shortURL}}}, {quoted: m});
 
-	['Menu', `${usedPrefix}menu`]
-
-  ], null, [['Canal', `${md}`]], m)
+m.react('✅️')
 
 } catch (error) {
 
