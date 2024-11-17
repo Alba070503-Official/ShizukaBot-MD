@@ -1,84 +1,60 @@
-import yts from 'yt-search'
-import fs from 'fs'
-import os from 'os'
-import axios from 'axios'
+import yts from 'yt-search' 
+const handler = async (m, { conn, text, usedPrefix, command }) => {
+    if (!text) throw `Ejemplo: ${usedPrefix + command} diles`,m;
 
-const handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) throw `Use example ${usedPrefix}${command} Joji - Ew`;
+    const randomReduction = Math.floor(Math.random() * 5) + 1;
+    let search = await yts(text);
+    let isVideo = /vid$/.test(command);
+    let urls = search.all[0].url;
+    let body = `\`YouTube Play\`
 
-  const search = await yts(text);
-  const vid = search.videos[0];
-  if (!vid) throw m.reply('Data no encontrada, intenta con otro titulo');
+    *Titulo:* ${search.all[0].title}
+    *Vistas:* ${search.all[0].views}
+    *Duracion:* ${search.all[0].timestamp}
+    *Subido:* ${search.all[0].ago}
+    *Url:* ${urls}
 
-  const { title, thumbnail, timestamp, views, ago, url } = vid;
+ðŸ•’ *Su ${isVideo ? 'Video' : 'Audio'} se estÃ¡ enviando, espere un momento...*`;
+    
+    conn.sendMessage(m.chat, { 
+        image: { url: search.all[0].thumbnail }, 
+        caption: body
+    }, { quoted: m,rcanal });
+    m.react('react1')
 
-await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key }})
-//  await conn.sendMessage(m.chat, { image: { url: thumbnail }, caption: wait }, { quoted: m });
+    let res = await dl_vid(urls)
+    let type = isVideo ? 'video' : 'audio';
+    let video = res.data.mp4;
+    let audio = res.data.mp3;
+    conn.sendMessage(m.chat, { 
+        [type]: { url: isVideo ? video : audio }, 
+        gifPlayback: false, 
+        mimetype: isVideo ? "video/mp4" : "audio/mpeg" 
+    }, { quoted: m });
+}
 
-  try {
-    const response = await axios.get(`https://api.ryzendesu.vip/api/downloader/ytmp3?url=${encodeURIComponent(url)}`);
-    const downloadUrl = response.data.url;
+handler.command = ['play', 'playvid'];
+handler.help = ['play', 'playvid'];
+handler.tags = ['dl'];
+export default handler;
 
-    if (!downloadUrl) throw new Error('Audio URL not found');
-
-    const tmpDir = os.tmpdir();
-    const filePath = `${tmpDir}/${title}.mp3`;
-
-    const audioResponse = await axios({
-      method: 'get',
-      url: downloadUrl,
-      responseType: 'stream',
-    });
-
-    const writableStream = fs.createWriteStream(filePath);
-    audioResponse.data.pipe(writableStream);
-
-    writableStream.on('finish', async () => {
-      await conn.sendMessage(m.chat, {
-        audio: {
-          url: filePath
+async function dl_vid(url) {
+    const response = await fetch('https://shinoa.us.kg/api/download/ytdl', {
+        method: 'POST',
+        headers: {
+            'accept': '*/*',
+            'api_key': 'free',
+            'Content-Type': 'application/json'
         },
-        mimetype: 'audio/mpeg',
-        fileName: `${title}.mp3`,
-        caption: `Titilo: ${title}\nPublicado: ${ago}`,
-        contextInfo: {
-          externalAdReply: {
-            showAdAttribution: true,
-            mediaType: 2,
-            mediaUrl: url,
-            title: title,
-            body: 'Audio Download',
-            sourceUrl: url,
-            thumbnail: await (await conn.getFile(thumbnail)).data,
-          },
-        },
-      }, { quoted: m });
-await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key }})
-
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error(`Failed to delete audio file: ${err}`);
-        } else {
-          console.log(`Deleted audio file: ${filePath}`);
-        }
-      });
+        body: JSON.stringify({
+            text: url,
+        })
     });
 
-    writableStream.on('error', (err) => {
-      console.error(`Failed to write audio file: ${err}`);
-      m.reply('Failed to download audio');
-    });
-  } catch (error) {
-    console.error('Error:', error.message);
-    throw `Error: ${error.message}. Please check the URL and try again.`;
-  }
-};
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-handler.help = ['play'].map((v) => v + ' *<consulta>*');
-handler.tags = ['downloader'];
-handler.command = /^(play)$/i;
-
-handler.register = true
-handler.disable = false
-
-export default handler
+    const data = await response.json();
+    return data;
+                }
