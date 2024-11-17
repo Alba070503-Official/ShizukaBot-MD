@@ -14,7 +14,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     *Subido:* ${search.all[0].ago}
     *Url:* ${urls}
 
-ðŸ•’ *Su ${isVideo ? 'Video' : 'Audio'} se estÃ¡ enviando, espere un momento...*`;
+’ *Su ${isVideo ? 'Video' : 'Audio'} se estÃ¡ enviando, espere un momento...*`;
     
     conn.sendMessage(m.chat, { 
         image: { url: search.all[0].thumbnail }, 
