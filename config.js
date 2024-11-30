@@ -140,7 +140,7 @@ global.author = ` Powered @Alba070503 💻` //"𝙂𝙖𝙩𝙖 𝘿𝙞𝙤𝙨
 // MANTENGA ESTO SIN MODIFICAR, NOS ESFORZAMOS A DIARIO POR OFRECERLES UN BOT PARA LA COMUNIDAD, SEA AGRADECIDO 😉
 // [EN] > BOT VERSION INFORMATION, PLEASE KEEP THIS UNCHANGED, WE STRIVE DAILY TO PROVIDE YOU WITH A BOT FOR THE COMMUNITY, BE GRATEFUL
 global.vs = "1.7.0"
-global.vsJB = "3.0 (Beta)"
+global.vsJB = "5.0"
 global.gt = "ShizukaBot-MD"
 
 fetchDataAndProcess().catch(error => console.error('Ocurrió un error:', error))
@@ -175,12 +175,12 @@ global.nomorown = "59169082575"
 global.pdoc = ["application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.ms-excel", "application/msword", "application/pdf", "text/rtf"]
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 
-global.ch = {
-ch1: '120363198641161536@newsletter',
-ch2: '120363160031023229@newsletter',
-ch3: '120363263466636910@newsletter',
-ch4: '120363370415738881@newsletter',
-}
+// global.ch = {
+// ch1: '120363198641161536@newsletter',
+// ch2: '120363160031023229@newsletter',
+// ch3: '120363263466636910@newsletter',
+// ch4: '120363370415738881@newsletter',
+// }
 
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 // ❰ RPG ❱
