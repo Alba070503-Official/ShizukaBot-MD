@@ -175,6 +175,13 @@ global.nomorown = "59169082575"
 global.pdoc = ["application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.ms-excel", "application/msword", "application/pdf", "text/rtf"]
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 
+global.ch = {
+ch1: '120363198641161536@newsletter',
+ch2: '120363160031023229@newsletter',
+ch3: '120363263466636910@newsletter',
+ch4: '120363370415738881@newsletter',
+}
+
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 // ❰ RPG ❱
 global.flaaa = [
