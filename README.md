@@ -1,7 +1,7 @@
-## ShizukaBot-MD By Alba070503 ✨
+## MomoAyaseBot-MD Powered @Alba070503 ✨
 
 <p align="center">
-<img src="https://github.com/Alba070503-Official/ShizukaBot-MD/blob/main/media/menus/Menu1.jpg" alt="ShizukaBot-MD" width="900"/>
+<img src="https://qu.ax/YlwSb.jpg" alt="MomoAyaseBot-MD" width="900"/>
 </p>
 
 <a href="https://github.com/Alba070503-Official/ShizukaBot-MD"><img title="Stars" src="https://img.shields.io/github/stars/Alba070503-Official/ShizukaBot-MD?color=ff4500&style=flat-square" /></a>
@@ -20,15 +20,15 @@
 Sigueme en mi canal de WhatsApp donde subo actualizaciónes del bot (⁠・⁠∀⁠・⁠)
 
 <a href="https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04">
-  <img src="https://img.shields.io/badge/ShizukaBot-MD-0a0a0a?style=for-the-badge&logo=whatsapp&logoColor=white">
+  <img src="https://img.shields.io/badge/MomoAyaseBot-MD-0a0a0a?style=for-the-badge&logo=whatsapp&logoColor=white">
 </a>
 
 ***
 
 ### `⚙️ AJUSTES ⚙️`
-- CAMBIAR NÚMERO DE PROPIETARIO [aqui](https://github.com/Alba070503-Official/ShizukaBot-MD/blob/main/config.js#L6)
-- CLONAR EL REPOSITORIO [Aqui](https://github.com/Alba070503-Official/ShizukaBot-MD/fork)
-- Puede cambiar a la última versión de baileys editando el package.json [aqui](https://github.com/Alba070503-Official/ShizukaBot-MD/blob/main/package.json#L42)
+- CAMBIAR NÚMERO DE PROPIETARIO [aqui](https://github.com/Alba070503-Official/MomoAyaseBot-MD/blob/main/config.js#L6)
+- CLONAR EL REPOSITORIO [Aqui](https://github.com/Alba070503-Official/MomoAyaseBot-MD/fork)
+- Puede cambiar a la última versión de baileys editando el package.json [aqui](https://github.com/Alba070503-Official/MomoAyaseBot-MD/blob/main/package.json#L42)
 ***
 
 #### INSTALACIÓN AUTOMÁTICA POR TERMUX
@@ -39,7 +39,7 @@ Sigueme en mi canal de WhatsApp donde subo actualizaciónes del bot (⁠・⁠�
 termux-setup-storage
 ```
 ```bash
-apt update -y && yes | apt upgrade && pkg install -y bash wget mpv && wget -O - https://raw.githubusercontent.com/Alba070503-Official/ShizukaBot-MD/master/Shizuka.sh | bash
+apt update -y && yes | apt upgrade && pkg install -y bash wget mpv && wget -O - https://raw.githubusercontent.com/Alba070503-Official/MomoAyaseBot-MD/master/Momo.sh | bash
 ```
 
 #### ACTIVAR EN TERMUX
@@ -59,7 +59,7 @@ pkg install -y git nodejs ffmpeg imagemagick && pkg install yarn
 ```
 
 ```bash
-git clone https://github.com/Alba070503-Official/ShizukaBot-MD && cd ShizukaBot-MD && yarn install && npm install
+git clone https://github.com/Alba070503-Official/MomoAyaseBot-MD && cd MomoAyaseBot-MD && yarn install && npm install
 ```
 
 ```bash
@@ -112,12 +112,12 @@ para usuarios del heroku
 ### `OBTENER OTRO CODIGO QR`
 ```bash
 ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
-> cd ShizukaBot-MD
+> cd MomoAyaseBot-MD
 > rm -rf Sessions
 > npm start
 ```
 ## `AGRADECIMIENTOS & CREDITOS` 
-<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="100" height="100" alt="GataDioa"/></a>
+<a href="https://github.com/GataNina-Li"><img src="https://avatars.githubusercontent.com/u/96250885?v=4" width="250" height="250" alt="GataDioa"/></a>
 
 <a href="https://www.youtube.com/@gatadios">
 <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
@@ -127,17 +127,17 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 </a>
 
   ## `CREADOR  & PROPIETARIO DEL BOT` 
-<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="150" height="150" alt="Alba070503"/></a>
+<a href="https://github.com/Alba070503"><img src="https://github.com/Alba070503.png" width="250" height="250" alt="Alba070503"/></a>
 
 `ShizukaBot-MD - By @Alba070503 `
 #### COLABORADORES 
 
-<a href="https://github.com/Alba070503-Official/ShizukaBot-MD/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=Alba070503-Official/ShizukaBot-MD"
+<a href="https://github.com/Alba070503-Official/MomoAyaseBot-MD/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=Alba070503-Official/MomoAyaseBot-MD"
 </a>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-`ShizukaBot-MD - By @Alba070503 `
+`MomoAyaseBot-MD - Powered @Alba070503 `
