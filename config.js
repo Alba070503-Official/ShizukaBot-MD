@@ -15,7 +15,7 @@ import { en, es, id, ar, pt } from "./lib/idiomas/total-idiomas.js"
 global.owner = [
 ["59175655964", 'Onwer Alba070503', true], //ShizukaBot-MD 💙
 ["59169082575"], 
-["5573031859"],
+["59169214837"],
 ["593968585383"],
 ["595976126756"],
 ["593968263524"],
@@ -132,7 +132,7 @@ global.desc2 = '' // Add long description (90 caractres max) (Este parámetro se
 global.country = '' // Add country, example: 🇪🇨
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
 
-global.packname = `ShizukaBot-MD 💜` //"𝙂𝙖𝙩𝙖𝘽𝙤𝙩-𝙈𝘿 🐈"
+global.packname = `MomoAyaseBot-MD ⭐` //"𝙂𝙖𝙩𝙖𝘽𝙤𝙩-𝙈𝘿 🐈"
 global.author = ` Powered @Alba070503 💻` //"𝙂𝙖𝙩𝙖 𝘿𝙞𝙤𝙨"
 
 // • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •
@@ -141,7 +141,7 @@ global.author = ` Powered @Alba070503 💻` //"𝙂𝙖𝙩𝙖 𝘿𝙞𝙤𝙨
 // [EN] > BOT VERSION INFORMATION, PLEASE KEEP THIS UNCHANGED, WE STRIVE DAILY TO PROVIDE YOU WITH A BOT FOR THE COMMUNITY, BE GRATEFUL
 global.vs = "1.7.0"
 global.vsJB = "5.0"
-global.gt = "ShizukaBot-MD"
+global.gt = "MomoAyaseBot-MD"
 
 fetchDataAndProcess().catch(error => console.error('Ocurrió un error:', error))
 
