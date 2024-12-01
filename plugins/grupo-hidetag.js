@@ -1,7 +1,12 @@
 import { generateWAMessageFromContent } from '@whiskeysockets/baileys';
 import * as fs from 'fs';
 
-const handler = async (m, { conn, text, participants, isOwner, isAdmin }) => {
+const handler = async (m, { conn, text, participants, isAdmin, isOwner }) => {
+  if (!isAdmin && !isOwner) {
+    // Si el usuario no es admin ni owner, se le mostrará este mensaje.
+    return m.reply('⚠️ ¡Este comando es solo para administradores o el propietario del bot!');
+  }
+
   try {
     const users = participants.map((u) => conn.decodeJid(u.id));
     const q = m.quoted ? m.quoted : m || m.text || m.sender;
@@ -62,9 +67,7 @@ const handler = async (m, { conn, text, participants, isOwner, isAdmin }) => {
 // Configuración del comando
 handler.command = /^(hidetag|notificar|notify)$/i;
 handler.group = true;
-
-// Permitir uso por admin o dueño del bot
-handler.admin = true;
-handler.owner = true;
+handler.admin = true; // Solo para admins del grupo
+handler.owner = true; // También para el owner del bot
 
 export default handler;
