@@ -9,7 +9,7 @@ handler.all = async function (m) {
 global.key = ''
 
 // Cuentas
-const response = await fetch('https://raw.githubusercontent.com/Alba070503-Official/ShizukaBot-MD/main/official_accounts.json')  
+const response = await fetch('https://raw.githubusercontent.com/Alba070503-Official/MomoAyaseBot-MD/main/official_accounts.json')  
 const data = await response.json()
 let { accounts, channels, groups, collaboration, sponsors, others } = data.info
 
@@ -22,7 +22,7 @@ global.tk = accounts.tiktok
 global.ths = accounts.threads
 global.paypal = accounts.paypal
 global.asistencia = others.assistance_num
-global.bot = 'wa.me/50238024328'
+global.bot = 'wa.me/59169082575'
 global.cuentas = accounts.all
 
 global.canal1 = channels.channel1
@@ -111,7 +111,7 @@ global.gataImg = [imagen1, imagen2, imagen3, imagen4, imagen5, imagen6, imagen7,
     forwardedNewsletterMessageInfo: {
       newsletterJid: "120363198641161536@newsletter",
       serverMessageId: 100,
-      newsletterName: 'ShizukaBot-MD Alba070503',
+      newsletterName: 'MomoAyaseBot-MD - @Alba070503',
     },
 	    externalAdReply: {
 				    showAdAttribution: true,
@@ -120,7 +120,7 @@ global.gataImg = [imagen1, imagen2, imagen3, imagen4, imagen5, imagen6, imagen7,
 					mediaUrl: null,
 					description: null,
 					previewType: "PHOTO",
-					thumbnailUrl: 'https://telegra.ph/file/5510d197a2ad0826c5434.jpg',
+					thumbnailUrl: 'https://qu.ax/dSqjk.jpg',
 		           sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04',
 		           mediaType: 1,
                    renderLargerThumbnail: false
