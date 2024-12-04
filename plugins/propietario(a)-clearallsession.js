@@ -9,7 +9,6 @@ if (global.conn.user.jid !== conn.user.jid) {
 return conn.reply(m.chat, '🚩 *Utiliza este comando directamente en el número principal del Bot*', m, rcanal, )
 }
 await conn.reply(m.chat, '🚩 *Iniciando proceso de eliminación de todos los archivos de sesión, excepto el archivo creds.json...*', m, rcanal )
-m.react(done)
 
 let sessionPath = `./${sessions}/`
 
