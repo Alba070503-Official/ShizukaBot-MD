@@ -14,7 +14,7 @@ return conn.reply(m.chat, '🚩 No puedo eliminar al propietario del bot', m)}
 await conn.groupParticipantsUpdate(m.chat, [user], 'remove')}
 handler.help = ['kick']
 handler.tags = ['grupo']
-handler.command = /^(kick|echar|hechar|sacar|ban)$/i
+handler.command = /^(kick|echar|hechar|ban)$/i
 handler.admin = true
 handler.group = true
 handler.botAdmin = true
