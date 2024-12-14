@@ -193,7 +193,7 @@ wa.me/${m.sender.split`@`[0]}?text=${usedPrefix + command}%20code
 let ppch = await conn.profilePictureUrl(who, 'image').catch(_ => gataMenu)
 await sleep(3000)
 if (global.conn.user.jid.split`@`[0] != conn.user.jid.split`@`[0]) {
-await parentw.sendMessage(ch.ch1, { text: chtxt, contextInfo: {
+await parentw.sendMessage(global.channelid, { text: chtxt, contextInfo: {
 externalAdReply: {
 title: "【 🔔 Notificación General 🔔 】",
 body: '🙀 ¡Nuevo sub-bot encontrado!',
