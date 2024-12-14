@@ -40,7 +40,7 @@ const defaultMenu = {
 
 ╭──⬣「 *Info Bot* 」⬣
 │  ≡◦ 👑 *Creador:* Alba070503 
-│  ≡◦ 🚩 *Bot:* 💜 ShizukaBot-MD 💜
+│  ≡◦ 🚩 *Bot:* 🌸 Momo Ayase Bot-MD 🌸
 │  ≡◦ ⏰️ *Actividad:* %muptime
 │  ≡◦ 📇 *Registrados:* %totalreg
 │  ≡◦ 💥 *Versión* %version
@@ -167,7 +167,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = ['allmenu', 'help', 'menú'] 
+handler.command = ['allmenu', 'help', 'menu'] 
 handler.register = true 
 export default handler
 
