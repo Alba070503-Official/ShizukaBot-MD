@@ -47,7 +47,7 @@ global.mes = d.toLocaleDateString('es', {month: 'long'})
 global.año = d.toLocaleDateString('es', {year: 'numeric'})
 global.tiempo = d.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true})
 
-global.channelid = '120363370415738881@newsletter'
+global.channelid = '120363305941657414@newsletter'
 global.redes = 'https://whatsapp.com/channel/0029Vam7yUg77qVaz3sIAp0z'
 global.nombre = conn.getName(m.sender)
 global.taguser = '@' + m.sender.split("@s.whatsapp.net")
