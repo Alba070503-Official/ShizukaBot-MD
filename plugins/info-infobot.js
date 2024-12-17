@@ -11,9 +11,6 @@ let format = sizeFormatter({
 
 let handler = async (m, { conn }) => {
   try {
-    // Descargar la imagen desde el enlace
-    let img = await (await fetch('https://qu.ax/ilnry.jpg')).buffer();
-
     // Obtener información del sistema
     let uptime = clockString(process.uptime() * 1000);
     let totalreg = Object.keys(global.db.data.users).length || 0;
@@ -44,7 +41,7 @@ ${'```' + Object.keys(used).map((key) => `${key.padEnd(10, ' ')}: ${format(used[
         mentionedJid: [m.sender],
         externalAdReply: {
           title: '❑— Momo AyaseBot-MD —❑\nWʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
-          thumbnail: img, // Imagen como buffer
+          thumbnailUrl: 'https://qu.ax/ilnry.jpg', // Imagen como URL
           sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04', // URL externa
           mediaType: 1,
           renderLargerThumbnail: true,
