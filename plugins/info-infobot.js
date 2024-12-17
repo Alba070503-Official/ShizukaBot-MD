@@ -37,14 +37,14 @@ let handler = async (m, { conn }) => {
 ${'```' + Object.keys(used).map((key) => `${key.padEnd(10, ' ')}: ${format(used[key])}`).join('\n') + '```'}
 `;
 
-    // Enviar el mensaje enriquecido
+    // Enviar el mensaje enriquecido con externalAdReply
     await conn.sendMessage(m.chat, {
       text: menu,
       contextInfo: {
         mentionedJid: [m.sender],
         externalAdReply: {
           title: '❑— Momo AyaseBot-MD —❑\nWʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
-          thumbnail: 'https://qu.ax/ilnry.jpg', // Imagen descargada
+          thumbnail: img, // Imagen como buffer
           sourceUrl: 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04', // URL externa
           mediaType: 1,
           renderLargerThumbnail: true,
