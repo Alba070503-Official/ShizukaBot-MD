@@ -33,7 +33,7 @@ async function handler(m, { conn: _envio, usedPrefix }) {
   const responseMessage = `╭═══〘 Lista Oficial Sub-Bots〙══╮\n\n║◉—⛩️ Puedes comunicarse con los Sub-Bots para que se unan a sus grupos\n\n║◉—⛩️ Si el texto aparece blanco significa que no hay Sub-Bots conectado\n\n║◉—⛩️ Cada Sub-Bots puede hacer lo que quiera, ShizukaBot-MD no se hace responsable\n\n║◉—⛩️ Sub-Bots Conectado : ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim();
 
   // Enviar mensaje con externalAdReply
-  const imageURL = 'https://qu.ax/ilnry.jpg'; // Miniatura de imagen externa
+  const imageURL = 'https://qu.ax/YlwSb.jpg'; // Miniatura de imagen externa
   const externalURL = 'https://whatsapp.com/channel/0029VaAN15BJP21BYCJ3tH04'; // URL externa
 
   await _envio.sendMessage(m.chat, {
@@ -41,7 +41,7 @@ async function handler(m, { conn: _envio, usedPrefix }) {
     contextInfo: {
       mentionedJid: [m.sender], // Menciona al remitente
       externalAdReply: {
-        title: '❑— YotsubaBot-MD —❑\nWʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
+        title: '❑— Momo AyaseBot-MD —❑\nWʜᴀᴛꜱᴀᴘᴘ Bᴏᴛ - Mᴜʟᴛɪ Dᴇᴠɪᴄᴇ',
         body: `Sub-Bots conectados: ${totalUsers || '0'}`,
         thumbnailUrl: imageURL,
         sourceUrl: externalURL,
