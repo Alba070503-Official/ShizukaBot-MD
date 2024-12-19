@@ -38,7 +38,7 @@ let handler = async (m, { conn, isGroup }) => {
 handler.help = ['corean'];
 handler.tags = ['nsfw'];
 handler.command = ['corean']; // Comando principal
-handler.group = true; // Solo disponible en grupos
+handler.group = false; // Solo disponible en grupos
 handler.register = true; // Requiere registro para usar el comando
 
 export default handler;
