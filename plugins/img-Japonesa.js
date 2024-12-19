@@ -1,21 +1,44 @@
-import fetch from 'node-fetch'
+const fetch = require('node-fetch');
 
-let handler = async (m, { conn, usedPrefix, command }) => {
-await m.react('🕓')
-try {
-let res = await fetch('https://deliriussapi-oficial.vercel.app/nsfw/corean')
-if (!res.ok) return
-let json = await res.json()
-if (!json.url) return
-await conn.sendFile(m.chat, json.url, 'thumbnail.jpg', listo, m)
-await m.react('✅')
-} catch {
-await m.react('✖️')
-}}
-handler.help = ['Japonesa']
-handler.tags = ['img']
-handler.command = ['japonesa']
-//handler.limit = 1
-handler.register = true 
+module.exports = {
+    name: "corean",
+    alias: ["korean", "coreannsfw"],
+    category: "nsfw",
+    desc: "Obtiene imágenes NSFW relacionadas con contenido coreano.",
+    async exec(msg, sock) {
+        const { from, isGroup, reply } = msg;
 
-export default handler
+        try {
+            // Reacción inicial para indicar que el bot está procesando
+            await sock.sendMessage(from, { react: { text: '🕓', key: msg.key } });
+
+            // Validación: Solo en grupos
+            if (!isGroup) {
+                return reply("Este comando solo está disponible en grupos.");
+            }
+
+            // Solicitar contenido de la API
+            const res = await fetch('https://deliriussapi-oficial.vercel.app/nsfw/corean');
+            if (!res.ok) throw new Error('Error al conectar con la API');
+
+            const json = await res.json();
+            if (!json.url) throw new Error('No se encontró contenido disponible');
+
+            // Enviar contenido al grupo
+            await sock.sendMessage(from, {
+                image: { url: json.url },
+                caption: "🔞 Aquí tienes tu contenido NSFW coreano.",
+            }, { quoted: msg });
+
+            // Reacción exitosa
+            await sock.sendMessage(from, { react: { text: '✅', key: msg.key } });
+
+        } catch (err) {
+            console.error(err);
+
+            // Reacción de error
+            await sock.sendMessage(from, { react: { text: '✖️', key: msg.key } });
+            reply("Hubo un problema al obtener el contenido. Inténtalo más tarde.");
+        }
+    }
+};
