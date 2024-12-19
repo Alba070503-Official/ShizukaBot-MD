@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 let handler = async (m, { conn, usedPrefix, command }) => {
 await m.react('🕓')
 try {
-let res = await fetch('https://aemt.me/japan')
+let res = await fetch('https://deliriussapi-oficial.vercel.app/nsfw/corean')
 if (!res.ok) return
 let json = await res.json()
 if (!json.url) return
